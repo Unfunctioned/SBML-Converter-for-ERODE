@@ -13,4 +13,12 @@
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.sbml.jsbml</groupId>
+            <artifactId>jsbml</artifactId>
+            <version>1.5</version>
+        </dependency>
+    </dependencies>
+
 </project>

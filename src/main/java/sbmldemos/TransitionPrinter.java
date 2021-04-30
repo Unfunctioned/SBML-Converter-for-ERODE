@@ -36,7 +36,7 @@ public class TransitionPrinter {
     private void printTransition(Transition t) {
         System.out.println("Transition ID: " + t.getId());
         ListOf<Input> inputs = t.getListOfInputs();
-        
+
         for(Input i : inputs)
             this.printInput(i);
         System.out.println();

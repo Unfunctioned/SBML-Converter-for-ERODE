@@ -1,4 +1,4 @@
-package sbmldemos;
+package sbml.demos;
 
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.SBMLReader;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class SpeciesPrinter {
     public static void main(String[] args) throws IOException, XMLStreamException {
-        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbmldemos/Trp_reg.sbml";
+        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/Trp_reg.sbml";
         SBase tree = SBMLReader.read(new File(path));
         SpeciesPrinter printer = new SpeciesPrinter();
         ListOf<QualitativeSpecies> species = printer.getListOfSpecies(tree);

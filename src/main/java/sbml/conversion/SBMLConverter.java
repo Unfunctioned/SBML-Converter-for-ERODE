@@ -12,6 +12,6 @@ public class SBMLConverter {
     public static  SBMLConverter converter = new SBMLConverter();
 
     public SBase read(String path) throws IOException, XMLStreamException {
-        return  SBMLReader.read(new File(path));
+        return SBMLReader.read(new File(path));
     }
 }

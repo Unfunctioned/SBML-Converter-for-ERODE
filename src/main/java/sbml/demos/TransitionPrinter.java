@@ -4,6 +4,7 @@ import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.SBMLReader;
 import org.sbml.jsbml.SBase;
 import org.sbml.jsbml.ext.qual.Input;
+import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.Transition;
 
@@ -36,9 +37,19 @@ public class TransitionPrinter {
     private void printTransition(Transition t) {
         System.out.println("Transition ID: " + t.getId());
         ListOf<Input> inputs = t.getListOfInputs();
+        ListOf<Output> outputs = t.getListOfOutputs();
 
         for(Input i : inputs)
             this.printInput(i);
+        for(Output o : outputs)
+            this.printOutput(o);
+        System.out.println();
+    }
+
+    private void printOutput(Output o) {
+        System.out.println("  Output ID: " + o.getId());
+        System.out.println("  Output Species: " + o.getQualitativeSpecies());
+        System.out.println("  Transition Effect: " + o.getTransitionEffect());
         System.out.println();
     }
 

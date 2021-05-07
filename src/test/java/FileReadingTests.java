@@ -8,31 +8,25 @@ import sbml.conversion.SBMLConverter;
 
 public class FileReadingTests {
     private String path;
-    private SBMLConverter converter;
     private SBase tree;
-    private String dir;
-    private String fullPath;
+    private Exception exception;
 
     @Given("a valid path to a SBML file")
     public void aValidPathToASBMLFile() {
-        dir = System.getProperty("user.dir");
-        System.out.println(dir);
         path = "./src/test/resources/Trp_reg.sbml";
     }
 
     @When("the file is read by the module")
     public void theFileIsReadByTheModule() {
         try {
-            fullPath = dir+path;
             tree = SBMLConverter.converter.read(path);
         } catch (Exception e) {
-            Assert.fail();
+            exception = e;
         }
-
     }
 
     @Then("an AST model containing the file data will be available")
     public void anASTModelContainingTheFileDataWillBeAvailable() {
-        Assert.assertTrue(tree.getClass().equals(SBMLDocument.class));
+        Assert.assertEquals(tree.getClass(),SBMLDocument.class);
     }
 }

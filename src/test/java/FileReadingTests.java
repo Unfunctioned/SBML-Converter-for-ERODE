@@ -1,3 +1,4 @@
+import com.thoughtworks.xstream.io.StreamException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,7 +20,7 @@ public class FileReadingTests {
     @When("the file is read by the module")
     public void theFileIsReadByTheModule() {
         try {
-            tree = SBMLConverter.converter.read(path);
+            tree = SBMLConverter.read(path);
         } catch (Exception e) {
             exception = e;
         }
@@ -28,5 +29,11 @@ public class FileReadingTests {
     @Then("an AST model containing the file data will be available")
     public void anASTModelContainingTheFileDataWillBeAvailable() {
         Assert.assertEquals(tree.getClass(),SBMLDocument.class);
+    }
+
+
+    @Then("parsing will fail with an exception")
+    public void parsingWillFailWithAnException() {
+        Assert.assertEquals(exception.getClass(), StreamException.class);
     }
 }

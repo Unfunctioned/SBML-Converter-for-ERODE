@@ -1,0 +1,16 @@
+begin Boolean network Test
+ begin init
+  Trpext = 1
+  Trp = 1
+  TrpE = 1
+  TrpR = 1
+ end init
+begin update functions
+  Trpext = false
+  Trp = false
+  TrpE = false
+  TrpR = false
+end update functions
+
+end Boolean network
+

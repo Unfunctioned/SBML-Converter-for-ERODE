@@ -6,10 +6,10 @@ begin Boolean network Test
   TrpR = 1
  end init
 begin update functions
-  Trpext = false
-  Trp = false
-  TrpE = false
-  TrpR = false
+  Trpext = Trpext
+  Trp = ((Trpext&TrpE) | Trpext)
+  TrpE = (Trp&TrpR)
+  TrpR = Trp
 end update functions
 
 end Boolean network

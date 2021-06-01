@@ -39,7 +39,7 @@ public class SBMLConverter {
     }
 
     public GUIBooleanNetworkImporter convert() throws IOException {
-        guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
+        this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
         //ArrayList<ArrayList<String>> initialConcentrations --> what are they in SBML? where to find?
         //Boolean updateFunctions --> LinkedHashMap<String,IUpdateFunction>()
         //ArrayList<ArrayList<String>> -> initialPartition --> what?

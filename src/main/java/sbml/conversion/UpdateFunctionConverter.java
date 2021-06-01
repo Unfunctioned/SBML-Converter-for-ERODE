@@ -3,10 +3,8 @@ package sbml.conversion;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.ListOf;
-import org.sbml.jsbml.ext.qual.FunctionTerm;
-import org.sbml.jsbml.ext.qual.Input;
-import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.Transition;
+
 import java.util.LinkedHashMap;
 
 public class UpdateFunctionConverter {

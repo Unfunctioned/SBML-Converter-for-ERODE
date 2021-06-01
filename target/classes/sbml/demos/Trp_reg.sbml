@@ -104,7 +104,7 @@
                 </apply>
               </apply>
             </math>
-                    </qual:functionTerm>
+          </qual:functionTerm>
           <qual:functionTerm qual:resultLevel="2">
             <math xmlns="http://www.w3.org/1998/Math/MathML">            
               <apply>

@@ -1,9 +1,9 @@
 begin Boolean network Test
  begin init
-  Trpext = 1
-  Trp = 1
-  TrpE = 1
-  TrpR = 1
+  Trpext = true
+  Trp = true
+  TrpE = true
+  TrpR = true
  end init
 begin update functions
   Trpext = Trpext

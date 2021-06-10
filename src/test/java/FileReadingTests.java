@@ -17,6 +17,12 @@ public class FileReadingTests {
         path = "./src/test/resources/Trp_reg.sbml";
     }
 
+    @Given("a valid path to an erroneus SBML file")
+    public void a_valid_path_to_an_erroneus_sbml_file() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
     @When("the file is read by the module")
     public void theFileIsReadByTheModule() {
         try {

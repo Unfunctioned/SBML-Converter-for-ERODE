@@ -1,15 +1,11 @@
 package sbml.demos;
 
-import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
-import it.imt.erode.importing.InfoBooleanNetworkImporting;
 import it.imt.erode.importing.booleannetwork.GUIBooleanNetworkImporter;
 import org.sbml.jsbml.SBMLDocument;
 import sbml.conversion.SBMLConverter;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 public class ErodeExporter {
 
@@ -24,7 +20,8 @@ public class ErodeExporter {
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
         SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
 
-        GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.convert();
+        sbmlConverter.convert();
+        GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         System.out.println(guiBooleanNetworkImporter.getBooleanNetwork().getSpecies().toString());
         GUIBooleanNetworkImporter.printToBNERODEFIle(guiBooleanNetworkImporter.getBooleanNetwork(),guiBooleanNetworkImporter.getInitialPartition(),
                 "Test.ode", null, true, null, null, false);

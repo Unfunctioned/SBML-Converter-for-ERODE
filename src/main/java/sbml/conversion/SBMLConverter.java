@@ -1,6 +1,5 @@
 package sbml.conversion;
 
-import it.imt.erode.booleannetwork.implementations.BooleanNetwork;
 import it.imt.erode.booleannetwork.interfaces.IBooleanNetwork;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.crn.interfaces.ISpecies;
@@ -17,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class SBMLConverter {
 
@@ -35,24 +33,24 @@ public class SBMLConverter {
     }
 
     public GUIBooleanNetworkImporter getGuiBnImporter() {
-        return guiBnImporter;
-    }
-
-    public GUIBooleanNetworkImporter convert() throws IOException {
-        this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
-        //ArrayList<ArrayList<String>> initialConcentrations --> what are they in SBML? where to find?
-        //Boolean updateFunctions --> LinkedHashMap<String,IUpdateFunction>()
-        //ArrayList<ArrayList<String>> -> initialPartition --> what?
-        this.infoImporting = guiBnImporter.importBooleanNetwork(true,true, true,
-                sbmlModel.getName(), new ArrayList<ArrayList<String>>(), new LinkedHashMap<String, IUpdateFunction>(),
-                new ArrayList<ArrayList<String>>(),null);
-        this.setModelName("TestNetwork");
-        this.addSpecies(sbmlModel.getErodeSpecies());
-        this.setUpdateFunctions(sbmlModel.getErodeUpdateFunctions());
         return this.guiBnImporter;
     }
 
-    private void setModelName(String testNetwork) {
+    public SBMLModel getSBMLModel() {
+        return this.sbmlModel;
+    }
+
+    public InfoBooleanNetworkImporting getInfoImporting() {
+        return this.infoImporting;
+    }
+
+    public void convert() throws IOException {
+        this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
+        this.infoImporting = guiBnImporter.importBooleanNetwork(true,true, true,
+                sbmlModel.getName(), new ArrayList<ArrayList<String>>(), new LinkedHashMap<String, IUpdateFunction>(),
+                new ArrayList<ArrayList<String>>(),null);
+        this.addSpecies(sbmlModel.getErodeSpecies());
+        this.setUpdateFunctions(sbmlModel.getErodeUpdateFunctions());
     }
 
     private void addSpecies(LinkedHashMap<String, ISpecies> erodeSpecies) {

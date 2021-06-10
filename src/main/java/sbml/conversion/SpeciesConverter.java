@@ -24,7 +24,7 @@ public class SpeciesConverter {
         int id = 0;
         for(QualitativeSpecies q : this.sbmlSpecies) {
             //Species s = new Species(string name, int id, BigDecimal initialConcentration, string initialConcentrationExpression);
-            Species testSpecies = new Species(q.getId(), id, BigDecimal.ONE,"1", false);
+            Species testSpecies = new Species(q.getId(), id, BigDecimal.ONE,"true", false);
             this.erodeSpecies.put(testSpecies.getName(), testSpecies);
             id++;
         }

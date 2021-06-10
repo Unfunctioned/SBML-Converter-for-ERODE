@@ -25,7 +25,7 @@ public class FunctionTermConverter {
         for(FunctionTerm f : functionTerms) {
             if(!f.isDefaultTerm() && f.isSetResultLevel() && f.getResultLevel() == 1) {
                 for(Output o : outputs)
-                    updateFunctions.put(o.getQualitativeSpecies(),convertUpdateFunction(f));
+                    updateFunctions.put(o.getQualitativeSpecies(), convertUpdateFunction(f));
             }
         }
     }

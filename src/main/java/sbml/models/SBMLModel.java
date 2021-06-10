@@ -15,8 +15,14 @@ public class SBMLModel implements IConversion
     private QualModel qualModel;
 
     public SBMLModel(Model model) {
-        this.name = model.getId(); //The actual model name is stored in the parameter id
-        this.qualModel = new QualModel((QualModelPlugin) model.getExtension("qual"));
+        if(model != null) {
+            this.name = model.getId(); //The actual model name is stored in the parameter id
+            this.qualModel = new QualModel((QualModelPlugin) model.getExtension("qual"));
+        }
+        else {
+            this.name = "NULL";
+            this.qualModel = new QualModel(new QualModelPlugin(new Model()));
+        }
     }
 
     public String getName() {

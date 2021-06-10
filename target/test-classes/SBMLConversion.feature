@@ -1,14 +1,18 @@
 Feature: Converting the top-level SBMLDocument class to ERODE format
+
+  Background:
+    Given the ExceptionCollector is empty
+
   #SBMLConverter construction and initialisation
   Scenario: Initializing an SBMLConverter instance successfully
     Given an SBMLDocument instance with the SBML-qual extension
     When attempting to create an SBMLConverter instance
-    Then the creation succeeds
+    Then the SBMLConverter creation succeeds
 
   Scenario: Failing to initialise an SBMLConverter instance given an non-SBMLQual model
     Given an SBMLDocument instance without the SBML-qual extension
     When attempting to create an SBMLConverter instance
-    Then an exception with message is "Argument for @NotNull parameter 'qualModel' of sbml/models/QualModel.<init> must not be null" thrown
+    Then an exception with message is "Invalid input, the SBML-model is not an SBML-qual model" thrown
 
   #Top-level conversion
   Scenario: Converting an SBML-qual model successfully

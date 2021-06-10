@@ -8,12 +8,10 @@ import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.layout.LayoutModelPlugin;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.SBMLConverter;
-import sbml.models.SBMLModel;
 
 public class SBMLConversionTests {
     private SBMLDocument sbmlDocument;
     private SBMLConverter sbmlConverter;
-    private Exception exception;
     private GUIBooleanNetworkImporter guiBooleanNetworkImporter;
 
     @Given("an SBMLDocument instance with the SBML-qual extension")
@@ -38,7 +36,7 @@ public class SBMLConversionTests {
     public void anSBMLConverterInstanceCreatedFromAnSBMLQualModel() {
         anSBMLDocumentInstanceWithTheSBMLQualExtension();
         attemptingToCreateAnSBMLConverterInstance();
-        Assert.assertNull(exception);
+        Assert.assertNull(ExceptionCollector.getExceptionInstance());
         Assert.assertEquals(SBMLConverter.class, sbmlConverter.getClass());
     }
 
@@ -47,7 +45,7 @@ public class SBMLConversionTests {
         try {
             sbmlConverter = new SBMLConverter(sbmlDocument);
         } catch (Exception e) {
-            exception = e;
+            ExceptionCollector.setExceptionInstance(e);
         }
     }
 
@@ -57,25 +55,19 @@ public class SBMLConversionTests {
             sbmlConverter.convert();
             guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         } catch (Exception e) {
-            exception = e;
+            ExceptionCollector.setExceptionInstance(e);
         }
     }
 
-    @Then("the creation succeeds")
-    public void theCreationSucceeds() {
-        Assert.assertNull(exception);
+    @Then("the SBMLConverter creation succeeds")
+    public void theSBMLConverterCreationSucceeds() {
+        Assert.assertNull(ExceptionCollector.getExceptionInstance());
         Assert.assertNotNull(sbmlConverter.getSBMLModel());
-    }
-
-    @Then("an exception with message is {string} thrown")
-    public void anExceptionWithMessageIsThrown(String arg0) {
-        Assert.assertNotNull(exception);
-        Assert.assertEquals(arg0, exception.getMessage());
     }
 
     @Then("the ERODE data structures have been created successfully")
     public void theERODEDataStructuresHaveBeenCreatedSuccessfully() {
-        Assert.assertNull(exception);
+        Assert.assertNull(ExceptionCollector.getExceptionInstance());
         Assert.assertNotNull(guiBooleanNetworkImporter);
         Assert.assertNotNull(guiBooleanNetworkImporter.getBooleanNetwork());
         Assert.assertNotNull(sbmlConverter.getInfoImporting());

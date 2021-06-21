@@ -15,8 +15,9 @@ public class ErodeExporter {
      * @throws IOException
      * @throws XMLStreamException
      */
+
     public static void main(String[] args) throws IOException, XMLStreamException {
-        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/Trp_reg.sbml";
+        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
         SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
 

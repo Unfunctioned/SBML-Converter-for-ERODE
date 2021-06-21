@@ -5,6 +5,10 @@ import org.junit.Before;
 
 public class CommonSteps {
 
+    public static String GetPath() {
+        return "./src/test/resources/CorticalAreaDevelopment.sbml";
+    }
+
     @Given("the ExceptionCollector is empty")
     public void theExceptionCollectorIsEmpty() {
         ExceptionCollector.clear();

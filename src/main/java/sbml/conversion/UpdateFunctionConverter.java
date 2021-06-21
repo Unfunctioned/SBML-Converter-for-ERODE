@@ -24,7 +24,6 @@ public class UpdateFunctionConverter {
     private void toErodeFormat() {
         for(Transition t : this.sbmlTransitions) {
             functionTermConverter.convert(t, this.erodeUpdateFunctions);
-            System.out.println();
         }
     }
 

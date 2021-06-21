@@ -20,7 +20,10 @@ public class SBMLModel implements IConversion
             try {
                 this.qualModel = new QualModel((QualModelPlugin) model.getExtension("qual"));
             } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
                 throw new IllegalArgumentException("Invalid input, the SBML-model is not an SBML-qual model");
+
             }
     }
 

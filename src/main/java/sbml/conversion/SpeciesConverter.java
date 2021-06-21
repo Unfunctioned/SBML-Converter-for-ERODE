@@ -23,12 +23,24 @@ public class SpeciesConverter {
     private LinkedHashMap<String, ISpecies> toErodeFormat() {
         int id = 0;
         for(QualitativeSpecies q : this.sbmlSpecies) {
-            //Species s = new Species(string name, int id, BigDecimal initialConcentration, string initialConcentrationExpression);
-            Species testSpecies = new Species(q.getId(), id, BigDecimal.ONE,"true", false);
+            Species testSpecies = CreateSpecies(id,q);
             this.erodeSpecies.put(testSpecies.getName(), testSpecies);
             id++;
         }
         return this.erodeSpecies;
+    }
+
+    private Species CreateSpecies(int id, QualitativeSpecies species) {
+        int initialValue = species.getInitialLevel();
+        switch (initialValue) {
+            case 0:
+                return new Species(species.getId(),id,BigDecimal.ZERO,"false", false);
+            case 1:
+                return new Species(species.getId(), id, BigDecimal.ONE, "true", false);
+            default:
+                String startValue = String.valueOf(initialValue);
+                return new Species(species.getId(),id,new BigDecimal(startValue),startValue, false);
+        }
     }
 
     public LinkedHashMap<String, ISpecies> getErodeSpecies() {

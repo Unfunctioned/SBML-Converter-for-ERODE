@@ -14,7 +14,7 @@ public class FileReadingTests {
 
     @Given("a valid path to a SBML file")
     public void aValidPathToASBMLFile() {
-        path = "./src/test/resources/Trp_reg.sbml";
+        path = CommonSteps.GetPath();
     }
 
     @Given("a valid path to an erroneus SBML file")

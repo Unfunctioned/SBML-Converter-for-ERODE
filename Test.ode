@@ -13,6 +13,6 @@ begin update functions
   S_4 = (((S_1 -> true)&(true -> S_1))&(((S_3 -> true)&(true -> S_3)) -> false))
   S_5 = (((((S_1 -> true)&(true -> S_1)) | ((S_4 -> true)&(true -> S_4))) -> false) | ((((S_1 -> true)&(true -> S_1)) | ((S_4 -> true)&(true -> S_4))) -> false))
 end update functions
-reduceBBE()
+
 end Boolean network
 

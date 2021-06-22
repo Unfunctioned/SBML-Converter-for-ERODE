@@ -14,14 +14,14 @@ public class UpdateFunctionConverter {
     private ListOf<Transition> sbmlTransitions;
     private LinkedHashMap<String, IUpdateFunction> erodeUpdateFunctions;
 
-    public UpdateFunctionConverter(@NotNull ListOf<Transition> listOfTransitions) {
+    public UpdateFunctionConverter(@NotNull ListOf<Transition> listOfTransitions) throws Exception {
         this.functionTermConverter = new FunctionTermConverter();
         this.erodeUpdateFunctions = new LinkedHashMap<>();
         this.sbmlTransitions = listOfTransitions;
         this.toErodeFormat();
     }
 
-    private void toErodeFormat() {
+    private void toErodeFormat() throws Exception {
         for(Transition t : this.sbmlTransitions) {
             functionTermConverter.convert(t, this.erodeUpdateFunctions);
         }

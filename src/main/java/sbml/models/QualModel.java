@@ -15,7 +15,7 @@ public class QualModel {
     private SpeciesConverter speciesConverter;
     private UpdateFunctionConverter updateFunctionConverter;
 
-    public QualModel(@NotNull QualModelPlugin qualModel) {
+    public QualModel(@NotNull QualModelPlugin qualModel) throws Exception {
         this.sbmlQualModel = qualModel;
         this.speciesConverter = new SpeciesConverter(qualModel.getListOfQualitativeSpecies());
         this.updateFunctionConverter = new UpdateFunctionConverter(qualModel.getListOfTransitions());

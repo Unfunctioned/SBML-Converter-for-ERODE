@@ -26,13 +26,15 @@ public class QualModelTests {
         try {
             qualModel = new QualModel(qualModelPlugin);
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @Then("the QualModel creation succeeds")
     public void theQualModelCreationSucceeds() {
-        Assert.assertNull(ExceptionCollector.getExceptionInstance());
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
         Assert.assertNotNull(qualModel);
         Assert.assertEquals(qualModelPlugin,qualModel.getSbmlQualModel());
 

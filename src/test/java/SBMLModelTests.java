@@ -32,13 +32,15 @@ public class SBMLModelTests {
         try {
             sbmlModel = new SBMLModel(model);
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @Then("the SBMLModel creation succeeds")
     public void theSBMLModelCreationSucceeds() {
-        Assert.assertNull(ExceptionCollector.getExceptionInstance());
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
         Assert.assertNotNull(sbmlModel);
         Assert.assertNotNull(sbmlModel.getName());
         Assert.assertNotNull(sbmlModel.getQualModel());

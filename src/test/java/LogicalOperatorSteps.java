@@ -1,90 +1,94 @@
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import it.imt.erode.booleannetwork.updatefunctions.*;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
+import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.Assert;
 import sbml.conversion.operators.Operator;
 
 public class LogicalOperatorSteps {
-    private Operator operator;
-    private IUpdateFunction x;
-    private IUpdateFunction y;
+    private static final Operator operator = new Operator();
     private IUpdateFunction booleanExpression;
-
-    @Given("an Operator-object instance")
-    public void anOperatorObjectInstance() {
-        operator = new Operator();
-    }
-
-    @Given("an update function term X in ERODE format")
-    public void anUpdateFunctionTermXInERODEFormat() {
-        x = new TrueUpdateFunction();
-    }
-
-    @Given("an update function term Y in ERODE format")
-    public void anUpdateFunctionTermYInERODEFormat() {
-        y = new FalseUpdateFunction();
-    }
 
     @When("the AND-operation is created")
     public void theANDOperationIsCreated() {
         try {
-            booleanExpression = operator.And(x,y);
+            Expression ec = Expression.getInstance();
+            booleanExpression = operator.And(ec.getX(),ec.getY());
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @When("the OR-operation is created")
     public void theOROperationIsCreated() {
         try {
-            booleanExpression = operator.Or(x,y);
+            Expression ec = Expression.getInstance();
+            booleanExpression = operator.Or(ec.getX(),ec.getY());
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @When("the NOT-operation is created")
     public void theNOTOperationIsCreated() {
         try {
-            booleanExpression = operator.Not(x);
+            Expression ec = Expression.getInstance();
+            booleanExpression = operator.Not(ec.getX());
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @When("the XOR-operation is created")
     public void theXOROperationIsCreated() {
         try {
-            booleanExpression = operator.Xor(x,y);
+            Expression expr = Expression.getInstance();
+            booleanExpression = operator.Xor(expr.getX(),expr.getY());
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @Then("a boolean update function representing the AND-operation is created successfully")
     public void aBooleanUpdateFunctionRepresentingTheANDOperationIsCreatedSuccessfully() {
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
+
+        Expression expression = Expression.getInstance();
+
         Assert.assertNotNull(booleanExpression);
         Assert.assertEquals(booleanExpression.getClass(),BooleanUpdateFunctionExpr.class);
-        BooleanUpdateFunctionExpr expr = (BooleanUpdateFunctionExpr) booleanExpression;
-        Assert.assertEquals(x,expr.getFirst());
-        Assert.assertEquals(y,expr.getSecond());
-        Assert.assertEquals(BooleanConnector.AND,expr.getOperator());
+        BooleanUpdateFunctionExpr functionExpr = (BooleanUpdateFunctionExpr) booleanExpression;
+        Assert.assertEquals(expression.getX(),functionExpr.getFirst());
+        Assert.assertEquals(expression.getY(),functionExpr.getSecond());
+        Assert.assertEquals(BooleanConnector.AND,functionExpr.getOperator());
     }
 
     @Then("a boolean update function representing the OR-operation is created successfully")
     public void aBooleanUpdateFunctionRepresentingTheOROperationIsCreatedSuccessfully() {
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
+
+        Expression expression = Expression.getInstance();
+
         Assert.assertNotNull(booleanExpression);
         Assert.assertEquals(booleanExpression.getClass(),BooleanUpdateFunctionExpr.class);
-        BooleanUpdateFunctionExpr expr = (BooleanUpdateFunctionExpr) booleanExpression;
-        Assert.assertEquals(x,expr.getFirst());
-        Assert.assertEquals(y,expr.getSecond());
-        Assert.assertEquals(BooleanConnector.OR,expr.getOperator());
+        BooleanUpdateFunctionExpr functionExpr = (BooleanUpdateFunctionExpr) booleanExpression;
+        Assert.assertEquals(expression.getX(), functionExpr.getFirst());
+        Assert.assertEquals(expression.getY(),functionExpr.getSecond());
+        Assert.assertEquals(BooleanConnector.OR,functionExpr.getOperator());
     }
 
     @Then("a boolean update function representing the NOT-operation is created successfully")
     public void aBooleanUpdateFunctionRepresentingTheNOTOperationIsCreatedSuccessfully() {
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
+
         Assert.assertNotNull(booleanExpression);
         Assert.assertEquals(booleanExpression.getClass(), NotBooleanUpdateFunction.class);
 
@@ -96,6 +100,11 @@ public class LogicalOperatorSteps {
 
     @Then("a boolean update function representing the XOR-operation is created successfully")
     public void aBooleanUpdateFunctionRepresentingTheXOROperationIsCreatedSuccessfully() {
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
+
+        Expression expression = Expression.getInstance();
+
         Assert.assertNotNull(booleanExpression);
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, booleanExpression.getClass());
 
@@ -107,8 +116,8 @@ public class LogicalOperatorSteps {
         IUpdateFunction lhs = outerExpr.getFirst();
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, lhs.getClass());
         BooleanUpdateFunctionExpr orExpr = (BooleanUpdateFunctionExpr) lhs;
-        Assert.assertEquals(x, orExpr.getFirst());
-        Assert.assertEquals(y, orExpr.getSecond());
+        Assert.assertEquals(expression.getX(), orExpr.getFirst());
+        Assert.assertEquals(expression.getY(), orExpr.getSecond());
         Assert.assertEquals(BooleanConnector.OR, orExpr.getOperator());
 
         //Assert right term [!(x && y)]

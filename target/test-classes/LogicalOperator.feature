@@ -2,7 +2,7 @@ Feature: Translating logical operators to ERODE format
 
   Background:
     Given the ExceptionCollector is empty
-    Given an Operator-object instance
+    Given the ExpressionCollector is empty
 
   Scenario: Creating an AND-operation in ERODE format
     Given an update function term X in ERODE format

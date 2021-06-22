@@ -1,3 +1,4 @@
+import io.cucumber.java.an.E;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -37,7 +38,8 @@ public class SBMLConversionTests {
     public void anSBMLConverterInstanceCreatedFromAnSBMLQualModel() {
         anSBMLDocumentInstanceWithTheSBMLQualExtension();
         attemptingToCreateAnSBMLConverterInstance();
-        Assert.assertNull(ExceptionCollector.getExceptionInstance());
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
         Assert.assertEquals(SBMLConverter.class, sbmlConverter.getClass());
     }
 
@@ -56,7 +58,8 @@ public class SBMLConversionTests {
         try {
             sbmlConverter = new SBMLConverter(sbmlDocument);
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
@@ -66,19 +69,22 @@ public class SBMLConversionTests {
             sbmlConverter.convert();
             guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 
     @Then("the SBMLConverter creation succeeds")
     public void theSBMLConverterCreationSucceeds() {
-        Assert.assertNull(ExceptionCollector.getExceptionInstance());
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
         Assert.assertNotNull(sbmlConverter.getSBMLModel());
     }
 
     @Then("the ERODE data structures have been created successfully")
     public void theERODEDataStructuresHaveBeenCreatedSuccessfully() {
-        Assert.assertNull(ExceptionCollector.getExceptionInstance());
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
         Assert.assertNotNull(guiBooleanNetworkImporter);
         Assert.assertNotNull(guiBooleanNetworkImporter.getBooleanNetwork());
         Assert.assertNotNull(sbmlConverter.getInfoImporting());

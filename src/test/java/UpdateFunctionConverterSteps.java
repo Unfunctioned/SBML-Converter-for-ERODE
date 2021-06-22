@@ -45,7 +45,8 @@ public class UpdateFunctionConverterSteps {
         try {
             updateFunctionConverter = new UpdateFunctionConverter(transitions);
         } catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 

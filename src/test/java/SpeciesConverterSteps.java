@@ -62,7 +62,8 @@ public class SpeciesConverterSteps {
             speciesConverter = new SpeciesConverter(qualitativeSpecies);
         }
         catch (Exception e) {
-            ExceptionCollector.setExceptionInstance(e);
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
         }
     }
 

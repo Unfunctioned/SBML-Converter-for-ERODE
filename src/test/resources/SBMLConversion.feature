@@ -19,3 +19,12 @@ Feature: Converting the top-level SBMLDocument class to ERODE format
     Given an SBMLConverter instance created from an SBML-qual model
     When the model is converted
     Then the ERODE data structures have been created successfully
+
+  #Adding species to a boolean network in ERODE format
+  Scenario: Adding ERODE-Species to a boolean network in ERODE format
+    Given a boolean network in SBML format
+    When attempting to create an SBMLConverter instance
+    Then the SBMLConverter creation succeeds
+    When the model is converted
+    Then the ERODE data structures have been created successfully
+    Then the boolean network contains a List of Species

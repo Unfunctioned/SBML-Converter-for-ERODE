@@ -1,6 +1,7 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import it.imt.erode.booleannetwork.interfaces.IBooleanNetwork;
 import it.imt.erode.importing.booleannetwork.GUIBooleanNetworkImporter;
 import org.junit.Assert;
 import org.sbml.jsbml.Model;
@@ -40,6 +41,16 @@ public class SBMLConversionTests {
         Assert.assertEquals(SBMLConverter.class, sbmlConverter.getClass());
     }
 
+    @Given("a boolean network in SBML format")
+    public void aBooleanNetworkInSBMLFormat() {
+        String path = CommonSteps.GetPath();
+        try {
+            sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
+        } catch (Exception e) {
+            Assert.fail("Could not read file on path: " + path);
+        }
+    }
+
     @When("attempting to create an SBMLConverter instance")
     public void attemptingToCreateAnSBMLConverterInstance() {
         try {
@@ -71,5 +82,12 @@ public class SBMLConversionTests {
         Assert.assertNotNull(guiBooleanNetworkImporter);
         Assert.assertNotNull(guiBooleanNetworkImporter.getBooleanNetwork());
         Assert.assertNotNull(sbmlConverter.getInfoImporting());
+    }
+
+    @Then("the boolean network contains a List of Species")
+    public void theBooleanNetworkContainsAListOfSpecies() {
+        IBooleanNetwork booleanNetwork = guiBooleanNetworkImporter.getBooleanNetwork();
+        Assert.assertNotNull(booleanNetwork.getSpecies());
+        Assert.assertEquals(5,booleanNetwork.getSpecies().size());
     }
 }

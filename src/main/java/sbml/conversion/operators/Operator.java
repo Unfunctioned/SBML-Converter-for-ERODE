@@ -1,6 +1,7 @@
 package sbml.conversion.operators;
 
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
+import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.operators.interfaces.ILogicalOperator;
 import sbml.conversion.operators.interfaces.IRelationalOperator;
@@ -19,32 +20,32 @@ public class Operator implements ILogicalOperator, IRelationalOperator, IValueEl
     }
 
     @Override
-    public IUpdateFunction And(IUpdateFunction x, IUpdateFunction y) {
+    public IUpdateFunction And(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
         return logicalOperator.And(x,y);
     }
 
     @Override
-    public IUpdateFunction Or(IUpdateFunction x, IUpdateFunction y) {
+    public IUpdateFunction Or(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
         return logicalOperator.Or(x,y);
     }
 
     @Override
-    public IUpdateFunction Not(IUpdateFunction x) {
+    public IUpdateFunction Not(@NotNull IUpdateFunction x) {
         return logicalOperator.Not(x);
     }
 
     @Override
-    public IUpdateFunction Xor(IUpdateFunction x, IUpdateFunction y) {
+    public IUpdateFunction Xor(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
         return logicalOperator.Xor(x,y);
     }
 
     @Override
-    public IUpdateFunction Equals(IUpdateFunction x, IUpdateFunction y) {
+    public IUpdateFunction Equals(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
         return relationalOperator.Equals(x,y);
     }
 
     @Override
-    public IUpdateFunction NotEquals(IUpdateFunction x, IUpdateFunction y) {
+    public IUpdateFunction NotEquals(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
         return relationalOperator.NotEquals(x,y);
     }
 

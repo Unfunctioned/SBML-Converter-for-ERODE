@@ -8,4 +8,6 @@ public interface IValueElement {
     IUpdateFunction Reference(ASTNode node);
 
     IUpdateFunction Constant(ASTNode node);
+
+    IUpdateFunction BooleanValue(ASTNode node);
 }

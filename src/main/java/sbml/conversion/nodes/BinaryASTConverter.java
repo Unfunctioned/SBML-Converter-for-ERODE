@@ -27,14 +27,17 @@ public class BinaryASTConverter extends NodeConverter {
             case "LOGICAL_XOR":
                 this.updateFunction = operator.Xor(leftChild.getUpdateFunction(), rightChild.getUpdateFunction());
                 break;
+            case "LOGICAL_IMPLIES":
+                this.updateFunction = operator.Implies(leftChild.getUpdateFunction(),rightChild.getUpdateFunction());
+                break;
             case "RELATIONAL_EQ":
                 this.updateFunction = operator.Equals(leftChild.getUpdateFunction(), rightChild.getUpdateFunction());
                 break;
-            case "RELATIONAL_NEG":
+            case "RELATIONAL_NEQ":
                 this.updateFunction = operator.NotEquals(leftChild.getUpdateFunction(), rightChild.getUpdateFunction());
                 break;
             default:
-                throw new IllegalArgumentException("Type name did not match any case!");
+                throw new IllegalArgumentException("Invalid type name");
         }
     }
 }

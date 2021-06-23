@@ -20,7 +20,20 @@ public class ValueElement implements IValueElement {
             case 0:
                 return new FalseUpdateFunction();
             default:
-                throw new IllegalArgumentException("Given network is not a boolean network");
+                throw new IllegalArgumentException("Given node value is not a boolean value");
+        }
+    }
+
+    @Override
+    public IUpdateFunction BooleanValue(ASTNode node) {
+        ASTNode.Type type = node.getType();
+        switch (type.name()) {
+            case "CONSTANT_FALSE":
+                return new FalseUpdateFunction();
+            case "CONSTANT_TRUE":
+                return new TrueUpdateFunction();
+            default:
+                throw new IllegalArgumentException("Given node is not a boolean constant");
         }
     }
 }

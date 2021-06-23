@@ -79,9 +79,8 @@ public class RelationalOperatorSteps {
         Assert.assertEquals(NotBooleanUpdateFunction.class, relationalExpression.getClass());
         NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction) relationalExpression;
 
-        /* TODO: Add getInner() to the NotBooleanUpdate class
         //Assert inner expression [() && ()]
-        IUpdateFunction innerExpr = notExpr.getInner();
+        IUpdateFunction innerExpr = notExpr.getInnerUpdateFunction();
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, innerExpr.getClass());
         BooleanUpdateFunctionExpr andExpr = (BooleanUpdateFunctionExpr) innerExpr;
         Assert.assertEquals(BooleanConnector.AND, andExpr.getOperator());
@@ -103,6 +102,5 @@ public class RelationalOperatorSteps {
         Assert.assertEquals(expression.getY(), yImpliesX.getFirst());
         Assert.assertEquals(expression.getX(), yImpliesX.getSecond());
         Assert.assertEquals(BooleanConnector.IMPLIES, yImpliesX.getOperator());
-         */
     }
 }

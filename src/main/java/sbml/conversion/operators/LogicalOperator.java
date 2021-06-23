@@ -28,4 +28,8 @@ public class LogicalOperator implements ILogicalOperator {
         IUpdateFunction xAndY = new BooleanUpdateFunctionExpr(x,y, BooleanConnector.AND);
         return new BooleanUpdateFunctionExpr(xOrY, Not(xAndY), BooleanConnector.AND);
     }
+
+    public IUpdateFunction Implies(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
+        return new BooleanUpdateFunctionExpr(x,y,BooleanConnector.IMPLIES);
+    }
 }

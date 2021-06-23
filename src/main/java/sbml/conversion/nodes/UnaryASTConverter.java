@@ -20,7 +20,7 @@ public class UnaryASTConverter extends NodeConverter {
                 this.updateFunction = operator.Not(child.getUpdateFunction());
                 break;
             default:
-                throw new IllegalArgumentException("Type name did not match any case!");
+                throw new IllegalArgumentException("Invalid type name");
         }
     }
 }

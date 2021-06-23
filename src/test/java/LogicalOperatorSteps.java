@@ -54,6 +54,17 @@ public class LogicalOperatorSteps {
         }
     }
 
+    @When("the IMPLIES-operation is created")
+    public void theIMPLIESOperationIsCreated() {
+        try {
+            Expression expr = Expression.getInstance();
+            booleanExpression = operator.Implies(expr.getX(),expr.getY());
+        } catch (Exception e) {
+            ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+            exceptionCollector.setException(e);
+        }
+    }
+
     @Then("a boolean update function representing the AND-operation is created successfully")
     public void aBooleanUpdateFunctionRepresentingTheANDOperationIsCreatedSuccessfully() {
         ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
@@ -89,13 +100,13 @@ public class LogicalOperatorSteps {
         ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
         Assert.assertNull(exceptionCollector.getException());
 
+        Expression expression = Expression.getInstance();
+
         Assert.assertNotNull(booleanExpression);
         Assert.assertEquals(booleanExpression.getClass(), NotBooleanUpdateFunction.class);
 
-        /* TODO: Add getInner() to the NotBooleanUpdate class
         NotBooleanUpdateFunction expr = (NotBooleanUpdateFunction) booleanExpression;
-        Assert.assertEquals(x,expr.getInner());
-        */
+        Assert.assertEquals(expression.getX(),expr.getInnerUpdateFunction());
     }
 
     @Then("a boolean update function representing the XOR-operation is created successfully")
@@ -124,14 +135,27 @@ public class LogicalOperatorSteps {
         IUpdateFunction rhs = (NotBooleanUpdateFunction) outerExpr.getSecond();
         Assert.assertEquals(NotBooleanUpdateFunction.class, rhs.getClass());
 
-        /* TODO: Add getInner() to the NotBooleanUpdate class
         NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction) rhs;
-        IUpdateFunction innerExpr = notExpr.getInner();
+        IUpdateFunction innerExpr = notExpr.getInnerUpdateFunction();
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, innerExpr.getClass());
         BooleanUpdateFunctionExpr andExor = (BooleanUpdateFunctionExpr) innerExpr;
-        Assert.assertEquals(x, andExor.getFirst());
-        Assert.assertEquals(y, andExor.getSecond());
+        Assert.assertEquals(expression.getX(), andExor.getFirst());
+        Assert.assertEquals(expression.getY(), andExor.getSecond());
         Assert.assertEquals(BooleanConnector.AND, andExor.getOperator());
-        */
+    }
+
+    @Then("a boolean update function representing the IMPLIES-operation is created successfully")
+    public void aBooleanUpdateFunctionRepresentingTheIMPLIESOperationIsCreatedSuccessfully() {
+        ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
+        Assert.assertNull(exceptionCollector.getException());
+
+        Expression expression = Expression.getInstance();
+
+        Assert.assertNotNull(booleanExpression);
+        Assert.assertEquals(booleanExpression.getClass(),BooleanUpdateFunctionExpr.class);
+        BooleanUpdateFunctionExpr functionExpr = (BooleanUpdateFunctionExpr) booleanExpression;
+        Assert.assertEquals(expression.getX(),functionExpr.getFirst());
+        Assert.assertEquals(expression.getY(),functionExpr.getSecond());
+        Assert.assertEquals(BooleanConnector.IMPLIES,functionExpr.getOperator());
     }
 }

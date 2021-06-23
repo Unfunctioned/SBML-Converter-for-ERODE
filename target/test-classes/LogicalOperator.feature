@@ -26,3 +26,9 @@ Feature: Translating logical operators to ERODE format
     Given an update function term Y in ERODE format
     When the XOR-operation is created
     Then a boolean update function representing the XOR-operation is created successfully
+
+  Scenario: Creating a IMPLIES-operation in ERODE format
+    Given an update function term X in ERODE format
+    Given an update function term Y in ERODE format
+    When the IMPLIES-operation is created
+    Then a boolean update function representing the IMPLIES-operation is created successfully

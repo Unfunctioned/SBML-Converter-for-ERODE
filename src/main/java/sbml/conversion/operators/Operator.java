@@ -40,6 +40,11 @@ public class Operator implements ILogicalOperator, IRelationalOperator, IValueEl
     }
 
     @Override
+    public IUpdateFunction Implies(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
+        return  logicalOperator.Implies(x,y);
+    }
+
+    @Override
     public IUpdateFunction Equals(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
         return relationalOperator.Equals(x,y);
     }
@@ -50,12 +55,17 @@ public class Operator implements ILogicalOperator, IRelationalOperator, IValueEl
     }
 
     @Override
-    public IUpdateFunction Reference(ASTNode node) {
+    public IUpdateFunction Reference(@NotNull ASTNode node) {
         return valueElement.Reference(node);
     }
 
     @Override
-    public IUpdateFunction Constant(ASTNode node) {
+    public IUpdateFunction Constant(@NotNull ASTNode node) {
         return valueElement.Constant(node);
+    }
+
+    @Override
+    public IUpdateFunction BooleanValue(ASTNode node) {
+        return valueElement.BooleanValue(node);
     }
 }

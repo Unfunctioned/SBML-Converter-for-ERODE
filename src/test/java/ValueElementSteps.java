@@ -19,11 +19,6 @@ public class ValueElementSteps {
     private IUpdateFunction erodeReference;
     private IUpdateFunction erodeConstant;
 
-    @Given("a species to be referenced")
-    public void aSpeciesToBeReferenced() {
-
-    }
-
     @Given("a species with name {string} to be referenced")
     public void aSpeciesWithNameToBeReferenced(String arg0) {
         speciesReference = new ASTNode(arg0);
@@ -32,6 +27,12 @@ public class ValueElementSteps {
     @Given("an ASTNode with value {int} representing a constant")
     public void anASTNodeWithValueRepresentingAConstant(int arg0) {
         booleanConstant = new ASTNode(arg0);
+    }
+
+    @Given("an ASTNode of type {string} representing a boolean constant")
+    public void anASTNodeOfTypeRepresentingABooleanConstant(String arg0) {
+        booleanConstant = new ASTNode();
+        booleanConstant.setType(arg0);
     }
 
     @When("the Reference-operation is created")
@@ -47,6 +48,15 @@ public class ValueElementSteps {
     public void theConstantIsCreated() {
         try {
             erodeConstant = operator.Constant(booleanConstant);
+        } catch (Exception e) {
+            exceptionCollector.setException(e);
+        }
+    }
+
+    @When("the boolean value is created")
+    public void theBooleanValueIsCreated() {
+        try {
+            erodeConstant = operator.BooleanValue(booleanConstant);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }

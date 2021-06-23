@@ -19,8 +19,12 @@ public class ValueASTConverter extends NodeConverter {
             case "INTEGER":
                 this.updateFunction = operator.Constant(currentNode);
                 break;
+            case "CONSTANT_FALSE":
+            case "CONSTANT_TRUE":
+                this.updateFunction = operator.BooleanValue(currentNode);
+                break;
             default:
-                throw new IllegalArgumentException("Type name did not match any case!");
+                throw new IllegalArgumentException("Unknown type name");
         }
     }
 }

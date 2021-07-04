@@ -4,11 +4,11 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
-import sbml.models.SBMLModel;
+import sbml.conversion.ModelConverter;
 
 public class SBMLModelTests {
     private Model model;
-    private SBMLModel sbmlModel;
+    private ModelConverter modelConverter;
 
     @Given("a valid SBML-qual model")
     public void aValidSBMLQualModel() {
@@ -30,7 +30,7 @@ public class SBMLModelTests {
     @When("attempting to create an SBMLModel instance")
     public void attemptingToCreateAnSBMLModelInstance() {
         try {
-            sbmlModel = new SBMLModel(model);
+            modelConverter = new ModelConverter(model);
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -41,8 +41,8 @@ public class SBMLModelTests {
     public void theSBMLModelCreationSucceeds() {
         ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
         Assert.assertNull(exceptionCollector.getException());
-        Assert.assertNotNull(sbmlModel);
-        Assert.assertNotNull(sbmlModel.getName());
-        Assert.assertNotNull(sbmlModel.getQualModel());
+        Assert.assertNotNull(modelConverter);
+        Assert.assertNotNull(modelConverter.getName());
+        Assert.assertNotNull(modelConverter.getQualModel());
     }
 }

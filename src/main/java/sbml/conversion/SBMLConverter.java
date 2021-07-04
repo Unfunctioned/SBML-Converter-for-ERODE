@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBMLReader;
 import org.sbml.jsbml.SBase;
-import sbml.models.SBMLModel;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -26,18 +25,18 @@ public class SBMLConverter {
     private GUIBooleanNetworkImporter guiBnImporter;
     private InfoBooleanNetworkImporting infoImporting;
 
-    private SBMLModel sbmlModel;
+    private ModelConverter modelConverter;
 
     public SBMLConverter(@NotNull SBMLDocument sbmlDocumentModel) {
-        sbmlModel = new SBMLModel(sbmlDocumentModel.getModel());
+        modelConverter = new ModelConverter(sbmlDocumentModel.getModel());
     }
 
     public GUIBooleanNetworkImporter getGuiBnImporter() {
         return this.guiBnImporter;
     }
 
-    public SBMLModel getSBMLModel() {
-        return this.sbmlModel;
+    public ModelConverter getSBMLModel() {
+        return this.modelConverter;
     }
 
     public InfoBooleanNetworkImporting getInfoImporting() {
@@ -47,10 +46,10 @@ public class SBMLConverter {
     public void convert() throws IOException {
         this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
         this.infoImporting = guiBnImporter.importBooleanNetwork(true,true, true,
-                sbmlModel.getName(), new ArrayList<ArrayList<String>>(), new LinkedHashMap<String, IUpdateFunction>(),
+                modelConverter.getName(), new ArrayList<ArrayList<String>>(), new LinkedHashMap<String, IUpdateFunction>(),
                 new ArrayList<ArrayList<String>>(),null);
-        this.addSpecies(sbmlModel.getErodeSpecies());
-        this.setUpdateFunctions(sbmlModel.getErodeUpdateFunctions());
+        this.addSpecies(modelConverter.getErodeSpecies());
+        this.setUpdateFunctions(modelConverter.getErodeUpdateFunctions());
     }
 
     private void addSpecies(LinkedHashMap<String, ISpecies> erodeSpecies) {

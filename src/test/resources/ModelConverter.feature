@@ -1,4 +1,4 @@
-Feature: Converting the SBML model contained in an SBMLDocument
+Feature: Converting the SBML model contained in an SBMLDocument using the ModelConverter
 
   Background:
     Given the ExceptionCollector is empty
@@ -11,7 +11,7 @@ Feature: Converting the SBML model contained in an SBMLDocument
   Scenario: Attempting to create an SBMLModel instance without an SBML-qual model
     Given that there is no SBML Model
     When attempting to create an SBMLModel instance
-    Then an exception with message is "Argument for @NotNull parameter 'model' of sbml/models/SBMLModel.<init> must not be null" thrown
+    Then an exception with message is "Argument for @NotNull parameter 'model' of sbml/conversion/ModelConverter.<init> must not be null" thrown
     
   Scenario: Attempting to create an SBMLModel instance using a non-SBML-qual model
     Given a non-SBML-qual model

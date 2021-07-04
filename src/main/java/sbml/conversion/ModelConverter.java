@@ -1,24 +1,23 @@
-package sbml.models;
+package sbml.conversion;
 
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.crn.interfaces.ISpecies;
 import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
-import sbml.conversion.IConversion;
 
 import java.util.LinkedHashMap;
 
-public class SBMLModel implements IConversion
+public class ModelConverter implements IConversion
 {
 
     private String name;
-    private QualModel qualModel;
+    private QualModelConverter qualModelConverter;
 
-    public SBMLModel(@NotNull Model model) {
+    public ModelConverter(@NotNull Model model) {
             this.name = model.getId(); //The actual model name is stored in the parameter id
             try {
-                this.qualModel = new QualModel((QualModelPlugin) model.getExtension("qual"));
+                this.qualModelConverter = new QualModelConverter((QualModelPlugin) model.getExtension("qual"));
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
@@ -31,15 +30,15 @@ public class SBMLModel implements IConversion
         return name;
     }
 
-    public QualModel getQualModel() {
-        return qualModel;
+    public QualModelConverter getQualModel() {
+        return qualModelConverter;
     }
 
     public LinkedHashMap<String, ISpecies> getErodeSpecies() {
-        return this.qualModel.getErodeSpecies();
+        return this.qualModelConverter.getErodeSpecies();
     }
 
     public LinkedHashMap<String, IUpdateFunction> getErodeUpdateFunctions() {
-        return this.qualModel.getUpdateFunctions();
+        return this.qualModelConverter.getUpdateFunctions();
     }
 }

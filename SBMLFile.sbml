@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<!-- Created by SBMLConverter version 1.0 on 2021-07-06 at 17:39:06 CEST with JSBML version 1.5. -->
+<!-- Created by SBMLConverter version 1.0 on 2021-07-07 at 24:57:52 CEST with JSBML version 1.5. -->
 <sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" qual:required="true" version="1" xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
   <model>
     <qual:listOfQualitativeSpecies xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
@@ -12,189 +12,66 @@
     <qual:listOfTransitions xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input0" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input1" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input2" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input0" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input1" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input2" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
         </qual:listOfInputs>
                 <qual:listOfFunctionTerms>
           <qual:functionTerm qual:resultLevel="1">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">            
-              <apply>
-                <and/>
-                <apply>
-                  <and/>
-                  <apply>
-                    <eq/>
-                    <ci> S_1 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                  <apply>
-                    <eq/>
-                    <ci> S_4 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                </apply>
-                <apply>
-                  <neq/>
-                  <ci> S_3 </ci>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-              </apply>
-            </math>
-                    </qual:functionTerm>
+          </qual:functionTerm>
           <qual:defaultTerm qual:resultLevel="0">
           </qual:defaultTerm>
         </qual:listOfFunctionTerms>
       </qual:transition>
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input3" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input4" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input5" qual:qualitativeSpecies="S_5" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input3" qual:qualitativeSpecies="S_5" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input4" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input5" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
         </qual:listOfInputs>
                 <qual:listOfFunctionTerms>
           <qual:functionTerm qual:resultLevel="1">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">            
-              <apply>
-                <and/>
-                <apply>
-                  <eq/>
-                  <ci> S_4 </ci>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-                <apply>
-                  <not/>
-                  <apply>
-                    <eq/>
-                    <ci> S_3 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                  <apply>
-                    <eq/>
-                    <ci> S_5 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                </apply>
-              </apply>
-            </math>
-                    </qual:functionTerm>
+          </qual:functionTerm>
           <qual:defaultTerm qual:resultLevel="0">
           </qual:defaultTerm>
         </qual:listOfFunctionTerms>
       </qual:transition>
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input6" qual:qualitativeSpecies="S_2" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input7" qual:qualitativeSpecies="S_5" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input6" qual:qualitativeSpecies="S_5" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input7" qual:qualitativeSpecies="S_2" qual:transitionEffect="none"/>
           <qual:input qual:id="Input8" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
           <qual:input qual:id="Input9" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
         </qual:listOfInputs>
                 <qual:listOfFunctionTerms>
           <qual:functionTerm qual:resultLevel="1">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">            
-              <apply>
-                <and/>
-                <apply>
-                  <eq/>
-                  <ci> S_5 </ci>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-                <apply>
-                  <not/>
-                  <apply>
-                    <or/>
-                    <apply>
-                      <eq/>
-                      <ci> S_2 </ci>
-                      <cn type="integer"> 1 </cn>
-                    </apply>
-                    <apply>
-                      <eq/>
-                      <ci> S_4 </ci>
-                      <cn type="integer"> 1 </cn>
-                    </apply>
-                  </apply>
-                  <apply>
-                    <eq/>
-                    <ci> S_1 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                </apply>
-              </apply>
-            </math>
-                    </qual:functionTerm>
+          </qual:functionTerm>
           <qual:defaultTerm qual:resultLevel="0">
           </qual:defaultTerm>
         </qual:listOfFunctionTerms>
       </qual:transition>
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input10" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input11" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input10" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input11" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
         </qual:listOfInputs>
                 <qual:listOfFunctionTerms>
           <qual:functionTerm qual:resultLevel="1">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">            
-              <apply>
-                <and/>
-                <apply>
-                  <eq/>
-                  <ci> S_1 </ci>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-                <apply>
-                  <neq/>
-                  <ci> S_3 </ci>
-                  <cn type="integer"> 1 </cn>
-                </apply>
-              </apply>
-            </math>
-                    </qual:functionTerm>
+          </qual:functionTerm>
           <qual:defaultTerm qual:resultLevel="0">
           </qual:defaultTerm>
         </qual:listOfFunctionTerms>
       </qual:transition>
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input12" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input12" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
           <qual:input qual:id="Input13" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input14" qual:qualitativeSpecies="S_4" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input14" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
           <qual:input qual:id="Input15" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
         </qual:listOfInputs>
                 <qual:listOfFunctionTerms>
           <qual:functionTerm qual:resultLevel="1">
-            <math xmlns="http://www.w3.org/1998/Math/MathML">            
-              <apply>
-                <or/>
-                <apply>
-                  <not/>
-                  <apply>
-                    <eq/>
-                    <ci> S_1 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                  <apply>
-                    <eq/>
-                    <ci> S_4 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                </apply>
-                <apply>
-                  <not/>
-                  <apply>
-                    <eq/>
-                    <ci> S_1 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                  <apply>
-                    <eq/>
-                    <ci> S_4 </ci>
-                    <cn type="integer"> 1 </cn>
-                  </apply>
-                </apply>
-              </apply>
-            </math>
-                    </qual:functionTerm>
+          </qual:functionTerm>
           <qual:defaultTerm qual:resultLevel="0">
           </qual:defaultTerm>
         </qual:listOfFunctionTerms>

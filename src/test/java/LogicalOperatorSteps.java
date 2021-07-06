@@ -2,19 +2,21 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import it.imt.erode.booleannetwork.updatefunctions.*;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
-import org.apache.commons.math3.analysis.function.Exp;
 import org.junit.Assert;
+import sbml.conversion.operators.ErodeOperator;
+import sbml.conversion.operators.Format;
 import sbml.conversion.operators.Operator;
+import sbml.conversion.operators.interfaces.IOperator;
 
 public class LogicalOperatorSteps {
-    private static final Operator operator = new Operator();
+    private static final ErodeOperator OPERATOR = (ErodeOperator) Operator.create(Format.ERODE);
     private IUpdateFunction booleanExpression;
 
     @When("the AND-operation is created")
     public void theANDOperationIsCreated() {
         try {
             Expression ec = Expression.getInstance();
-            booleanExpression = operator.And(ec.getX(),ec.getY());
+            booleanExpression = OPERATOR.And(ec.getX(),ec.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -25,7 +27,7 @@ public class LogicalOperatorSteps {
     public void theOROperationIsCreated() {
         try {
             Expression ec = Expression.getInstance();
-            booleanExpression = operator.Or(ec.getX(),ec.getY());
+            booleanExpression = OPERATOR.Or(ec.getX(),ec.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -36,7 +38,7 @@ public class LogicalOperatorSteps {
     public void theNOTOperationIsCreated() {
         try {
             Expression ec = Expression.getInstance();
-            booleanExpression = operator.Not(ec.getX());
+            booleanExpression = OPERATOR.Not(ec.getX());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -47,7 +49,7 @@ public class LogicalOperatorSteps {
     public void theXOROperationIsCreated() {
         try {
             Expression expr = Expression.getInstance();
-            booleanExpression = operator.Xor(expr.getX(),expr.getY());
+            booleanExpression = OPERATOR.Xor(expr.getX(),expr.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -58,7 +60,7 @@ public class LogicalOperatorSteps {
     public void theIMPLIESOperationIsCreated() {
         try {
             Expression expr = Expression.getInstance();
-            booleanExpression = operator.Implies(expr.getX(),expr.getY());
+            booleanExpression = OPERATOR.Implies(expr.getX(),expr.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);

@@ -5,14 +5,17 @@ import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.TrueUpdateFunction;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.operators.interfaces.IValueElement;
+import sbml.conversion.operators.interfaces.IElement;
 
-public class ValueElement implements IValueElement {
+public class ErodeElement implements IElement<ASTNode, IUpdateFunction> {
 
+
+    @Override
     public IUpdateFunction Reference(ASTNode node) {
         return new ReferenceToNodeUpdateFunction(node.getName());
     }
 
+    @Override
     public IUpdateFunction Constant(ASTNode node) {
         switch (node.getInteger()) {
             case 1:

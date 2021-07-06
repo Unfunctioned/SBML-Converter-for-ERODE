@@ -47,37 +47,7 @@ public class FunctionTermConverter {
     }
 
     private ASTNode convertUpdateFunction(IUpdateFunction updateFunction) {
-        Class<?> classType = updateFunction.getClass();
-        if(classType.equals(BooleanUpdateFunctionExpr.class)) {
-            return this.convertBinaryExpression((BooleanUpdateFunctionExpr) updateFunction);
-        }
-        else if(classType.equals(NotBooleanUpdateFunction.class)) {
-            return this.convertNegation((NotBooleanUpdateFunction) updateFunction);
-        }
-        if(classType.equals(ReferenceToNodeUpdateFunction.class)) {
-            return astNodeBuilder.convertNodeReference(updateFunction);
-        }
-        else if(classType.equals(TrueUpdateFunction.class)) {
-            return astNodeBuilder.createValueNode(1);
-        }
-        else {
-            return astNodeBuilder.createValueNode(0);
-        }
-    }
-
-    private ASTNode convertBinaryExpression(BooleanUpdateFunctionExpr expression) {
-        ASTNode leftChild = convertUpdateFunction(expression.getFirst());
-        ASTNode rightChild = convertUpdateFunction(expression.getSecond());
-        return astNodeBuilder.convertBinaryNode(leftChild,rightChild,expression);
-    }
-
-    private ASTNode convertNegation(NotBooleanUpdateFunction notExpression) {
-        ASTNode child = convertUpdateFunction(notExpression.getInnerUpdateFunction());
-        switch (child.getType()) {
-            case RELATIONAL_EQ:
-                return astNodeBuilder.createBinaryNode(child, ASTNode.Type.RELATIONAL_NEQ);
-            default:
-                return astNodeBuilder.convertNegationNode(child);
-        }
+        NodeConverter nodeConverter = NodeConverter.create(updateFunction);
+        return nodeConverter.getExpressionAST();
     }
 }

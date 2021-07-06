@@ -1,16 +1,16 @@
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
-import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
+import sbml.conversion.operators.ErodeOperator;
+import sbml.conversion.operators.Format;
 import sbml.conversion.operators.Operator;
 
 public class RelationalOperatorSteps {
 
-    private static final Operator operator = new Operator();
+    private static final ErodeOperator OPERATOR = (ErodeOperator) Operator.create(Format.ERODE);
     private IUpdateFunction relationalExpression;
 
 
@@ -18,7 +18,7 @@ public class RelationalOperatorSteps {
     public void theEqualsOperationIsCreated() {
         try {
             Expression expression = Expression.getInstance();
-            relationalExpression = operator.Equals(expression.getX(),expression.getY());
+            relationalExpression = OPERATOR.Equals(expression.getX(),expression.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -29,7 +29,7 @@ public class RelationalOperatorSteps {
     public void theNotEqualsOperationIsCreated() {
         try {
             Expression expression = Expression.getInstance();
-            relationalExpression = operator.NotEquals(expression.getX(),expression.getY());
+            relationalExpression = OPERATOR.NotEquals(expression.getX(),expression.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);

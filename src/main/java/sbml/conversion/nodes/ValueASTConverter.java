@@ -1,30 +1,62 @@
 package sbml.conversion.nodes;
 
+import com.kitfox.svg.A;
+import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
+import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction;
 import org.sbml.jsbml.ASTNode;
+import sbml.configurations.Strings;
+import sbml.conversion.ASTNodeBuilder;
+import sbml.conversion.operators.ErodeElement;
 
 public class ValueASTConverter extends NodeConverter {
 
     public ValueASTConverter(ASTNode node) {
         super(node);
-        convert();
+        convertSBML();
+    }
+
+    public ValueASTConverter(IUpdateFunction updateFunction) {
+        super(updateFunction);
+        convertERODE();
     }
 
     @Override
-    protected void convert() {
+    protected void convertSBML() {
         ASTNode.Type type = currentNode.getType();
+        ErodeElement element = (ErodeElement) this.element;
         switch (type.name()) {
             case "NAME":
-                this.updateFunction = operator.Reference(currentNode);
+                this.updateFunction = element.Reference(currentNode);
                 break;
             case "INTEGER":
-                this.updateFunction = operator.Constant(currentNode);
+                this.updateFunction = element.Constant(currentNode);
                 break;
             case "CONSTANT_FALSE":
             case "CONSTANT_TRUE":
-                this.updateFunction = operator.BooleanValue(currentNode);
+                this.updateFunction = element.BooleanValue(currentNode);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown type name");
+        }
+    }
+
+    @Override
+    protected void convertERODE() {
+        Class<?> classType = updateFunction.getClass();
+        String className = classType.getSimpleName();
+        ASTNodeBuilder builder = new ASTNodeBuilder();
+        switch (className) {
+            case Strings.REFERENCE:
+                this.currentNode = builder.reference((ReferenceToNodeUpdateFunction)updateFunction);
+                break;
+            case Strings.TRUE:
+                this.currentNode = builder.integer(true);
+                break;
+            case Strings.FALSE:
+                this.currentNode = builder.integer(false);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown type");
         }
     }
 }

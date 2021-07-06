@@ -14,6 +14,7 @@ import sbml.conversion.SpeciesConverter;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class SpeciesConverterSteps {
     private SBMLDocument sbmlDocument;
@@ -76,15 +77,20 @@ public class SpeciesConverterSteps {
     @Then("the SpeciesConverter contains a list of ERODE-Species with initial values ranging from {int} to {int}")
     public void theSpeciesConverterContainsAListOfERODESpeciesWithInitialValuesRangingFromTo(int arg0, int arg1) {
         boolean[] confirmedInitialValues = new boolean[(arg1-arg0)+1];
-        LinkedHashMap<String, ISpecies> erodeSpecies = speciesConverter.getErodeSpecies();
+        List<ISpecies> erodeSpecies = speciesConverter.getErodeSpecies();
         for (QualitativeSpecies q : qualitativeSpecies) {
             try {
-                ISpecies s = erodeSpecies.get(q.getId());
-                Assert.assertEquals(q.getId(),s.getName());
-                Assert.assertEquals(new BigDecimal(String.valueOf(q.getInitialLevel())),s.getInitialConcentration());
-                int initialValue = s.getInitialConcentration().intValue();
-                if(!confirmedInitialValues[initialValue-arg0])
-                    confirmedInitialValues[initialValue-arg0] = true;
+                for(ISpecies s : erodeSpecies) {
+                    String sbmlId = q.getId();
+                    String erodeName = s.getName();
+                    if(erodeName.equals(sbmlId)) {
+                        Assert.assertEquals(new BigDecimal(String.valueOf(q.getInitialLevel())),
+                                s.getInitialConcentration());
+                        int initialValue = s.getInitialConcentration().intValue();
+                        if(!confirmedInitialValues[initialValue-arg0])
+                            confirmedInitialValues[initialValue-arg0] = true;
+                    }
+                }
             } catch (Exception e) {
                 Assert.fail();
             }

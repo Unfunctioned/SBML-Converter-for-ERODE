@@ -2,8 +2,8 @@ package sbml.conversion;
 
 import it.imt.erode.crn.interfaces.ISpecies;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 
 public interface IConversion {
-    LinkedHashMap<String, ISpecies> getErodeSpecies();
+    List<ISpecies> getErodeSpecies();
 }

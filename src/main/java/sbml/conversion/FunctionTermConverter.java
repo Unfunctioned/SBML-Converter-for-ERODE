@@ -10,71 +10,74 @@ import sbml.conversion.nodes.NodeConverter;
 public class FunctionTermConverter {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
-    public IUpdateFunction toErode(FunctionTerm functionTerm) {
+    private ASTNodeBuilder astNodeBuilder;
+    private FunctionTermBuilder functionTermBuilder;
+
+    public FunctionTermConverter() {
+        this.astNodeBuilder = new ASTNodeBuilder();
+        this.functionTermBuilder = new FunctionTermBuilder();
+    }
+
+    public IUpdateFunction convertSBMLFunctionTerms(ListOf<FunctionTerm> listOfFunctionTerms) {
+        FunctionTerm functionTerm = getResultLevel(listOfFunctionTerms,1);
         ASTNode node = functionTerm.getMath();
         NodeConverter converter = NodeConverter.create(node);
         return converter.getUpdateFunction();
     }
 
-    public ListOf<FunctionTerm> toSBML(IUpdateFunction updateFunction, int maxLevel) {
-        ListOf<FunctionTerm> functionTerms = new ListOf<>(CONFIG.getLevel(),CONFIG.getVersion());
-        for(int i = maxLevel; i > 0; i--) {
-            FunctionTerm f = new FunctionTerm(CONFIG.getLevel(), CONFIG.getVersion());
-            f.setResultLevel(i);
-            f.setMath(ConvertMath(updateFunction));
-            functionTerms.add(f);
+    private FunctionTerm getResultLevel(ListOf<FunctionTerm> functionTerms, int level) {
+        for(FunctionTerm f : functionTerms) {
+            if(f.isSetResultLevel() && f.getResultLevel() == level)
+                return f;
         }
-        FunctionTerm defaultTerm = new FunctionTerm();
-        defaultTerm.setDefaultTerm(true);
+        throw new IllegalArgumentException("No function term with result level " + level + " found");
+    }
+
+    public ListOf<FunctionTerm> convertERODEUpdateFunctions(IUpdateFunction updateFunction, int maxLevel) {
+        ListOf<FunctionTerm> functionTerms = new ListOf<>(CONFIG.getLevel(),CONFIG.getVersion());
+        ASTNode astNode = this.convertUpdateFunction(updateFunction);
+        for(int i = maxLevel; i > 0; i--) {
+            FunctionTerm functionTerm = functionTermBuilder.createFunctionTerm(i, astNode);
+            functionTerms.add(functionTerm);
+        }
+
+        FunctionTerm defaultTerm = functionTermBuilder.createDefaultTerm();
         functionTerms.add(defaultTerm);
         return functionTerms;
     }
 
-    private ASTNode ConvertMath(IUpdateFunction updateFunction) {
-        if(updateFunction.getClass().equals(ReferenceToNodeUpdateFunction.class)) {
-            ReferenceToNodeUpdateFunction refExpr = (ReferenceToNodeUpdateFunction) updateFunction;
-            return new ASTNode(refExpr.toString());
+    private ASTNode convertUpdateFunction(IUpdateFunction updateFunction) {
+        Class<?> classType = updateFunction.getClass();
+        if(classType.equals(BooleanUpdateFunctionExpr.class)) {
+            return this.convertBinaryExpression((BooleanUpdateFunctionExpr) updateFunction);
         }
-        else if(updateFunction.getClass().equals(BooleanUpdateFunctionExpr.class)) {
-            BooleanUpdateFunctionExpr expr = (BooleanUpdateFunctionExpr) updateFunction;
-            ASTNode leftChild = ConvertMath(expr.getFirst());
-            ASTNode rightChild = ConvertMath(expr.getSecond());
-            return CreatBinaryNode(leftChild,rightChild,expr);
-
+        else if(classType.equals(NotBooleanUpdateFunction.class)) {
+            return this.convertNegation((NotBooleanUpdateFunction) updateFunction);
         }
-        else if(updateFunction.getClass().equals(NotBooleanUpdateFunction.class)) {
-            NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction) updateFunction;
-            ASTNode child = ConvertMath(notExpr.getInnerUpdateFunction());
-            ASTNode booleanNot = new ASTNode(child);
-            booleanNot.setType(ASTNode.Type.LOGICAL_NOT);
-            return booleanNot;
-
+        if(classType.equals(ReferenceToNodeUpdateFunction.class)) {
+            return astNodeBuilder.convertNodeReference(updateFunction);
         }
-        else if(updateFunction.getClass().equals(TrueUpdateFunction.class)){
-            return new ASTNode(1);
+        else if(classType.equals(TrueUpdateFunction.class)) {
+            return astNodeBuilder.createValueNode(1);
         }
         else {
-            return new ASTNode(0);
+            return astNodeBuilder.createValueNode(0);
         }
     }
 
-    private ASTNode CreatBinaryNode(ASTNode leftChild, ASTNode rightChild, BooleanUpdateFunctionExpr expr) {
-        ASTNode astNode = new ASTNode();
-        switch (expr.getOperator()) {
-            case AND:
-                astNode.setType(ASTNode.Type.LOGICAL_AND);
-                break;
-            case OR:
-                astNode.setType(ASTNode.Type.LOGICAL_OR);
-                break;
-            case IMPLIES:
-                astNode.setType(ASTNode.Type.LOGICAL_IMPLIES);
-                break;
+    private ASTNode convertBinaryExpression(BooleanUpdateFunctionExpr expression) {
+        ASTNode leftChild = convertUpdateFunction(expression.getFirst());
+        ASTNode rightChild = convertUpdateFunction(expression.getSecond());
+        return astNodeBuilder.convertBinaryNode(leftChild,rightChild,expression);
+    }
+
+    private ASTNode convertNegation(NotBooleanUpdateFunction notExpression) {
+        ASTNode child = convertUpdateFunction(notExpression.getInnerUpdateFunction());
+        switch (child.getType()) {
+            case RELATIONAL_EQ:
+                return astNodeBuilder.createBinaryNode(child, ASTNode.Type.RELATIONAL_NEQ);
             default:
-                throw new IllegalArgumentException("Invalid type");
+                return astNodeBuilder.convertNegationNode(child);
         }
-        astNode.addChild(leftChild);
-        astNode.addChild(rightChild);
-        return astNode;
     }
 }

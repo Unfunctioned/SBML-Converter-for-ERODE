@@ -13,42 +13,40 @@ import org.sbml.jsbml.ext.qual.Transition;
 import sbml.configurations.SBMLConfiguration;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class QualModelConverter {
-    private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
     private QualModelPlugin sbmlQualModel;
 
     private SpeciesConverter speciesConverter;
     private TransitionConverter transitionConverter;
 
-    private IBooleanNetwork booleanNetwork;
-
-    public QualModelConverter(@NotNull QualModelPlugin qualModel) {
-        this.sbmlQualModel = qualModel;
-        this.speciesConverter = new SpeciesConverter(qualModel.getListOfQualitativeSpecies());
-        this.transitionConverter = new TransitionConverter(qualModel.getListOfTransitions());
+    public QualModelConverter(@NotNull QualModelPlugin qualModelPlugin) {
+        this.sbmlQualModel = qualModelPlugin;
+        this.speciesConverter = new SpeciesConverter(qualModelPlugin.getListOfQualitativeSpecies());
+        this.transitionConverter = new TransitionConverter(qualModelPlugin.getListOfTransitions());
     }
 
-    public QualModelConverter(IBooleanNetwork booleanNetwork, Model model) {
-        this.booleanNetwork = booleanNetwork;
+    public QualModelConverter(@NotNull IBooleanNetwork booleanNetwork, Model model) {
         this.speciesConverter = new SpeciesConverter(booleanNetwork.getSpecies());
         this.transitionConverter = new TransitionConverter(booleanNetwork.getUpdateFunctions());
-
         this.sbmlQualModel = new QualModelPlugin(model);
+        this.buildSBMLQualModel(speciesConverter.getSbmlSpecies(),
+                transitionConverter.getSbmlTransitions());
+    }
 
-        ListOf<QualitativeSpecies> species = speciesConverter.getSbmlSpecies();
-        sbmlQualModel.setListOfQualitativeSpecies(species);
-
-        ListOf<Transition> transitions = transitionConverter.getSbmlTransitions();
-        sbmlQualModel.setListOfTransitions(transitions);
+    private void buildSBMLQualModel(ListOf<QualitativeSpecies> sbmlSpecies,
+                                    ListOf<Transition> sbmlTransitions) {
+        sbmlQualModel.setListOfQualitativeSpecies(sbmlSpecies);
+        sbmlQualModel.setListOfTransitions(sbmlTransitions);
     }
 
     public QualModelPlugin getSbmlQualModel() {
         return this.sbmlQualModel;
     }
 
-    public LinkedHashMap<String, ISpecies> getErodeSpecies() {
+    public List<ISpecies> getErodeSpecies() {
         return this.speciesConverter.getErodeSpecies();
     }
 

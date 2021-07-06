@@ -9,6 +9,7 @@ import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 import sbml.configurations.SBMLConfiguration;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -16,22 +17,21 @@ public class SpeciesConverter {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
     private ListOf<QualitativeSpecies> sbmlSpecies;
-    private LinkedHashMap<String, ISpecies> erodeSpecies;
+    private List<ISpecies> erodeSpecies;
 
     public SpeciesConverter(@NotNull ListOf<QualitativeSpecies> listOfQualitativeSpecies) {
         this.sbmlSpecies = listOfQualitativeSpecies;
-        this.erodeSpecies = new LinkedHashMap<>();
-        this.toErodeFormat();
+        this.erodeSpecies = convertSBMLSpecies();
     }
 
-    private LinkedHashMap<String, ISpecies> toErodeFormat() {
+    private List<ISpecies> convertSBMLSpecies() {
+        List<ISpecies> erodeSpecies = new ArrayList<>();
         int id = 0;
         for(QualitativeSpecies q : this.sbmlSpecies) {
-            Species species = CreateSpecies(id,q);
-            this.erodeSpecies.put(species.getName(), species);
+            erodeSpecies.add(CreateSpecies(id,q));
             id++;
         }
-        return this.erodeSpecies;
+        return erodeSpecies;
     }
 
     private Species CreateSpecies(int id, QualitativeSpecies species) {
@@ -42,8 +42,10 @@ public class SpeciesConverter {
             case 1:
                 return new Species(species.getId(), id, BigDecimal.ONE, "true", false);
             default:
-                String startValue = String.valueOf(initialValue);
-                return new Species(species.getId(),id,new BigDecimal(startValue),startValue, false);
+                throw new IllegalArgumentException("The value of the given species is outside the Boolean Domain");
+                //Example code for multi-valued speices:
+                /*String startValue = String.valueOf(initialValue);
+                return new Species(species.getId(),id,new BigDecimal(startValue),startValue, false);*/
         }
     }
 
@@ -52,15 +54,17 @@ public class SpeciesConverter {
 
 
     public SpeciesConverter(@NotNull List<ISpecies> species) {
-        sbmlSpecies = new ListOf<>(CONFIG.getLevel(), CONFIG.getVersion());
-        this.toSBMLFormat(species);
+        this.erodeSpecies = species;
+        this.sbmlSpecies = convertERODESpecies();
     }
 
-    private void toSBMLFormat(List<ISpecies> species) {
-        for(ISpecies s : species) {
+    private ListOf<QualitativeSpecies> convertERODESpecies() {
+        ListOf<QualitativeSpecies> sbmlSpecies = new ListOf<>(CONFIG.getLevel(), CONFIG.getVersion());
+        for(ISpecies s : this.erodeSpecies) {
             QualitativeSpecies q = CreateQualitativeSpecies(s);
-             sbmlSpecies.add(q);
+            sbmlSpecies.add(q);
         }
+        return sbmlSpecies;
     }
 
     private QualitativeSpecies CreateQualitativeSpecies(ISpecies s) {
@@ -74,7 +78,7 @@ public class SpeciesConverter {
         return q;
     }
 
-    public LinkedHashMap<String, ISpecies> getErodeSpecies() {
+    public List<ISpecies> getErodeSpecies() {
         return this.erodeSpecies;
     }
 

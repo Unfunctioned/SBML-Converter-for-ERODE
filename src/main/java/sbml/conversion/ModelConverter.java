@@ -9,11 +9,12 @@ import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.configurations.SBMLConfiguration;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class ModelConverter implements IConversion
 {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
-    private static final String QUAL = "qual";
+    private static final String EXTENSION_NAME = "qual";
 
     private String name;
     private QualModelConverter qualModelConverter;
@@ -22,29 +23,32 @@ public class ModelConverter implements IConversion
 
     public ModelConverter(@NotNull Model model) {
             this.model = model;
-            this.name = model.getId(); //The actual model name is stored in the parameter id
-            try {
-                this.qualModelConverter = new QualModelConverter((QualModelPlugin) model.getExtension("qual"));
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-                throw new IllegalArgumentException("Invalid input, the SBML-model is not an SBML-qual model");
+            this.name = model.getId();
+            this.qualModelConverter = new QualModelConverter(this.tryGetQualModel());
+    }
 
-            }
+    private QualModelPlugin tryGetQualModel() {
+        try {
+            return (QualModelPlugin) model.getExtension("qual");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            throw new IllegalArgumentException("Invalid input, the SBML-model is not an SBML-qual model");
+        }
     }
 
     public ModelConverter(IBooleanNetwork booleanNetwork) {
-        System.out.println("Packaging qual-model");
         this.name = booleanNetwork.getName();
         this.model = new Model(CONFIG.getLevel(),CONFIG.getVersion());
         this.qualModelConverter = new QualModelConverter(booleanNetwork, model);
-        System.out.println("Initialized qual model conversion");
-        QualModelPlugin qualModelPlugin = qualModelConverter.getSbmlQualModel();
-        qualModelPlugin.setParent(model);
-        System.out.println("Test");
-        model.addExtension(QUAL,qualModelPlugin);
-        System.out.println("Added model to main SBML model");
+        this.packageSBML();
     }
+
+    private void packageSBML() {
+        QualModelPlugin qualModelPlugin = qualModelConverter.getSbmlQualModel();
+        model.addExtension(EXTENSION_NAME,qualModelPlugin);
+    }
+
 
     public String getName() {
         return name;
@@ -54,7 +58,7 @@ public class ModelConverter implements IConversion
         return qualModelConverter;
     }
 
-    public LinkedHashMap<String, ISpecies> getErodeSpecies() {
+    public List<ISpecies> getErodeSpecies() {
         return this.qualModelConverter.getErodeSpecies();
     }
 

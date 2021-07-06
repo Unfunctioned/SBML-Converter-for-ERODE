@@ -16,17 +16,15 @@ public class SBMLExporter {
      * @param args
      */
     public static void main(String[] args) throws IOException, XMLStreamException {
-        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
+       String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
 
 
-        SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
-        sbmlConverter.toErode();
-
-        GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
-
-        sbmlConverter = new SBMLConverter(guiBooleanNetworkImporter.getBooleanNetwork());
-        sbmlDocument = sbmlConverter.getSbmlDocument();
+        SBMLConverter converter = new SBMLConverter(sbmlDocument);
+        GUIBooleanNetworkImporter guiBooleanNetworkImporter = converter.getGuiBnImporter();
+        //--------------------------------------------------------------------------------------
+        converter = new SBMLConverter(guiBooleanNetworkImporter.getBooleanNetwork());
+        sbmlDocument = converter.getSbmlDocument();
 
         print(sbmlDocument);
     }

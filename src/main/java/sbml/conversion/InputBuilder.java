@@ -44,7 +44,7 @@ public class InputBuilder {
         return a;
     }
 
-    public ListOf<Input> createInputs(IUpdateFunction updateFunction) {
+    public ListOf<Input> buildAll(IUpdateFunction updateFunction) {
         HashSet<ReferenceToNodeUpdateFunction> references = ExtractInputs(updateFunction);
         ListOf<Input> inputs = new ListOf<>(CONFIG.getLevel(),CONFIG.getVersion());
         for (ReferenceToNodeUpdateFunction r : references) {

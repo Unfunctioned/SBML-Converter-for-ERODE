@@ -8,7 +8,7 @@ public class OutputBuilder {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
     private static final String DEFAULT_NAME = "Output";
 
-    public Output buildFrom(String speciesId, int id) {
+    public Output build(String speciesId, int id) {
         Output o = new Output(CONFIG.getLevel(), CONFIG.getVersion());
         o.setId(DEFAULT_NAME + id);
         o.setQualitativeSpecies(speciesId);

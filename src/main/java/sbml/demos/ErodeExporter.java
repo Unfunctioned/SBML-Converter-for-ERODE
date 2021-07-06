@@ -22,7 +22,6 @@ public class ErodeExporter {
 
 
         SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
-        sbmlConverter.toErode();
 
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         System.out.println(guiBooleanNetworkImporter.getBooleanNetwork().getSpecies().toString());

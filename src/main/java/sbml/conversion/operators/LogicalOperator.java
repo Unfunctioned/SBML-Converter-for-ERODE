@@ -23,10 +23,7 @@ public class LogicalOperator implements ILogicalOperator {
     }
 
     public IUpdateFunction Xor(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
-        //(x || y) && !(x && y)
-        IUpdateFunction xOrY = new BooleanUpdateFunctionExpr(x, y, BooleanConnector.OR);
-        IUpdateFunction xAndY = new BooleanUpdateFunctionExpr(x,y, BooleanConnector.AND);
-        return new BooleanUpdateFunctionExpr(xOrY, Not(xAndY), BooleanConnector.AND);
+        return new BooleanUpdateFunctionExpr(x,y,BooleanConnector.XOR);
     }
 
     public IUpdateFunction Implies(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {

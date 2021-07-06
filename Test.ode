@@ -7,11 +7,11 @@ begin Boolean network Test
   S_5
  end init
 begin update functions
-  S_1 = ((((S_1 -> true)&(true -> S_1))&((S_4 -> true)&(true -> S_4)))&(((S_3 -> true)&(true -> S_3)) -> false))
-  S_2 = (((S_4 -> true)&(true -> S_4))&((((S_3 -> true)&(true -> S_3)) | ((S_5 -> true)&(true -> S_5))) -> false))
-  S_3 = (((S_5 -> true)&(true -> S_5))&(((((S_2 -> true)&(true -> S_2)) | ((S_4 -> true)&(true -> S_4))) | ((S_1 -> true)&(true -> S_1))) -> false))
-  S_4 = (((S_1 -> true)&(true -> S_1))&(((S_3 -> true)&(true -> S_3)) -> false))
-  S_5 = (((((S_1 -> true)&(true -> S_1)) | ((S_4 -> true)&(true -> S_4))) -> false) | ((((S_1 -> true)&(true -> S_1)) | ((S_4 -> true)&(true -> S_4))) -> false))
+  S_1 = (((S_1 = true)&(S_4 = true))&(!(S_3 = true)))
+  S_2 = ((S_4 = true)&(!((S_3 = true) | (S_5 = true))))
+  S_3 = ((S_5 = true)&(!(((S_2 = true) | (S_4 = true)) | (S_1 = true))))
+  S_4 = ((S_1 = true)&(!(S_3 = true)))
+  S_5 = ((!((S_1 = true) | (S_4 = true))) | (!((S_1 = true) | (S_4 = true))))
 end update functions
 
 end Boolean network

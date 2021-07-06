@@ -15,15 +15,11 @@ public class RelationalOperator implements IRelationalOperator {
     }
 
     public IUpdateFunction Equals(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
-        //x <-> y = x->y && y->x
-        IUpdateFunction xImpliesY = new BooleanUpdateFunctionExpr(x, y, BooleanConnector.IMPLIES);
-        IUpdateFunction yImpliesX = new BooleanUpdateFunctionExpr(y, x, BooleanConnector.IMPLIES);
-        return new BooleanUpdateFunctionExpr(xImpliesY, yImpliesX, BooleanConnector.AND);
+        return new BooleanUpdateFunctionExpr(x,y,BooleanConnector.EQ);
     }
 
     public IUpdateFunction NotEquals(@NotNull IUpdateFunction x, @NotNull IUpdateFunction y) {
-        IUpdateFunction equals = Equals(x,y);
-        return logicalOperator.Not(equals);
+        return new BooleanUpdateFunctionExpr(x,y,BooleanConnector.NEQ);
     }
 }
 

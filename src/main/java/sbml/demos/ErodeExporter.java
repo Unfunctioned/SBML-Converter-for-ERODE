@@ -19,9 +19,11 @@ public class ErodeExporter {
     public static void main(String[] args) throws IOException, XMLStreamException {
         String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
-        SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
 
-        sbmlConverter.convert();
+
+        SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
+        sbmlConverter.toErode();
+
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         System.out.println(guiBooleanNetworkImporter.getBooleanNetwork().getSpecies().toString());
         GUIBooleanNetworkImporter.printToBNERODEFIle(guiBooleanNetworkImporter.getBooleanNetwork(),guiBooleanNetworkImporter.getInitialPartition(),

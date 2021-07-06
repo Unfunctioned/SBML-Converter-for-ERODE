@@ -66,7 +66,7 @@ public class SBMLConversionTests {
     @When("the model is converted")
     public void theModelIsConverted() {
         try {
-            sbmlConverter.convert();
+            sbmlConverter.toErode();
             guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();

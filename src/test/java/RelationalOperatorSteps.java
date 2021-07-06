@@ -42,30 +42,9 @@ public class RelationalOperatorSteps {
         Assert.assertNull(exceptionCollector.getException());
         Assert.assertNotNull(relationalExpression);
 
-        Expression expression = Expression.getInstance();
-
-        //Assert outer expression [() && ()]
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, relationalExpression.getClass());
-        BooleanUpdateFunctionExpr outerExpr = (BooleanUpdateFunctionExpr) relationalExpression;
-        Assert.assertEquals(BooleanConnector.AND, outerExpr.getOperator());
-
-        //Assert left term [(x -> y)]
-        IUpdateFunction leftExpr = outerExpr.getFirst();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, leftExpr.getClass());
-        BooleanUpdateFunctionExpr xImpliesY = (BooleanUpdateFunctionExpr) leftExpr;
-
-        Assert.assertEquals(expression.getX(), xImpliesY.getFirst());
-        Assert.assertEquals(expression.getY(), xImpliesY.getSecond());
-        Assert.assertEquals(BooleanConnector.IMPLIES, xImpliesY.getOperator());
-
-        //Assert right term [y -> x]
-        IUpdateFunction rightExpr = outerExpr.getSecond();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, rightExpr.getClass());
-        BooleanUpdateFunctionExpr yImpliesX = (BooleanUpdateFunctionExpr) rightExpr;
-
-        Assert.assertEquals(expression.getY(), yImpliesX.getFirst());
-        Assert.assertEquals(expression.getX(), yImpliesX.getSecond());
-        Assert.assertEquals(BooleanConnector.IMPLIES, yImpliesX.getOperator());
+        BooleanUpdateFunctionExpr eqExpr = (BooleanUpdateFunctionExpr) relationalExpression;
+        Assert.assertEquals(BooleanConnector.EQ, eqExpr.getOperator());
     }
 
     @Then("a boolean update function representing the NotEquals-operation is created successfully")
@@ -74,33 +53,8 @@ public class RelationalOperatorSteps {
         Assert.assertNull(exceptionCollector.getException());
         Assert.assertNotNull(relationalExpression);
 
-        Expression expression = Expression.getInstance();
-
-        Assert.assertEquals(NotBooleanUpdateFunction.class, relationalExpression.getClass());
-        NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction) relationalExpression;
-
-        //Assert inner expression [() && ()]
-        IUpdateFunction innerExpr = notExpr.getInnerUpdateFunction();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, innerExpr.getClass());
-        BooleanUpdateFunctionExpr andExpr = (BooleanUpdateFunctionExpr) innerExpr;
-        Assert.assertEquals(BooleanConnector.AND, andExpr.getOperator());
-
-        //Assert left term [(x -> y)]
-        IUpdateFunction leftExpr = andExpr.getFirst();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, leftExpr.getClass());
-        BooleanUpdateFunctionExpr xImpliesY = (BooleanUpdateFunctionExpr) leftExpr;
-
-        Assert.assertEquals(expression.getX(), xImpliesY.getFirst());
-        Assert.assertEquals(expression.getY(), xImpliesY.getSecond());
-        Assert.assertEquals(BooleanConnector.IMPLIES, xImpliesY.getOperator());
-
-        //Assert right term [y -> x]
-        IUpdateFunction rightExpr = andExpr.getSecond();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, rightExpr.getClass());
-        BooleanUpdateFunctionExpr yImpliesX = (BooleanUpdateFunctionExpr) rightExpr;
-
-        Assert.assertEquals(expression.getY(), yImpliesX.getFirst());
-        Assert.assertEquals(expression.getX(), yImpliesX.getSecond());
-        Assert.assertEquals(BooleanConnector.IMPLIES, yImpliesX.getOperator());
+        Assert.assertEquals(BooleanUpdateFunctionExpr.class, relationalExpression.getClass());
+        BooleanUpdateFunctionExpr neqExpr = (BooleanUpdateFunctionExpr) relationalExpression;
+        Assert.assertEquals(BooleanConnector.NEQ,neqExpr.getOperator());
     }
 }

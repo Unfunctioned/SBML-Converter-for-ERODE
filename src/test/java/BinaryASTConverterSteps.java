@@ -62,23 +62,8 @@ public class BinaryASTConverterSteps {
         Assert.assertNotNull(updateFunction);
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, updateFunction.getClass());
         //Outer expression
-        BooleanUpdateFunctionExpr andExpr = (BooleanUpdateFunctionExpr)updateFunction;
-        Assert.assertEquals(BooleanConnector.AND,andExpr.getOperator());
-
-        //Left inner expression
-        IUpdateFunction orFunction = andExpr.getFirst();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, orFunction.getClass());
-        BooleanUpdateFunctionExpr orExpr = (BooleanUpdateFunctionExpr)orFunction;
-        Assert.assertEquals(BooleanConnector.OR, orExpr.getOperator());
-
-        //Right inner expression
-        IUpdateFunction notFunction = andExpr.getSecond();
-        Assert.assertEquals(NotBooleanUpdateFunction.class, notFunction.getClass());
-        NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction) notFunction;
-        IUpdateFunction andFunction = notExpr.getInnerUpdateFunction();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, andFunction.getClass());
-        andExpr = (BooleanUpdateFunctionExpr) andFunction;
-        Assert.assertEquals(BooleanConnector.AND, andExpr.getOperator());
+        BooleanUpdateFunctionExpr xorExpr = (BooleanUpdateFunctionExpr)updateFunction;
+        Assert.assertEquals(BooleanConnector.XOR,xorExpr.getOperator());
     }
 
     @Then("an ERODE update function representing an EQ operation was created")
@@ -88,20 +73,8 @@ public class BinaryASTConverterSteps {
         Assert.assertNotNull(updateFunction);
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, updateFunction.getClass());
         //Outer expression
-        BooleanUpdateFunctionExpr andExpr = (BooleanUpdateFunctionExpr)updateFunction;
-        Assert.assertEquals(BooleanConnector.AND,andExpr.getOperator());
-
-        //Left inner expression
-        IUpdateFunction implyFunction = andExpr.getFirst();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, implyFunction.getClass());
-        BooleanUpdateFunctionExpr implyExpr = (BooleanUpdateFunctionExpr) implyFunction;
-        Assert.assertEquals(BooleanConnector.IMPLIES, implyExpr.getOperator());
-
-        //Right inner expression
-        implyFunction = andExpr.getSecond();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, implyFunction.getClass());
-        implyExpr = (BooleanUpdateFunctionExpr) implyFunction;
-        Assert.assertEquals(BooleanConnector.IMPLIES, implyExpr.getOperator());
+        BooleanUpdateFunctionExpr eqExpr = (BooleanUpdateFunctionExpr)updateFunction;
+        Assert.assertEquals(BooleanConnector.EQ,eqExpr.getOperator());
     }
 
     @Then("an ERODE update function representing an NEQ operation was created")
@@ -109,27 +82,11 @@ public class BinaryASTConverterSteps {
         Assert.assertNotNull(binaryASTConverter);
         IUpdateFunction updateFunction = binaryASTConverter.getUpdateFunction();
         Assert.assertNotNull(updateFunction);
-        Assert.assertEquals(NotBooleanUpdateFunction.class, updateFunction.getClass());
+        Assert.assertEquals(BooleanUpdateFunctionExpr.class, updateFunction.getClass());
         //Outer not expression
-        NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction)updateFunction;
+        BooleanUpdateFunctionExpr neqExpr = (BooleanUpdateFunctionExpr) updateFunction;
         //Equals expression
-        IUpdateFunction equalsFunction = notExpr.getInnerUpdateFunction();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, equalsFunction.getClass());
-        //Outer expression
-        BooleanUpdateFunctionExpr andExpr = (BooleanUpdateFunctionExpr)equalsFunction;
-        Assert.assertEquals(BooleanConnector.AND,andExpr.getOperator());
-
-        //Left inner expression
-        IUpdateFunction implyFunction = andExpr.getFirst();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, implyFunction.getClass());
-        BooleanUpdateFunctionExpr implyExpr = (BooleanUpdateFunctionExpr) implyFunction;
-        Assert.assertEquals(BooleanConnector.IMPLIES, implyExpr.getOperator());
-
-        //Right inner expression
-        implyFunction = andExpr.getSecond();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, implyFunction.getClass());
-        implyExpr = (BooleanUpdateFunctionExpr) implyFunction;
-        Assert.assertEquals(BooleanConnector.IMPLIES, implyExpr.getOperator());
+        Assert.assertEquals(neqExpr.getOperator(), BooleanConnector.NEQ);
     }
 
     @Then("an ERODE update function representing an IMPLIES operation was created")

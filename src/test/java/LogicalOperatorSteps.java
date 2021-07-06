@@ -120,28 +120,8 @@ public class LogicalOperatorSteps {
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, booleanExpression.getClass());
 
         //Assert outerExpression [() && !()]
-        BooleanUpdateFunctionExpr outerExpr = (BooleanUpdateFunctionExpr) booleanExpression;
-        Assert.assertEquals(BooleanConnector.AND, outerExpr.getOperator());
-
-        //Assert left term [(x || y)]
-        IUpdateFunction lhs = outerExpr.getFirst();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, lhs.getClass());
-        BooleanUpdateFunctionExpr orExpr = (BooleanUpdateFunctionExpr) lhs;
-        Assert.assertEquals(expression.getX(), orExpr.getFirst());
-        Assert.assertEquals(expression.getY(), orExpr.getSecond());
-        Assert.assertEquals(BooleanConnector.OR, orExpr.getOperator());
-
-        //Assert right term [!(x && y)]
-        IUpdateFunction rhs = (NotBooleanUpdateFunction) outerExpr.getSecond();
-        Assert.assertEquals(NotBooleanUpdateFunction.class, rhs.getClass());
-
-        NotBooleanUpdateFunction notExpr = (NotBooleanUpdateFunction) rhs;
-        IUpdateFunction innerExpr = notExpr.getInnerUpdateFunction();
-        Assert.assertEquals(BooleanUpdateFunctionExpr.class, innerExpr.getClass());
-        BooleanUpdateFunctionExpr andExor = (BooleanUpdateFunctionExpr) innerExpr;
-        Assert.assertEquals(expression.getX(), andExor.getFirst());
-        Assert.assertEquals(expression.getY(), andExor.getSecond());
-        Assert.assertEquals(BooleanConnector.AND, andExor.getOperator());
+        BooleanUpdateFunctionExpr xorExpr = (BooleanUpdateFunctionExpr) booleanExpression;
+        Assert.assertEquals(BooleanConnector.XOR, xorExpr.getOperator());
     }
 
     @Then("a boolean update function representing the IMPLIES-operation is created successfully")

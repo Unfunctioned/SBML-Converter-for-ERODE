@@ -28,7 +28,7 @@ Feature: Converting binary boolean expressions to ERODE format
     When the binary ASTNode is converted
     Then an ERODE update function representing an EQ operation was created
 
-  Scenario: Translating the NEG-Operation to ERODE format
+  Scenario: Translating the NEQ-Operation to ERODE format
     Given a binary ASTNode with type "neq"
     When the binary ASTNode is converted
     Then an ERODE update function representing an NEQ operation was created

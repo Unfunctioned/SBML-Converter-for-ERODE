@@ -11,7 +11,7 @@ Feature: Converting the SBML-Species into an ERODE-Species
   Scenario: Attempting to create a SpeciesConverter without a list of qualitative species
     Given that there is no list of qualitative species
     When attempting to create a SpeciesConverter instance
-    Then an exception with message is "Argument for @NotNull parameter 'listOfQualitativeSpecies' of sbml/conversion/SpeciesConverter.<init> must not be null" thrown
+    Then an exception with message is "Argument for @NotNull parameter 'qualitativeSpecies' of sbml/conversion/species/SpeciesConverter.create must not be null" thrown
 
   Scenario: Attempting to create a SpeciesConverter instance using an empty list
     Given an empty list of qualitative species

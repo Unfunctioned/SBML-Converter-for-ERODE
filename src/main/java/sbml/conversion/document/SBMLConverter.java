@@ -8,7 +8,7 @@ import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBMLReader;
 import org.sbml.jsbml.SBase;
 import sbml.configurations.SBMLConfiguration;
-import sbml.conversion.ModelConverter;
+import sbml.conversion.model.IModelConverter;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -21,16 +21,16 @@ public abstract class SBMLConverter implements ISBMLConverter {
     }
 
     public static ISBMLConverter create(@NotNull SBMLDocument sbmlDocument) throws IOException {
-        return new DocumentExtractor(sbmlDocument);
+        return new DocumentReader(sbmlDocument);
     }
 
     public static ISBMLConverter create(@NotNull IBooleanNetwork booleanNetwork) {
-        return new DocumentBuilder(booleanNetwork);
+        return new DocumentWriter(booleanNetwork);
     }
 
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
-    protected ModelConverter modelConverter;
+    protected IModelConverter modelConverter;
 
     protected SBMLDocument sbmlDocument;
 
@@ -40,7 +40,6 @@ public abstract class SBMLConverter implements ISBMLConverter {
 
     public SBMLConverter(@NotNull SBMLDocument sbmlDocument) throws IOException {
         this.sbmlDocument = sbmlDocument;
-        this.modelConverter = new ModelConverter(sbmlDocument.getModel());
         this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
 
     }
@@ -55,7 +54,7 @@ public abstract class SBMLConverter implements ISBMLConverter {
     }
 
     @Override
-    public ModelConverter getSBMLModel() {
+    public IModelConverter getSBMLModel() {
         return this.modelConverter;
     }
 

@@ -5,16 +5,18 @@ import it.imt.erode.crn.interfaces.ISpecies;
 import it.imt.erode.importing.InfoBooleanNetworkImporting;
 import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.SBMLDocument;
+import sbml.conversion.model.ModelConverter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class DocumentExtractor extends SBMLConverter {
+public class DocumentReader extends SBMLConverter {
 
-    public DocumentExtractor(@NotNull SBMLDocument sbmlDocument) throws IOException {
+    public DocumentReader(@NotNull SBMLDocument sbmlDocument) throws IOException {
         super(sbmlDocument);
+        this.modelConverter = ModelConverter.create(sbmlDocument.getModel());
         this.infoImporting = createErodeModel();
         this.booleanNetwork = guiBnImporter.getBooleanNetwork();
         buildErodeModel();

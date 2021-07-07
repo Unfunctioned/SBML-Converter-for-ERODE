@@ -4,11 +4,12 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
-import sbml.conversion.QualModelConverter;
+import sbml.conversion.qualmodel.IQualModelConverter;
+import sbml.conversion.qualmodel.QualModelConverter;
 
 public class QualModelTests {
     private QualModelPlugin qualModelPlugin;
-    private QualModelConverter qualModelConverter;
+    private IQualModelConverter qualModelConverter;
 
 
     @Given("a valid QualModelPlugin")
@@ -24,7 +25,7 @@ public class QualModelTests {
     @When("attempting to create an QualModel instance")
     public void attemptingToCreateAnQualModelInstance() {
         try {
-            qualModelConverter = new QualModelConverter(qualModelPlugin);
+            qualModelConverter = QualModelConverter.create(qualModelPlugin);
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);

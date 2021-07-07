@@ -11,7 +11,7 @@ Feature: Converting SBML-transitions into ERODE's UpdateFunctions using the Tran
   Scenario: Attempting to create a TransitionConverter without a list of transitions
     Given that there is no list of transitions
     When attempting to create a TransitionConverter instance
-    Then an exception with message is "Argument for @NotNull parameter 'listOfTransitions' of sbml/conversion/TransitionConverter.<init> must not be null" thrown
+    Then an exception with message is "Argument for @NotNull parameter 'transitions' of sbml/conversion/transitions/TransitionConverter.create must not be null" thrown
 
   Scenario: Attempting to create a TransitionConverter instance using an empty list
     Given an empty list of transitions

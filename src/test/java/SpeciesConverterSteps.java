@@ -9,13 +9,14 @@ import org.sbml.jsbml.Species;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 import sbml.conversion.document.SBMLConverter;
-import sbml.conversion.SpeciesConverter;
+import sbml.conversion.species.ISpeciesConverter;
+import sbml.conversion.species.SpeciesConverter;
 
 public class SpeciesConverterSteps {
     private SBMLDocument sbmlDocument;
     private ListOf<QualitativeSpecies> qualitativeSpecies;
 
-    private SpeciesConverter speciesConverter;
+    private ISpeciesConverter speciesConverter;
 
     @Given("a valid list of qualitative species")
     public void aValidListOfQualitativeSpecies() {
@@ -55,7 +56,7 @@ public class SpeciesConverterSteps {
     @When("attempting to create a SpeciesConverter instance")
     public void attemptingToCreateASpeciesConverterInstance() {
         try {
-            speciesConverter = new SpeciesConverter(qualitativeSpecies);
+            speciesConverter = SpeciesConverter.create(qualitativeSpecies);
         }
         catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();

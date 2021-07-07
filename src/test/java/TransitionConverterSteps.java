@@ -9,15 +9,15 @@ import org.sbml.jsbml.ext.qual.FunctionTerm;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.Transition;
 import sbml.conversion.document.SBMLConverter;
-import sbml.conversion.TransitionConverter;
+import sbml.conversion.transitions.ITransitionConverter;
+import sbml.conversion.transitions.TransitionConverter;
 
 public class TransitionConverterSteps {
         private static final ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
         private SBMLDocument sbmlDocument;
 
         private ListOf<Transition> transitions;
-        private TransitionConverter transitionConverter;
-        private ListOf<FunctionTerm> functionTerms;
+        private ITransitionConverter transitionConverter;
 
     @Given("a valid list of transitions")
     public void aValidListOfTransitions() {
@@ -60,7 +60,7 @@ public class TransitionConverterSteps {
     @When("attempting to create a TransitionConverter instance")
     public void attemptingToCreateAUpdateFunctionConverterInstance() {
         try {
-            transitionConverter = new TransitionConverter(transitions);
+            transitionConverter = TransitionConverter.create(transitions);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }

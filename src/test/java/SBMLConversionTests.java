@@ -8,11 +8,12 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.layout.LayoutModelPlugin;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
+import sbml.conversion.document.ISBMLConverter;
 import sbml.conversion.document.SBMLConverter;
 
 public class SBMLConversionTests {
     private SBMLDocument sbmlDocument;
-    private SBMLConverter sbmlConverter;
+    private ISBMLConverter sbmlConverter;
     private GUIBooleanNetworkImporter guiBooleanNetworkImporter;
 
     @Given("an SBMLDocument instance with the SBML-qual extension")

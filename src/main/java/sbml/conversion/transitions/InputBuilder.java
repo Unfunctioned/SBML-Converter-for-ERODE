@@ -1,4 +1,4 @@
-package sbml.conversion.builders;
+package sbml.conversion.transitions;
 
 import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;

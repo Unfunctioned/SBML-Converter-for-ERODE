@@ -6,7 +6,7 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.ModelConverter;
 
-public class SBMLModelTests {
+public class ModelConverterSteps {
     private Model model;
     private ModelConverter modelConverter;
 

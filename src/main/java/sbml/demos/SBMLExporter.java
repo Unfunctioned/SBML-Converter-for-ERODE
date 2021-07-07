@@ -3,7 +3,8 @@ package sbml.demos;
 import it.imt.erode.importing.booleannetwork.GUIBooleanNetworkImporter;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBMLWriter;
-import sbml.conversion.SBMLConverter;
+import sbml.conversion.document.ISBMLConverter;
+import sbml.conversion.document.SBMLConverter;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -20,10 +21,10 @@ public class SBMLExporter {
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
 
 
-        SBMLConverter converter = new SBMLConverter(sbmlDocument);
+        ISBMLConverter converter = SBMLConverter.create(sbmlDocument);
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = converter.getGuiBnImporter();
         //--------------------------------------------------------------------------------------
-        converter = new SBMLConverter(guiBooleanNetworkImporter.getBooleanNetwork());
+        converter = SBMLConverter.create(guiBooleanNetworkImporter.getBooleanNetwork());
         sbmlDocument = converter.getSbmlDocument();
 
         print(sbmlDocument);

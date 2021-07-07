@@ -2,7 +2,8 @@ package sbml.demos;
 
 import it.imt.erode.importing.booleannetwork.GUIBooleanNetworkImporter;
 import org.sbml.jsbml.SBMLDocument;
-import sbml.conversion.SBMLConverter;
+import sbml.conversion.document.ISBMLConverter;
+import sbml.conversion.document.SBMLConverter;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class ErodeExporter {
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
 
 
-        SBMLConverter sbmlConverter = new SBMLConverter(sbmlDocument);
+        ISBMLConverter sbmlConverter = SBMLConverter.create(sbmlDocument);
 
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         System.out.println(guiBooleanNetworkImporter.getBooleanNetwork().getSpecies().toString());

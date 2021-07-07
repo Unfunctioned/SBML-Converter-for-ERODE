@@ -1,4 +1,3 @@
-import io.cucumber.gherkin.Func;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,7 +8,7 @@ import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.qual.FunctionTerm;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.Transition;
-import sbml.conversion.SBMLConverter;
+import sbml.conversion.document.SBMLConverter;
 import sbml.conversion.TransitionConverter;
 
 public class TransitionConverterSteps {

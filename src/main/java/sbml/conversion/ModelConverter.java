@@ -24,12 +24,16 @@ public class ModelConverter implements IConversion
     public ModelConverter(@NotNull Model model) {
             this.model = model;
             this.name = model.getId();
-            this.qualModelConverter = new QualModelConverter(this.tryGetQualModel());
+            QualModelPlugin qualModelPlugin = this.tryGetQualModel();
+            this.qualModelConverter = new QualModelConverter(qualModelPlugin);
     }
 
     private QualModelPlugin tryGetQualModel() {
         try {
-            return (QualModelPlugin) model.getExtension("qual");
+            QualModelPlugin qualModelPlugin = (QualModelPlugin) model.getExtension(EXTENSION_NAME);
+            if (qualModelPlugin == null)
+                throw new NullPointerException();
+            return qualModelPlugin;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

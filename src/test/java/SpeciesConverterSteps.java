@@ -1,7 +1,6 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import it.imt.erode.crn.interfaces.ISpecies;
 import org.junit.Assert;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
@@ -9,12 +8,8 @@ import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.Species;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.QualitativeSpecies;
-import sbml.conversion.SBMLConverter;
+import sbml.conversion.document.SBMLConverter;
 import sbml.conversion.SpeciesConverter;
-
-import java.math.BigDecimal;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class SpeciesConverterSteps {
     private SBMLDocument sbmlDocument;
@@ -72,32 +67,5 @@ public class SpeciesConverterSteps {
     public void theSpeciesConverterCreationSucceeds() {
         Assert.assertNotNull(speciesConverter);
         Assert.assertNotNull(speciesConverter.getErodeSpecies());
-    }
-
-    @Then("the SpeciesConverter contains a list of ERODE-Species with initial values ranging from {int} to {int}")
-    public void theSpeciesConverterContainsAListOfERODESpeciesWithInitialValuesRangingFromTo(int arg0, int arg1) {
-        boolean[] confirmedInitialValues = new boolean[(arg1-arg0)+1];
-        List<ISpecies> erodeSpecies = speciesConverter.getErodeSpecies();
-        for (QualitativeSpecies q : qualitativeSpecies) {
-            try {
-                for(ISpecies s : erodeSpecies) {
-                    String sbmlId = q.getId();
-                    String erodeName = s.getName();
-                    if(erodeName.equals(sbmlId)) {
-                        Assert.assertEquals(new BigDecimal(String.valueOf(q.getInitialLevel())),
-                                s.getInitialConcentration());
-                        int initialValue = s.getInitialConcentration().intValue();
-                        if(!confirmedInitialValues[initialValue-arg0])
-                            confirmedInitialValues[initialValue-arg0] = true;
-                    }
-                }
-            } catch (Exception e) {
-                Assert.fail();
-            }
-        }
-        for (boolean b : confirmedInitialValues) {
-            if(!b)
-                Assert.fail();
-        }
     }
 }

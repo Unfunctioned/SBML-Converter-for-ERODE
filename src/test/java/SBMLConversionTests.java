@@ -1,4 +1,3 @@
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,7 +8,7 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.layout.LayoutModelPlugin;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
-import sbml.conversion.SBMLConverter;
+import sbml.conversion.document.SBMLConverter;
 
 public class SBMLConversionTests {
     private SBMLDocument sbmlDocument;
@@ -40,7 +39,7 @@ public class SBMLConversionTests {
         attemptingToCreateAnSBMLConverterInstance();
         ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
         Assert.assertNull(exceptionCollector.getException());
-        Assert.assertEquals(SBMLConverter.class, sbmlConverter.getClass());
+        Assert.assertNotNull(sbmlConverter);
     }
 
     @Given("a boolean network in SBML format")
@@ -56,7 +55,7 @@ public class SBMLConversionTests {
     @When("attempting to create an SBMLConverter instance")
     public void attemptingToCreateAnSBMLConverterInstance() {
         try {
-            sbmlConverter = new SBMLConverter(sbmlDocument);
+            sbmlConverter = SBMLConverter.create(sbmlDocument);
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);

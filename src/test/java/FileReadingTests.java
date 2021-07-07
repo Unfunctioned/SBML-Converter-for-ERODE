@@ -5,7 +5,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBase;
-import sbml.conversion.SBMLConverter;
+import sbml.conversion.document.SBMLConverter;
 
 public class FileReadingTests {
     private String path;

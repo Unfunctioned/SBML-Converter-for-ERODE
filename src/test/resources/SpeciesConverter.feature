@@ -18,8 +18,7 @@ Feature: Converting the SBML-Species into an ERODE-Species
     When attempting to create a SpeciesConverter instance
     Then the SpeciesConverter creation succeeds
 
-  Scenario: Converting various SBML-Species into ERODE species with different initial values
+  Scenario: Attempting to convert a list of multi-valued species into boolean ERODE species
     Given a valid list of qualitative species with initial values ranging from 0 to 2
     When attempting to create a SpeciesConverter instance
-    Then the SpeciesConverter creation succeeds
-    * the SpeciesConverter contains a list of ERODE-Species with initial values ranging from 0 to 2
+    Then an exception with message is "The value of the given species is outside the Boolean Domain" thrown

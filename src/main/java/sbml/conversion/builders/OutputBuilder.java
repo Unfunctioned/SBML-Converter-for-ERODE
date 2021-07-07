@@ -1,4 +1,4 @@
-package sbml.conversion;
+package sbml.conversion.builders;
 
 import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.OutputTransitionEffect;

@@ -7,7 +7,9 @@ import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction
 import it.imt.erode.booleannetwork.updatefunctions.TrueUpdateFunction;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.operators.*;
+import sbml.conversion.espressions.*;
+import sbml.conversion.espressions.elements.Element;
+import sbml.conversion.espressions.elements.ErodeElement;
 
 public class ValueElementSteps {
     private static final ErodeElement ELEMENT = (ErodeElement) Element.create(Format.ERODE);

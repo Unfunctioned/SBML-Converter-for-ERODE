@@ -1,8 +1,7 @@
-package sbml.conversion.operators;
+package sbml.conversion.espressions.operators;
 
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.ASTNodeBuilder;
-import sbml.conversion.operators.interfaces.IOperator;
+import sbml.conversion.builders.ASTNodeBuilder;
 
 public class SBMLOperator implements IOperator<ASTNode> {
 

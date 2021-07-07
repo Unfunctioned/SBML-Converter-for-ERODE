@@ -1,12 +1,11 @@
 package sbml.conversion.nodes;
 
-import com.kitfox.svg.A;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import sbml.configurations.Strings;
-import sbml.conversion.ASTNodeBuilder;
-import sbml.conversion.operators.ErodeElement;
+import sbml.conversion.builders.ASTNodeBuilder;
+import sbml.conversion.espressions.elements.ErodeElement;
 
 public class ValueASTConverter extends NodeConverter {
 
@@ -24,15 +23,15 @@ public class ValueASTConverter extends NodeConverter {
     protected void convertSBML() {
         ASTNode.Type type = currentNode.getType();
         ErodeElement element = (ErodeElement) this.element;
-        switch (type.name()) {
-            case "NAME":
+        switch (type) {
+            case NAME:
                 this.updateFunction = element.Reference(currentNode);
                 break;
-            case "INTEGER":
+            case INTEGER:
                 this.updateFunction = element.Constant(currentNode);
                 break;
-            case "CONSTANT_FALSE":
-            case "CONSTANT_TRUE":
+            case CONSTANT_FALSE:
+            case CONSTANT_TRUE:
                 this.updateFunction = element.BooleanValue(currentNode);
                 break;
             default:

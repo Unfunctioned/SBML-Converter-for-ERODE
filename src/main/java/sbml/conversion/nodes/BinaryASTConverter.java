@@ -3,7 +3,7 @@ package sbml.conversion.nodes;
 import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import org.sbml.jsbml.ASTNode;
 import org.sbml.jsbml.ASTNode.Type;
-import sbml.conversion.operators.ErodeOperator;
+import sbml.conversion.espressions.operators.ErodeOperator;
 
 public class BinaryASTConverter extends NodeConverter {
 

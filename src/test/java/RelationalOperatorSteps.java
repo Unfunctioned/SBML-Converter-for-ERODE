@@ -4,9 +4,9 @@ import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
-import sbml.conversion.operators.ErodeOperator;
-import sbml.conversion.operators.Format;
-import sbml.conversion.operators.Operator;
+import sbml.conversion.espressions.operators.ErodeOperator;
+import sbml.conversion.espressions.Format;
+import sbml.conversion.espressions.operators.Operator;
 
 public class RelationalOperatorSteps {
 

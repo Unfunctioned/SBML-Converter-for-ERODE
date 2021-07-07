@@ -5,6 +5,8 @@ import org.sbml.jsbml.ASTNode;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.ext.qual.FunctionTerm;
 import sbml.configurations.SBMLConfiguration;
+import sbml.conversion.builders.ASTNodeBuilder;
+import sbml.conversion.builders.FunctionTermBuilder;
 import sbml.conversion.nodes.NodeConverter;
 
 public class FunctionTermConverter {

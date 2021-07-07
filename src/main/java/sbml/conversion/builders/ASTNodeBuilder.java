@@ -1,4 +1,4 @@
-package sbml.conversion;
+package sbml.conversion.builders;
 
 import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction;
 import org.sbml.jsbml.ASTNode;

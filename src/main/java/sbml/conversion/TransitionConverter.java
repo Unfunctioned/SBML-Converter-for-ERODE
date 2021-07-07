@@ -8,6 +8,8 @@ import org.sbml.jsbml.ext.qual.Input;
 import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.Transition;
 import sbml.configurations.SBMLConfiguration;
+import sbml.conversion.builders.InputBuilder;
+import sbml.conversion.builders.OutputBuilder;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -4,8 +4,7 @@ import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import sbml.configurations.Strings;
-import sbml.conversion.ASTNodeBuilder;
-import sbml.conversion.operators.ErodeOperator;
+import sbml.conversion.espressions.operators.ErodeOperator;
 
 public class UnaryASTConverter extends NodeConverter {
 

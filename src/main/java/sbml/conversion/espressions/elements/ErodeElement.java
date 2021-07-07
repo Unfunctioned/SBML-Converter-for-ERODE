@@ -1,11 +1,10 @@
-package sbml.conversion.operators;
+package sbml.conversion.espressions.elements;
 
 import it.imt.erode.booleannetwork.updatefunctions.FalseUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.TrueUpdateFunction;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.operators.interfaces.IElement;
 
 public class ErodeElement implements IElement<ASTNode, IUpdateFunction> {
 

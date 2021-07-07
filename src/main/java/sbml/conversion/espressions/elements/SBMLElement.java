@@ -1,8 +1,7 @@
-package sbml.conversion.operators;
+package sbml.conversion.espressions.elements;
 
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.operators.interfaces.IElement;
 
 public class SBMLElement implements IElement<IUpdateFunction,ASTNode> {
     @Override

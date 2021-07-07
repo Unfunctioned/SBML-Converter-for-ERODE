@@ -5,11 +5,11 @@ import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import sbml.configurations.Strings;
-import sbml.conversion.operators.Element;
-import sbml.conversion.operators.Format;
-import sbml.conversion.operators.Operator;
-import sbml.conversion.operators.interfaces.IElement;
-import sbml.conversion.operators.interfaces.IOperator;
+import sbml.conversion.espressions.elements.Element;
+import sbml.conversion.espressions.Format;
+import sbml.conversion.espressions.operators.Operator;
+import sbml.conversion.espressions.elements.IElement;
+import sbml.conversion.espressions.operators.IOperator;
 
 public abstract class NodeConverter {
 

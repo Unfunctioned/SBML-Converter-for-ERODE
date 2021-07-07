@@ -1,9 +1,6 @@
-package sbml.conversion.operators;
+package sbml.conversion.espressions.operators;
 
-import io.cucumber.java.an.E;
-import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
-import org.sbml.jsbml.ASTNode;
-import sbml.conversion.operators.interfaces.IOperator;
+import sbml.conversion.espressions.Format;
 
 public class Operator {
     

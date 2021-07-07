@@ -1,10 +1,10 @@
-package sbml.conversion.operators;
+package sbml.conversion.espressions.operators;
 
 import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
-import sbml.conversion.operators.interfaces.IOperator;
+import sbml.conversion.espressions.operators.IOperator;
 
 public class ErodeOperator implements IOperator<IUpdateFunction> {
 

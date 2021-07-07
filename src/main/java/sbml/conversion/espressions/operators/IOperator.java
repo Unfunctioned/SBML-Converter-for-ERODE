@@ -1,4 +1,4 @@
-package sbml.conversion.operators.interfaces;
+package sbml.conversion.espressions.operators;
 
 public interface IOperator<T> {
 

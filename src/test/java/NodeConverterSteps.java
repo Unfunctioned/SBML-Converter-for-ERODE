@@ -1,14 +1,12 @@
-import com.kitfox.svg.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.nodes.BinaryASTConverter;
+import sbml.conversion.nodes.binary.BinaryASTConverter;
 import sbml.conversion.nodes.NodeConverter;
-import sbml.conversion.nodes.UnaryASTConverter;
-import sbml.conversion.nodes.ValueASTConverter;
-import umontreal.iro.lecuyer.simprocs.Bin;
+import sbml.conversion.nodes.unary.UnaryASTConverter;
+import sbml.conversion.nodes.value.ValueASTConverter;
 
 public class NodeConverterSteps {
     private static final ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
@@ -55,21 +53,21 @@ public class NodeConverterSteps {
     @Then("a BinaryASTConverter is created succesfully")
     public void aBinaryASTConverterIsCreatedSuccesfully() {
         Assert.assertNotNull(nodeConverter);
-        Assert.assertEquals(BinaryASTConverter.class, nodeConverter.getClass());
+        Assert.assertTrue(nodeConverter instanceof BinaryASTConverter);
         Assert.assertNotNull(nodeConverter.getUpdateFunction());
     }
 
     @Then("a UnaryASTConverter is created successfully")
     public void aUnaryASTConverterIsCreatedSuccessfully() {
         Assert.assertNotNull(nodeConverter);
-        Assert.assertEquals(UnaryASTConverter.class, nodeConverter.getClass());
+        Assert.assertTrue(nodeConverter instanceof UnaryASTConverter);
         Assert.assertNotNull(nodeConverter.getUpdateFunction());
     }
 
     @Then("a ValueASTConverter is created successfully")
     public void aValueASTConverterIsCreatedSuccessfully() {
         Assert.assertNotNull(nodeConverter);
-        Assert.assertEquals(ValueASTConverter.class, nodeConverter.getClass());
+        Assert.assertTrue(nodeConverter instanceof ValueASTConverter);
         Assert.assertNotNull(nodeConverter.getUpdateFunction());
     }
 }

@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.ext.qual.Transition;
 import sbml.configurations.SBMLConfiguration;
-import sbml.conversion.FunctionTermConverter;
 
 import java.util.LinkedHashMap;
 
@@ -20,20 +19,16 @@ public abstract class TransitionConverter implements ITransitionConverter {
         return new TransitionWriter(updateFunctions);
     }
 
-    protected FunctionTermConverter functionTermConverter;
-
     protected ListOf<Transition> sbmlTransitions;
 
     protected LinkedHashMap<String, IUpdateFunction> erodeUpdateFunctions;
 
     public TransitionConverter(@NotNull ListOf<Transition> listOfTransitions) {
         this.sbmlTransitions = listOfTransitions;
-        this.functionTermConverter = new FunctionTermConverter();
     }
 
     public TransitionConverter(LinkedHashMap<String, IUpdateFunction> updateFunctions) {
         this.erodeUpdateFunctions = updateFunctions;
-        this.functionTermConverter = new FunctionTermConverter();
     }
 
     public LinkedHashMap<String, IUpdateFunction> getErodeUpdateFunctions() {

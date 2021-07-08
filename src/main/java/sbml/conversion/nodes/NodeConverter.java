@@ -5,22 +5,20 @@ import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import sbml.configurations.Strings;
-import sbml.conversion.espressions.elements.Element;
-import sbml.conversion.espressions.Format;
-import sbml.conversion.espressions.operators.Operator;
-import sbml.conversion.espressions.elements.IElement;
-import sbml.conversion.espressions.operators.IOperator;
+import sbml.conversion.nodes.binary.BinaryASTConverter;
+import sbml.conversion.nodes.unary.UnaryASTConverter;
+import sbml.conversion.nodes.value.ValueASTConverter;
 
-public abstract class NodeConverter {
+public abstract class NodeConverter implements INodeConverter {
 
     public static NodeConverter create(ASTNode node) {
         switch (node.getChildCount()) {
             case 2:
-                return new BinaryASTConverter(node);
+                return BinaryASTConverter.create(node);
             case 1:
-                return new UnaryASTConverter(node);
+                return UnaryASTConverter.create(node);
             case 0:
-                return new ValueASTConverter(node);
+                return ValueASTConverter.create(node);
             default:
                 throw new IllegalArgumentException("A node cannot have more than 2 children");
         }
@@ -31,44 +29,37 @@ public abstract class NodeConverter {
         String className = classType.getSimpleName();
         switch (className) {
             case Strings.BINARY_EXPRESSION:
-                return new BinaryASTConverter((BooleanUpdateFunctionExpr)updateFunction);
+                return BinaryASTConverter.create((BooleanUpdateFunctionExpr)updateFunction);
             case Strings.NEGATION:
-                return new UnaryASTConverter((NotBooleanUpdateFunction)updateFunction);
+                return UnaryASTConverter.create((NotBooleanUpdateFunction)updateFunction);
             case Strings.REFERENCE:
             case Strings.TRUE:
             case Strings.FALSE:
-                return new ValueASTConverter(updateFunction);
+                return ValueASTConverter.create(updateFunction);
             default:
                 throw new IllegalArgumentException("Unknown update function type");
         }
     }
 
-    protected final IOperator operator;
-    protected final IElement element;
-
     protected ASTNode currentNode;
     protected IUpdateFunction updateFunction;
 
     public NodeConverter(ASTNode node) {
-        this.operator = Operator.create(Format.ERODE);
-        this.element = Element.create(Format.ERODE);
         this.currentNode = node;
     }
 
     public NodeConverter(IUpdateFunction updateFunction) {
-        this.operator = Operator.create(Format.SBML);
-        this.element = Element.create(Format.SBML);
         this.updateFunction = updateFunction;
     }
 
-    protected abstract void convertSBML();
+    protected abstract void convert();
 
-    protected abstract void convertERODE();
-
+    @Override
     public IUpdateFunction getUpdateFunction() {
         return updateFunction;
     }
 
+    @Override
     public ASTNode getExpressionAST() {
         return currentNode;
     }

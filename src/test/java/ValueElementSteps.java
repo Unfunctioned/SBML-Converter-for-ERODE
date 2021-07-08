@@ -7,12 +7,10 @@ import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction
 import it.imt.erode.booleannetwork.updatefunctions.TrueUpdateFunction;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.espressions.*;
-import sbml.conversion.espressions.elements.Element;
-import sbml.conversion.espressions.elements.ErodeElement;
+import sbml.conversion.nodes.elements.ErodeElement;
 
 public class ValueElementSteps {
-    private static final ErodeElement ELEMENT = (ErodeElement) Element.create(Format.ERODE);
+    private static final ErodeElement ELEMENT = new ErodeElement();
     private static final ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
 
     private ASTNode speciesReference;
@@ -40,7 +38,7 @@ public class ValueElementSteps {
     @When("the Reference-operation is created")
     public void theReferenceOperationIsCreated() {
         try {
-            erodeReference = ELEMENT.Reference(speciesReference);
+            erodeReference = ELEMENT.reference(speciesReference);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }
@@ -49,7 +47,7 @@ public class ValueElementSteps {
     @When("the constant is created")
     public void theConstantIsCreated() {
         try {
-            erodeConstant = ELEMENT.Constant(booleanConstant);
+            erodeConstant = ELEMENT.constant(booleanConstant);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }
@@ -58,7 +56,7 @@ public class ValueElementSteps {
     @When("the boolean value is created")
     public void theBooleanValueIsCreated() {
         try {
-            erodeConstant = ELEMENT.BooleanValue(booleanConstant);
+            erodeConstant = ELEMENT.booleanConstant(booleanConstant);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }

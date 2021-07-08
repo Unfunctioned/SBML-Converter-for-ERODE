@@ -1,4 +1,4 @@
-package sbml.conversion.espressions.elements;
+package sbml.conversion.nodes.elements;
 
 import it.imt.erode.booleannetwork.updatefunctions.FalseUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
@@ -10,12 +10,12 @@ public class ErodeElement implements IElement<ASTNode, IUpdateFunction> {
 
 
     @Override
-    public IUpdateFunction Reference(ASTNode node) {
+    public IUpdateFunction reference(ASTNode node) {
         return new ReferenceToNodeUpdateFunction(node.getName());
     }
 
     @Override
-    public IUpdateFunction Constant(ASTNode node) {
+    public IUpdateFunction constant(ASTNode node) {
         switch (node.getInteger()) {
             case 1:
                 return new TrueUpdateFunction();
@@ -27,7 +27,7 @@ public class ErodeElement implements IElement<ASTNode, IUpdateFunction> {
     }
 
     @Override
-    public IUpdateFunction BooleanValue(ASTNode node) {
+    public IUpdateFunction booleanConstant(ASTNode node) {
         ASTNode.Type type = node.getType();
         switch (type.name()) {
             case "CONSTANT_FALSE":

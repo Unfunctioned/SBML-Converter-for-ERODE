@@ -1,15 +1,11 @@
-import com.kitfox.svg.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
-import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.nodes.BinaryASTConverter;
-import sbml.conversion.nodes.UnaryASTConverter;
+import sbml.conversion.nodes.unary.UnaryASTConverter;
 
 public class UnaryASTConverterSteps {
     private static final ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
@@ -27,7 +23,7 @@ public class UnaryASTConverterSteps {
     @When("the unary ASTNode is converted")
     public void theUnaryASTNodeIsConverted() {
         try {
-            unaryASTConverter = new UnaryASTConverter(node);
+            unaryASTConverter = UnaryASTConverter.create(node);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }

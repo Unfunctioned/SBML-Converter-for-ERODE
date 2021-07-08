@@ -1,4 +1,4 @@
-package sbml.conversion.builders;
+package sbml.conversion.nodes.operators;
 
 import it.imt.erode.booleannetwork.updatefunctions.ReferenceToNodeUpdateFunction;
 import org.sbml.jsbml.ASTNode;
@@ -18,14 +18,11 @@ public class ASTNodeBuilder {
         return node;
     }
 
-    public ASTNode reference(ReferenceToNodeUpdateFunction updateFunction) {
-        return new ASTNode(updateFunction.toString());
+    public ASTNode reference(String name) {
+        return new ASTNode(name);
     }
 
-    public ASTNode integer(boolean b) {
-        if(b)
-            return new ASTNode(1);
-        else
-            return new ASTNode(0);
+    public ASTNode integer(int value) {
+            return new ASTNode(value);
     }
 }

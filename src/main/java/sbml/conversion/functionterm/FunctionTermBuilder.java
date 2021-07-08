@@ -1,4 +1,4 @@
-package sbml.conversion.builders;
+package sbml.conversion.functionterm;
 
 import org.sbml.jsbml.ASTNode;
 import org.sbml.jsbml.ext.qual.FunctionTerm;

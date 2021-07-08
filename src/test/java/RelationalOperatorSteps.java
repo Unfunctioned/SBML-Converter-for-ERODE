@@ -4,13 +4,11 @@ import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
-import sbml.conversion.espressions.operators.ErodeOperator;
-import sbml.conversion.espressions.Format;
-import sbml.conversion.espressions.operators.Operator;
+import sbml.conversion.nodes.operators.ErodeOperator;
 
 public class RelationalOperatorSteps {
 
-    private static final ErodeOperator OPERATOR = (ErodeOperator) Operator.create(Format.ERODE);
+    private static final ErodeOperator OPERATOR = new ErodeOperator();
     private IUpdateFunction relationalExpression;
 
 
@@ -18,7 +16,7 @@ public class RelationalOperatorSteps {
     public void theEqualsOperationIsCreated() {
         try {
             Expression expression = Expression.getInstance();
-            relationalExpression = OPERATOR.Equals(expression.getX(),expression.getY());
+            relationalExpression = OPERATOR.equals(expression.getX(),expression.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);
@@ -29,7 +27,7 @@ public class RelationalOperatorSteps {
     public void theNotEqualsOperationIsCreated() {
         try {
             Expression expression = Expression.getInstance();
-            relationalExpression = OPERATOR.NotEquals(expression.getX(),expression.getY());
+            relationalExpression = OPERATOR.notEquals(expression.getX(),expression.getY());
         } catch (Exception e) {
             ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
             exceptionCollector.setException(e);

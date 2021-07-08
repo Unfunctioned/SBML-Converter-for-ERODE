@@ -1,10 +1,9 @@
-import com.kitfox.svg.A;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.nodes.ValueASTConverter;
+import sbml.conversion.nodes.value.ValueASTConverter;
 
 public class ValueASTConverterSteps {
 
@@ -38,7 +37,7 @@ public class ValueASTConverterSteps {
     @When("the ValueASTConverter is created")
     public void theValueASTConverterIsCreated() {
         try {
-            valueASTConverter = new ValueASTConverter(node);
+            valueASTConverter = ValueASTConverter.create(node);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }

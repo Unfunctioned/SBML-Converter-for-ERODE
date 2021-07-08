@@ -6,6 +6,7 @@ import org.sbml.jsbml.ext.qual.FunctionTerm;
 import org.sbml.jsbml.ext.qual.Input;
 import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.Transition;
+import sbml.conversion.functionterm.FunctionTermWriter;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -15,12 +16,14 @@ public class TransitionWriter extends TransitionConverter {
     private InputBuilder inputBuilder;
     private OutputBuilder outputBuilder;
     private TransitionBuilder transitionBuilder;
+    private FunctionTermWriter writer;
 
     public TransitionWriter(LinkedHashMap<String, IUpdateFunction> updateFunctions) {
         super(updateFunctions);
         this.inputBuilder = new InputBuilder();
         this.outputBuilder = new OutputBuilder();
         this.transitionBuilder = new TransitionBuilder();
+        this.writer = new FunctionTermWriter();
 
         this.sbmlTransitions = convertERODEUpdateFunctions();
     }
@@ -31,7 +34,7 @@ public class TransitionWriter extends TransitionConverter {
         for (Map.Entry<String, IUpdateFunction> e : erodeUpdateFunctions.entrySet()) {
             Output output = outputBuilder.build(e.getKey(), id);
             ListOf<Input> inputs = inputBuilder.buildAll(e.getValue());
-            ListOf<FunctionTerm> functionTerms = functionTermConverter.convertERODEUpdateFunctions(e.getValue(), 1);
+            ListOf<FunctionTerm> functionTerms = writer.convert(e.getValue(), 1);
             Transition transition = transitionBuilder.createTransition(inputs,output,functionTerms);
             sbmlTransitions.add(transition);
             id++;

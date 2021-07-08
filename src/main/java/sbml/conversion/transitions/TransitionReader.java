@@ -5,13 +5,17 @@ import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.Transition;
+import sbml.conversion.functionterm.FunctionTermReader;
 
 import java.util.LinkedHashMap;
 
-public class TransitionReader extends TransitionConverter{
+public class TransitionReader extends TransitionConverter {
+
+    private FunctionTermReader reader;
 
     public TransitionReader(@NotNull ListOf<Transition> listOfTransitions) {
         super(listOfTransitions);
+        this.reader = new FunctionTermReader();
         this.erodeUpdateFunctions = convertSBMLTransitions();
     }
 
@@ -19,7 +23,7 @@ public class TransitionReader extends TransitionConverter{
         LinkedHashMap<String,IUpdateFunction> erodeUpdateFunctions = new LinkedHashMap<>();
         for(Transition t : this.sbmlTransitions) {
             ListOf<Output> outputs = t.getListOfOutputs();
-            IUpdateFunction updateFunction = functionTermConverter.convertSBMLFunctionTerms(t.getListOfFunctionTerms());
+            IUpdateFunction updateFunction = reader.convert(t.getListOfFunctionTerms());
             for(Output o : outputs)
                 erodeUpdateFunctions.put(o.getQualitativeSpecies(),updateFunction);
         }

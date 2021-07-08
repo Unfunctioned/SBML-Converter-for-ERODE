@@ -1,14 +1,12 @@
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.mk_latn.No;
 import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
-import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.nodes.BinaryASTConverter;
+import sbml.conversion.nodes.binary.BinaryASTConverter;
 
 public class BinaryASTConverterSteps {
     private static final ExceptionCollector exceptionCollector = ExceptionCollector.getInstance();
@@ -27,7 +25,7 @@ public class BinaryASTConverterSteps {
     @When("the binary ASTNode is converted")
     public void theBinaryASTNodeIsConverted() {
         try {
-            binaryASTConverter = new BinaryASTConverter(node);
+            binaryASTConverter = BinaryASTConverter.create(node);
         } catch (Exception e) {
             exceptionCollector.setException(e);
         }

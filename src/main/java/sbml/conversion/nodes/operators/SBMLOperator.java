@@ -1,7 +1,6 @@
-package sbml.conversion.espressions.operators;
+package sbml.conversion.nodes.operators;
 
 import org.sbml.jsbml.ASTNode;
-import sbml.conversion.builders.ASTNodeBuilder;
 
 public class SBMLOperator implements IOperator<ASTNode> {
 
@@ -12,37 +11,37 @@ public class SBMLOperator implements IOperator<ASTNode> {
     }
 
     @Override
-    public ASTNode Not(ASTNode x) {
+    public ASTNode not(ASTNode x) {
         return builder.unary(x,ASTNode.Type.LOGICAL_NOT);
     }
 
     @Override
-    public ASTNode And(ASTNode x, ASTNode y) {
+    public ASTNode and(ASTNode x, ASTNode y) {
         return builder.binary(x,y,ASTNode.Type.LOGICAL_AND);
     }
 
     @Override
-    public ASTNode Or(ASTNode x, ASTNode y) {
+    public ASTNode or(ASTNode x, ASTNode y) {
         return builder.binary(x,y,ASTNode.Type.LOGICAL_OR);
     }
 
     @Override
-    public ASTNode Xor(ASTNode x, ASTNode y) {
+    public ASTNode xor(ASTNode x, ASTNode y) {
         return builder.binary(x,y,ASTNode.Type.LOGICAL_XOR);
     }
 
     @Override
-    public ASTNode Implies(ASTNode x, ASTNode y) {
+    public ASTNode implies(ASTNode x, ASTNode y) {
         return builder.binary(x,y,ASTNode.Type.LOGICAL_IMPLIES);
     }
 
     @Override
-    public ASTNode Equals(ASTNode x, ASTNode y) {
+    public ASTNode equals(ASTNode x, ASTNode y) {
         return builder.binary(x,y,ASTNode.Type.RELATIONAL_EQ);
     }
 
     @Override
-    public ASTNode NotEquals(ASTNode x, ASTNode y) {
+    public ASTNode notEquals(ASTNode x, ASTNode y) {
         return builder.binary(x,y,ASTNode.Type.RELATIONAL_NEQ);
     }
 }

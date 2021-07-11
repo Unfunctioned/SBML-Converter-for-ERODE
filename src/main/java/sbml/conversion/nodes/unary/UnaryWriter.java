@@ -9,7 +9,7 @@ import sbml.conversion.nodes.NodeConverter;
 
 public class UnaryWriter extends UnaryASTConverter {
 
-    private SBMLOperator operator = new SBMLOperator();
+    private SBMLOperator operator;
 
     public UnaryWriter(NotBooleanUpdateFunction updateFunction) {
         super(updateFunction);

@@ -38,6 +38,7 @@ public class InputBuilder {
             return new HashSet<>();
         }
     }
+
     private HashSet<ReferenceToNodeUpdateFunction> Merge(HashSet<ReferenceToNodeUpdateFunction> a,
                                                          HashSet<ReferenceToNodeUpdateFunction> b) {
         a.addAll(b);

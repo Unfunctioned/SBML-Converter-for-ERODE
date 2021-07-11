@@ -23,6 +23,13 @@ public class SBMLElement implements IElement<IUpdateFunction,ASTNode> {
         return builder.reference(reference.toString());
     }
 
+    /**
+     * This method requires ERODE to support multi-valued networks,
+     * to be meaningful. It could then be modified to convert any integer
+     * representation.
+     *
+     * Currently, it is unused, but required by the interface
+     * */
     @Override
     public ASTNode constant(IUpdateFunction node) {
         Class<?> classType = node.getClass();

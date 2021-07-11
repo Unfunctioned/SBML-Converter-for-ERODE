@@ -29,13 +29,11 @@ public class ErodeElement implements IElement<ASTNode, IUpdateFunction> {
     @Override
     public IUpdateFunction booleanConstant(ASTNode node) {
         ASTNode.Type type = node.getType();
-        switch (type.name()) {
-            case "CONSTANT_FALSE":
+        switch (type) {
+            case CONSTANT_FALSE:
                 return new FalseUpdateFunction();
-            case "CONSTANT_TRUE":
-                return new TrueUpdateFunction();
             default:
-                throw new IllegalArgumentException("Given node is not a boolean constant");
+                return new TrueUpdateFunction();
         }
     }
 }

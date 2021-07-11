@@ -14,6 +14,7 @@ public abstract class BinaryASTConverter extends NodeConverter {
     public static BinaryASTConverter create(BooleanUpdateFunctionExpr updateFunction) {
         return new BinaryWriter(updateFunction);
     }
+
     protected NodeConverter leftChild;
     protected NodeConverter rightChild;
 

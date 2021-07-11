@@ -19,18 +19,9 @@ public class ValueWriter extends ValueASTConverter {
     @Override
     protected void convert() {
         Class<?> classType = updateFunction.getClass();
-        String className = classType.getSimpleName();
-        ASTNodeBuilder builder = new ASTNodeBuilder();
-        switch (className) {
-            case Strings.REFERENCE:
-                this.currentNode = element.reference(updateFunction);
-                break;
-            case Strings.TRUE:
-            case Strings.FALSE:
-                this.currentNode = element.booleanConstant(updateFunction);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown type");
-        }
+        if(classType.equals(ReferenceToNodeUpdateFunction.class))
+            this.currentNode = element.reference(updateFunction);
+        else
+            this.currentNode = element.booleanConstant(updateFunction);
     }
 }

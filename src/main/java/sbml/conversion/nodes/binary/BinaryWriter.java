@@ -22,30 +22,24 @@ public class BinaryWriter extends BinaryASTConverter {
         BooleanUpdateFunctionExpr expression = (BooleanUpdateFunctionExpr) updateFunction;
         BooleanConnector connector = expression.getOperator();
         switch (connector) {
-            case AND -> {
+            case AND:
                 this.currentNode = operator.and(leftChild.getExpressionAST(),rightChild.getExpressionAST());
                 break;
-            }
-            case OR -> {
+            case OR:
                 this.currentNode = operator.or(leftChild.getExpressionAST(),rightChild.getExpressionAST());
                 break;
-            }
-            case IMPLIES -> {
+            case IMPLIES:
                 this.currentNode = operator.implies(leftChild.getExpressionAST(),rightChild.getExpressionAST());
                 break;
-            }
-            case XOR -> {
+            case XOR:
                 this.currentNode = operator.xor(leftChild.getExpressionAST(),rightChild.getExpressionAST());
                 break;
-            }
-            case EQ -> {
+            case EQ:
                 this.currentNode = operator.equals(leftChild.getExpressionAST(),rightChild.getExpressionAST());
                 break;
-            }
-            case NEQ -> {
+            case NEQ:
                 this.currentNode = operator.notEquals(leftChild.getExpressionAST(),rightChild.getExpressionAST());
                 break;
-            }
         }
     }
 }

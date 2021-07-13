@@ -2,7 +2,6 @@ Feature: Converting unary boolean expressions to ERODE format
 
   Background:
     Given a UnaryManager has been initialized
-    Given the ExceptionCollector is empty
 
   #Not operator conversion
   Scenario: Converting the NOT-Operation to ERODE format

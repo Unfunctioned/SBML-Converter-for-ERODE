@@ -40,8 +40,6 @@ public abstract class SBMLConverter implements ISBMLConverter {
 
     public SBMLConverter(@NotNull SBMLDocument sbmlDocument) throws IOException {
         this.sbmlDocument = sbmlDocument;
-        this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
-
     }
 
     public SBMLConverter(IBooleanNetwork booleanNetwork) {

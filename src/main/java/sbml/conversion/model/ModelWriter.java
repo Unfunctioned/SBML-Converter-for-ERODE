@@ -5,9 +5,9 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.qualmodel.QualModelConverter;
 
-public class ModelBuilder extends ModelConverter {
+public class ModelWriter extends ModelConverter {
 
-    public ModelBuilder(IBooleanNetwork booleanNetwork) {
+    public ModelWriter(IBooleanNetwork booleanNetwork) {
         super(booleanNetwork);
         this.model = new Model(CONFIG.getLevel(),CONFIG.getVersion());
         this.qualModelConverter = QualModelConverter.create(booleanNetwork, model);

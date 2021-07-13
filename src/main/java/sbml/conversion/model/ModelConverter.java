@@ -17,11 +17,11 @@ public abstract class ModelConverter implements IModelConverter
     protected static final String EXTENSION_NAME = "qual";
 
     public static IModelConverter create(@NotNull Model model) {
-        return new ModelExtractor(model);
+        return new ModelReader(model);
     }
 
     public static IModelConverter create(@NotNull IBooleanNetwork booleanNetwork) {
-        return new ModelBuilder(booleanNetwork);
+        return new ModelWriter(booleanNetwork);
     }
 
     protected Model model;
@@ -48,11 +48,6 @@ public abstract class ModelConverter implements IModelConverter
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public IQualModelConverter getQualModel() {
-        return qualModelConverter;
     }
 
     @Override

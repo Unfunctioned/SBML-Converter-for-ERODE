@@ -14,8 +14,6 @@ public interface IModelConverter {
 
     String getName();
 
-    IQualModelConverter getQualModel();
-
     List<ISpecies> getErodeSpecies();
 
     LinkedHashMap<String, IUpdateFunction> getErodeUpdateFunctions();

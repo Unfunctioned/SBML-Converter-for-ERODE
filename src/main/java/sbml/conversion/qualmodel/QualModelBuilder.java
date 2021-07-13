@@ -23,7 +23,9 @@ public class QualModelBuilder extends QualModelConverter {
 
     private void buildSBMLQualModel(ListOf<QualitativeSpecies> sbmlSpecies,
                                     ListOf<Transition> sbmlTransitions) {
+        sbmlSpecies.setParent(sbmlQualModel.getModel());
         sbmlQualModel.setListOfQualitativeSpecies(sbmlSpecies);
+        sbmlTransitions.setParent(sbmlQualModel.getModel());
         sbmlQualModel.setListOfTransitions(sbmlTransitions);
     }
 }

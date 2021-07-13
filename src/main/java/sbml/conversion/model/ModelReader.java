@@ -4,9 +4,9 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.qualmodel.QualModelConverter;
 
-public class ModelExtractor extends ModelConverter {
+public class ModelReader extends ModelConverter {
 
-    public ModelExtractor(Model model) {
+    public ModelReader(Model model) {
         super(model);
         this.qualModelConverter = QualModelConverter.create(this.tryGetQualModel());
     }

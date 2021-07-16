@@ -10,9 +10,7 @@ import sbml.configurations.SBMLConfiguration;
 public class TransitionBuilder {
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
-    public Transition createTransition(ListOf<Input> inputs, Output output, ListOf<FunctionTerm> functionTerms) {
-        ListOf<Output> outputs = new ListOf<>(CONFIG.getLevel(),CONFIG.getVersion());
-        outputs.add(output);
+    public Transition createTransition(ListOf<Input> inputs, ListOf<Output> outputs, ListOf<FunctionTerm> functionTerms) {
         Transition t = new Transition(CONFIG.getLevel(),CONFIG.getVersion());
         t.setListOfInputs(inputs);
         t.setListOfOutputs(outputs);

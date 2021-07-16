@@ -32,10 +32,10 @@ public class TransitionWriter extends TransitionConverter {
         ListOf<Transition> sbmlTransitions = new ListOf<>(CONFIG.getLevel(),CONFIG.getVersion());
         int id = 0;
         for (Map.Entry<String, IUpdateFunction> e : erodeUpdateFunctions.entrySet()) {
-            Output output = outputBuilder.build(e.getKey(), id);
+            ListOf<Output> outputs = outputBuilder.build(e.getKey(), id);
             ListOf<Input> inputs = inputBuilder.buildAll(e.getValue());
             ListOf<FunctionTerm> functionTerms = writer.convert(e.getValue(), 1);
-            Transition transition = transitionBuilder.createTransition(inputs,output,functionTerms);
+            Transition transition = transitionBuilder.createTransition(inputs,outputs,functionTerms);
             sbmlTransitions.add(transition);
             id++;
         }

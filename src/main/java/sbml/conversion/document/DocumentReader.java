@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class DocumentReader extends SBMLConverter {
+class DocumentReader extends SBMLConverter {
 
     public DocumentReader(@NotNull SBMLDocument sbmlDocument) throws IOException {
         super(sbmlDocument);

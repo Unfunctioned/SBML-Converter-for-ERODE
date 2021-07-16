@@ -5,7 +5,7 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.qualmodel.QualModelConverter;
 
-public class ModelWriter extends ModelConverter {
+class ModelWriter extends ModelConverter {
 
     public ModelWriter(IBooleanNetwork booleanNetwork) {
         super(booleanNetwork);

@@ -8,7 +8,7 @@ import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpeciesReader extends SpeciesConverter {
+class SpeciesReader extends SpeciesConverter {
 
     private ErodeSpeciesBuilder erodeSpeciesBuilder;
 

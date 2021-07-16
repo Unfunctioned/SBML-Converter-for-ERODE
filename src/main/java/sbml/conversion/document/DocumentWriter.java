@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.SBMLDocument;
 import sbml.conversion.model.ModelConverter;
 
-public class DocumentWriter extends SBMLConverter {
+class DocumentWriter extends SBMLConverter {
 
     public DocumentWriter(@NotNull IBooleanNetwork booleanNetwork) {
         super(booleanNetwork);

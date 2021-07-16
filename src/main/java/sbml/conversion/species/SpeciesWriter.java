@@ -7,7 +7,7 @@ import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 
 import java.util.List;
 
-public class SpeciesWriter extends SpeciesConverter {
+class SpeciesWriter extends SpeciesConverter {
 
     private SBMLSpeciesBuilder speciesBuilder;
 

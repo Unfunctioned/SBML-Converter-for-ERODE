@@ -8,7 +8,6 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.species.ISpeciesConverter;
 import sbml.conversion.transitions.ITransitionConverter;
-import sbml.conversion.transitions.TransitionConverter;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,11 +15,11 @@ import java.util.List;
 public abstract class QualModelConverter implements IQualModelConverter {
 
     public static IQualModelConverter create(@NotNull QualModelPlugin qualModelPlugin) {
-        return new QualModelExtractor(qualModelPlugin);
+        return new QualModelReader(qualModelPlugin);
     }
 
     public static IQualModelConverter create(@NotNull IBooleanNetwork booleanNetwork, Model model) {
-        return new QualModelBuilder(booleanNetwork, model);
+        return new QualModelWriter(booleanNetwork, model);
     }
 
     protected QualModelPlugin sbmlQualModel;

@@ -4,7 +4,7 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.qualmodel.QualModelConverter;
 
-public class ModelReader extends ModelConverter {
+class ModelReader extends ModelConverter {
 
     public ModelReader(Model model) {
         super(model);

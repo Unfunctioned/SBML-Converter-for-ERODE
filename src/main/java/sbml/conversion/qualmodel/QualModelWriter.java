@@ -10,9 +10,9 @@ import org.sbml.jsbml.ext.qual.Transition;
 import sbml.conversion.species.SpeciesConverter;
 import sbml.conversion.transitions.TransitionConverter;
 
-public class QualModelBuilder extends QualModelConverter {
+class QualModelWriter extends QualModelConverter {
 
-    public QualModelBuilder(@NotNull IBooleanNetwork booleanNetwork, Model model) {
+    public QualModelWriter(@NotNull IBooleanNetwork booleanNetwork, Model model) {
         super();
         this.speciesConverter = SpeciesConverter.create(booleanNetwork.getSpecies());
         this.transitionConverter = TransitionConverter.create(booleanNetwork.getUpdateFunctions());

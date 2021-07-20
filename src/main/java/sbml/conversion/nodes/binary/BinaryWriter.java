@@ -2,6 +2,7 @@ package sbml.conversion.nodes.binary;
 
 import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
+import sbml.conversion.nodes.NodeManager;
 import sbml.conversion.nodes.operators.SBMLOperator;
 import sbml.conversion.nodes.NodeConverter;
 
@@ -11,8 +12,8 @@ public class BinaryWriter extends BinaryASTConverter {
 
     public BinaryWriter(BooleanUpdateFunctionExpr updateFunction) {
         super(updateFunction);
-        this.leftChild = NodeConverter.create(updateFunction.getFirst());
-        this.rightChild = NodeConverter.create(updateFunction.getSecond());
+        this.leftChild = NodeManager.create(updateFunction.getFirst());
+        this.rightChild = NodeManager.create(updateFunction.getSecond());
         this.operator = new SBMLOperator();
         this.convert();
     }

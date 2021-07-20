@@ -6,7 +6,7 @@ import it.imt.erode.importing.InfoBooleanNetworkImporting;
 import it.imt.erode.importing.booleannetwork.GUIBooleanNetworkImporter;
 import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.SBMLDocument;
-import sbml.conversion.model.ModelConverter;
+import sbml.conversion.model.ModelManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ class DocumentReader extends SBMLConverter {
 
     public DocumentReader(@NotNull SBMLDocument sbmlDocument) throws IOException {
         super(sbmlDocument);
-        this.modelConverter = ModelConverter.create(sbmlDocument.getModel());
+        this.modelConverter = ModelManager.create(sbmlDocument.getModel());
         this.guiBnImporter = new GUIBooleanNetworkImporter(null, null, null);
         this.infoImporting = createErodeModel();
         this.booleanNetwork = guiBnImporter.getBooleanNetwork();

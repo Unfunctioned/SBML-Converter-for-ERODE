@@ -9,7 +9,7 @@ import sbml.test.framework.TestDataManager;
 
 import java.util.List;
 
-public class SpeciesManager extends TestDataManager {
+public class SpeciesDataManager extends TestDataManager {
     private SBMLDocument sbmlDocument;
 
     private ListOf<QualitativeSpecies> qualitativeSpecies;

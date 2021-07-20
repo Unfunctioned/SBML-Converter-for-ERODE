@@ -16,10 +16,9 @@ import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.layout.LayoutModelPlugin;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.document.ISBMLConverter;
-import sbml.conversion.document.SBMLConverter;
-import sbml.test.framework.ExceptionCollector;
+import sbml.conversion.document.SBMLManager;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.document.DocumentManager;
+import sbml.test.framework.document.DocumentDataManager;
 import sbml.test.steps.CommonSteps;
 
 import java.io.IOException;
@@ -31,12 +30,12 @@ import static sbml.test.framework.TestDataManager.Type;
 
 public class SBMLDocumentConversion {
 
-    private DocumentManager documentManager;
+    private DocumentDataManager documentManager;
 
     @Given("a DocumentManager has been initialised")
     public void aDocumentManagerHasBeenInitialised() {
         TestDataManager.setInstance(Type.DOCUMENT);
-        documentManager = (DocumentManager) TestDataManager.getInstance();
+        documentManager = (DocumentDataManager) TestDataManager.getInstance();
     }
 
     @Given("an SBMLDocument instance with the SBML-qual extension")
@@ -63,7 +62,7 @@ public class SBMLDocumentConversion {
     public void aBooleanNetworkInSBMLFormat() {
         String path = CommonSteps.GetPath();
         try {
-            SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
+            SBMLDocument sbmlDocument = (SBMLDocument) SBMLManager.read(path);
             documentManager.setSbmlDocument(sbmlDocument);
         } catch (Exception e) {
             Assert.fail("Could not read file on path: " + path);
@@ -103,7 +102,7 @@ public class SBMLDocumentConversion {
     public void attemptingToCreateASBMLDocumentConverterInstanceForERODEFormat() {
         try {
             SBMLDocument sbmlDocument = documentManager.getSbmlDocument();
-            ISBMLConverter sbmlConverter = SBMLConverter.create(sbmlDocument);
+            ISBMLConverter sbmlConverter = SBMLManager.create(sbmlDocument);
             documentManager.setSbmlConverter(sbmlConverter);
         } catch (Exception e) {
             documentManager.setException(e);
@@ -114,7 +113,7 @@ public class SBMLDocumentConversion {
     public void attemptingToCreateASBMLDocumentConverterInstanceForSBMLFormat() {
         try {
             IBooleanNetwork booleanNetwork = documentManager.getBooleanNetwork();
-            ISBMLConverter sbmlConverter = SBMLConverter.create(booleanNetwork);
+            ISBMLConverter sbmlConverter = SBMLManager.create(booleanNetwork);
             documentManager.setSbmlConverter(sbmlConverter);
         } catch (Exception e) {
             documentManager.setException(e);

@@ -7,15 +7,15 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 import org.sbml.jsbml.ext.qual.Transition;
-import sbml.conversion.species.SpeciesConverter;
-import sbml.conversion.transitions.TransitionConverter;
+import sbml.conversion.species.SpeciesManager;
+import sbml.conversion.transitions.TransitionManager;
 
 class QualModelWriter extends QualModelConverter {
 
     public QualModelWriter(@NotNull IBooleanNetwork booleanNetwork, Model model) {
         super();
-        this.speciesConverter = SpeciesConverter.create(booleanNetwork.getSpecies());
-        this.transitionConverter = TransitionConverter.create(booleanNetwork.getUpdateFunctions());
+        this.speciesConverter = SpeciesManager.create(booleanNetwork.getSpecies());
+        this.transitionConverter = TransitionManager.create(booleanNetwork.getUpdateFunctions());
         this.sbmlQualModel = new QualModelPlugin(model);
         this.buildSBMLQualModel(speciesConverter.getSbmlSpecies(),
                 transitionConverter.getSbmlTransitions());

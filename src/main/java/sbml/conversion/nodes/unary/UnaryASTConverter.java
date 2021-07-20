@@ -2,6 +2,7 @@ package sbml.conversion.nodes.unary;
 
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import org.sbml.jsbml.ASTNode;
+import sbml.conversion.nodes.INodeConverter;
 import sbml.conversion.nodes.NodeConverter;
 
 public abstract class UnaryASTConverter extends NodeConverter {
@@ -14,7 +15,7 @@ public abstract class UnaryASTConverter extends NodeConverter {
         return new UnaryWriter(updateFunction);
     }
 
-    protected NodeConverter child;
+    protected INodeConverter child;
 
     public UnaryASTConverter(ASTNode node) {
         super(node);

@@ -11,17 +11,17 @@ import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.value.ValueASTConverter;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.nodes.values.ValueManager;
+import sbml.test.framework.nodes.values.ValueDataManager;
 import static sbml.test.framework.TestDataManager.Type;
 
 public class ASTLeafConversionSteps {
 
-    private ValueManager valueManager;
+    private ValueDataManager valueManager;
 
     @Given("a ValueManager has been initialized")
     public void aValueManagerHasBeenInitialized() {
         TestDataManager.setInstance(Type.VALUES);
-        valueManager = (ValueManager) TestDataManager.getInstance();
+        valueManager = (ValueDataManager) TestDataManager.getInstance();
     }
 
     @Given("an ASTNode representing the variable {string}")

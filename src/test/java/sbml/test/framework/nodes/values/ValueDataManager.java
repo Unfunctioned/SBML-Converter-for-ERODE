@@ -5,7 +5,7 @@ import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.value.ValueASTConverter;
 import sbml.test.framework.TestDataManager;
 
-public class ValueManager extends TestDataManager {
+public class ValueDataManager extends TestDataManager {
     private ASTNode node;
 
     private IUpdateFunction updateFunction;

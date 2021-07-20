@@ -5,7 +5,7 @@ import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.binary.BinaryASTConverter;
 import sbml.test.framework.TestDataManager;
 
-public class BinaryManager extends TestDataManager {
+public class BinaryDataManager extends TestDataManager {
 
     private ASTNode node;
 

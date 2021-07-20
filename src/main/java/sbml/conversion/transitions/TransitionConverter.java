@@ -11,14 +11,6 @@ import java.util.LinkedHashMap;
 public abstract class TransitionConverter implements ITransitionConverter {
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
-    public static ITransitionConverter create(@NotNull ListOf<Transition> transitions) {
-        return new TransitionReader(transitions);
-    }
-
-    public static ITransitionConverter create(@NotNull LinkedHashMap<String, IUpdateFunction> updateFunctions) {
-        return new TransitionWriter(updateFunctions);
-    }
-
     protected ListOf<Transition> sbmlTransitions;
 
     protected LinkedHashMap<String, IUpdateFunction> erodeUpdateFunctions;

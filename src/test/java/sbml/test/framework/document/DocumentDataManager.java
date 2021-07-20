@@ -6,7 +6,7 @@ import org.sbml.jsbml.SBMLDocument;
 import sbml.conversion.document.ISBMLConverter;
 import sbml.test.framework.TestDataManager;
 
-public class DocumentManager extends TestDataManager {
+public class DocumentDataManager extends TestDataManager {
     private SBMLDocument sbmlDocument;
     private ISBMLConverter sbmlConverter;
     private GUIBooleanNetworkImporter guiBooleanNetworkImporter;

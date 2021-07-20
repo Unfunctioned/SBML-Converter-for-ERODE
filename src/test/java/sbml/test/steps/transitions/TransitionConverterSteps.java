@@ -11,11 +11,11 @@ import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.qual.*;
-import sbml.conversion.document.SBMLConverter;
+import sbml.conversion.document.SBMLManager;
 import sbml.conversion.transitions.ITransitionConverter;
-import sbml.conversion.transitions.TransitionConverter;
+import sbml.conversion.transitions.TransitionManager;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.transitions.TransitionManager;
+import sbml.test.framework.transitions.TransitionDataManager;
 import sbml.test.steps.CommonSteps;
 
 import java.util.LinkedHashMap;
@@ -24,39 +24,39 @@ import static sbml.test.framework.TestDataManager.Type;
 
 public class TransitionConverterSteps {
 
-    private TransitionManager transitionManager;
+    private TransitionDataManager transitionDataManager;
 
     @Given("a TransitionManager has been initialized")
     public void aTransitionManagerHasBeenInitialized() {
         TestDataManager.setInstance(Type.TRANSITION);
-        transitionManager = (TransitionManager) TestDataManager.getInstance();
+        transitionDataManager = (TransitionDataManager) TestDataManager.getInstance();
     }
 
     @Given("a valid list of transitions")
     public void aValidListOfTransitions() {
         String path = CommonSteps.GetPath();
         try {
-            SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
-            transitionManager.setSbmlDocument(sbmlDocument);
+            SBMLDocument sbmlDocument = (SBMLDocument) SBMLManager.read(path);
+            transitionDataManager.setSbmlDocument(sbmlDocument);
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
-        SBMLDocument sbmlDocument = transitionManager.getSbmlDocument();
+        SBMLDocument sbmlDocument = transitionDataManager.getSbmlDocument();
         Model model = sbmlDocument.getModel();
         QualModelPlugin qualModelPlugin = (QualModelPlugin) model.getExtension("qual");
         ListOf<Transition> transitions = qualModelPlugin.getListOfTransitions();
-        transitionManager.setTransitions(transitions);
+        transitionDataManager.setTransitions(transitions);
         Assert.assertNotNull(transitions);
     }
 
     @Given("that there is no list of transitions")
     public void thatThereIsNoListOfTransitions() {
-        transitionManager.setTransitions(null);
+        transitionDataManager.setTransitions(null);
     }
 
     @Given("an empty list of transitions")
     public void anEmptyListOfTransitions() {
-        transitionManager.setTransitions(new ListOf<>(3,1));
+        transitionDataManager.setTransitions(new ListOf<>(3,1));
     }
 
     @Given("a valid list of transitions with result levels from {int} to {int} except level {int}")
@@ -71,7 +71,7 @@ public class TransitionConverterSteps {
                 transitions.add(t);
             }
         }
-        transitionManager.setTransitions(transitions);
+        transitionDataManager.setTransitions(transitions);
     }
 
     @Given("a valid Map of UpdateFunctions")
@@ -80,7 +80,7 @@ public class TransitionConverterSteps {
         String outputSpecies = "TestSpecies0";
         IUpdateFunction updateFunction = new NotBooleanUpdateFunction(new TrueUpdateFunction());
         map.put(outputSpecies, updateFunction);
-        transitionManager.setUpdateFunctions(map);
+        transitionDataManager.setUpdateFunctions(map);
     }
 
     @Given("a valid Map of UpdateFunctions with multiple variable references")
@@ -91,7 +91,7 @@ public class TransitionConverterSteps {
         ReferenceToNodeUpdateFunction var2 = new ReferenceToNodeUpdateFunction("input2");
         IUpdateFunction updateFunction = new BooleanUpdateFunctionExpr(var1, var2, BooleanConnector.AND);
         map.put(outputSpecies, updateFunction);
-        transitionManager.setUpdateFunctions(map);
+        transitionDataManager.setUpdateFunctions(map);
     }
 
     @Given("the inputs {string} and {string} in a list of inputs")
@@ -103,7 +103,7 @@ public class TransitionConverterSteps {
         input2.setQualitativeSpecies(arg1);
         inputs.add(input1);
         inputs.add(input2);
-        transitionManager.setInputs(inputs);
+        transitionDataManager.setInputs(inputs);
     }
 
     @Given("a the output {string} in a list of Output species")
@@ -112,7 +112,7 @@ public class TransitionConverterSteps {
         Output output = new Output(3,1);
         output.setQualitativeSpecies(arg0);
         outputs.add(output);
-        transitionManager.setOutputs(outputs);
+        transitionDataManager.setOutputs(outputs);
     }
 
     @Given("a list of function terms that reference {string} and {string}")
@@ -127,28 +127,28 @@ public class TransitionConverterSteps {
         and.addChild(ref2);
         functionTerm.setMath(and);
         functionTerms.add(functionTerm);
-        transitionManager.setFunctionTerms(functionTerms);
+        transitionDataManager.setFunctionTerms(functionTerms);
     }
 
     @Given("a transition created from the inputs, outputs and function terms")
     public void aTransitionCreatedFromTheInputsOutputsAndFunctionTerms() {
         Transition transition = new Transition(3,1);
-        transition.setListOfInputs(transitionManager.getInputs());
-        transition.setListOfOutputs(transitionManager.getOutputs());
-        transition.setListOfFunctionTerms(transitionManager.getFunctionTerms());
-        transitionManager.setTransition(transition);
+        transition.setListOfInputs(transitionDataManager.getInputs());
+        transition.setListOfOutputs(transitionDataManager.getOutputs());
+        transition.setListOfFunctionTerms(transitionDataManager.getFunctionTerms());
+        transitionDataManager.setTransition(transition);
     }
 
     @Given("that the transition was added to the list of transitions")
     public void thatTheTransitionWasAddedToTheListOfTransitions() {
-        ListOf<Transition> transitions = transitionManager.getTransitions();
-        transitions.add(transitionManager.getTransition());
-        transitionManager.setTransitions(transitions);
+        ListOf<Transition> transitions = transitionDataManager.getTransitions();
+        transitions.add(transitionDataManager.getTransition());
+        transitionDataManager.setTransitions(transitions);
     }
 
     @Given("an empty map of update functions")
     public void anEmptyMapOfUpdateFunctions() {
-        transitionManager.setUpdateFunctions(new LinkedHashMap<>());
+        transitionDataManager.setUpdateFunctions(new LinkedHashMap<>());
     }
 
     @Given("an update function referencing {string} and {string}")
@@ -156,63 +156,63 @@ public class TransitionConverterSteps {
         ReferenceToNodeUpdateFunction first = new ReferenceToNodeUpdateFunction(arg0);
         ReferenceToNodeUpdateFunction second = new ReferenceToNodeUpdateFunction(arg1);
         BooleanUpdateFunctionExpr and = new BooleanUpdateFunctionExpr(first, second, BooleanConnector.AND);
-        transitionManager.setUpdateFunction(and);
+        transitionDataManager.setUpdateFunction(and);
     }
 
     @Given("a key {string} mapping to the update function in the map")
     public void aKeyMappingToTheUpdateFunctionInTheMap(String arg0) {
-        LinkedHashMap<String, IUpdateFunction> map = transitionManager.getUpdateFunctions();
-        map.put(arg0, transitionManager.getUpdateFunction());
-        transitionManager.setUpdateFunctions(map);
+        LinkedHashMap<String, IUpdateFunction> map = transitionDataManager.getUpdateFunctions();
+        map.put(arg0, transitionDataManager.getUpdateFunction());
+        transitionDataManager.setUpdateFunctions(map);
     }
 
     @When("the TransitionConverter is created for the ERODE conversion")
     public void theTransitionConverterIsCreatedForTheERODEConversion() {
         try {
-            ListOf<Transition> transitions = transitionManager.getTransitions();
-            ITransitionConverter transitionConverter = TransitionConverter.create(transitions);
-            transitionManager.setTransitionConverter(transitionConverter);
+            ListOf<Transition> transitions = transitionDataManager.getTransitions();
+            ITransitionConverter transitionConverter = TransitionManager.create(transitions);
+            transitionDataManager.setTransitionConverter(transitionConverter);
         } catch (Exception e) {
-            transitionManager.setException(e);
+            transitionDataManager.setException(e);
         }
     }
 
     @When("the TransitionConverter is created for the SBML conversion")
     public void theTransitionConverterIsCreatedForTheSBMLConversion() {
         try {
-            LinkedHashMap<String, IUpdateFunction> updateFunctions = transitionManager.getUpdateFunctions();
-            ITransitionConverter transitionConverter = TransitionConverter.create(updateFunctions);
-            transitionManager.setTransitionConverter(transitionConverter);
+            LinkedHashMap<String, IUpdateFunction> updateFunctions = transitionDataManager.getUpdateFunctions();
+            ITransitionConverter transitionConverter = TransitionManager.create(updateFunctions);
+            transitionDataManager.setTransitionConverter(transitionConverter);
         } catch (Exception e) {
-            transitionManager.setException(e);
+            transitionDataManager.setException(e);
         }
     }
 
     @Then("the TransitionConverter creation succeeds")
     public void theUpdateFunctionConverterCreationSucceeds() {
-        ITransitionConverter transitionConverter = transitionManager.getTransitionConverter();
+        ITransitionConverter transitionConverter = transitionDataManager.getTransitionConverter();
         Assert.assertNotNull(transitionConverter);
     }
 
     @Then("a Map ERODE update functions is available")
     public void aMapERODEUpdateFunctionsIsAvailable() {
-        Assert.assertNotNull(transitionManager.getUpdateFunctions());
+        Assert.assertNotNull(transitionDataManager.getUpdateFunctions());
     }
 
     @Then("a List of SBML transitions is available")
     public void aListOfSBMLTransitionsIsAvailable() {
-        Assert.assertNotNull(transitionManager.getTransitions());
+        Assert.assertNotNull(transitionDataManager.getTransitions());
     }
 
     @Then("the Map contains the key {string}")
     public void theMapContainsTheKey(String arg0) {
-        LinkedHashMap<String, IUpdateFunction> map = transitionManager.getUpdateFunctions();
+        LinkedHashMap<String, IUpdateFunction> map = transitionDataManager.getUpdateFunctions();
         Assert.assertTrue(map.containsKey(arg0));
     }
 
     @Then("the update function mapped to {string} references the inputs {string} and {string}")
     public void theUpdateFunctionMappedToReferencesTheInputsAnd(String arg0, String arg1, String arg2) {
-        LinkedHashMap<String, IUpdateFunction> map = transitionManager.getUpdateFunctions();
+        LinkedHashMap<String, IUpdateFunction> map = transitionDataManager.getUpdateFunctions();
         IUpdateFunction updateFunction = map.get(arg0);
         Assert.assertEquals(BooleanUpdateFunctionExpr.class, updateFunction.getClass());
         BooleanUpdateFunctionExpr and = (BooleanUpdateFunctionExpr) updateFunction;
@@ -224,22 +224,22 @@ public class TransitionConverterSteps {
 
     @Then("the list of transitions contains {int} transition")
     public void theListOfTransitionsContainsTransition(int arg0) {
-        ListOf<Transition> transitions = transitionManager.getTransitions();
+        ListOf<Transition> transitions = transitionDataManager.getTransitions();
         Assert.assertEquals(arg0, transitions.size());
-        transitionManager.setTransition(transitions.get(0));
+        transitionDataManager.setTransition(transitions.get(0));
     }
 
     @Then("the transition contains a list of {int} inputs")
     public void theTransitionContainsAListOfInputs(int arg0) {
-        Transition transition = transitionManager.getTransition();
+        Transition transition = transitionDataManager.getTransition();
         ListOf<Input> inputs = transition.getListOfInputs();
         Assert.assertEquals(arg0, inputs.size());
-        transitionManager.setInputs(inputs);
+        transitionDataManager.setInputs(inputs);
     }
 
     @Then("the inputs reference {string} and {string}")
     public void theInputsReferenceAnd(String arg0, String arg1) {
-        ListOf<Input> inputs = transitionManager.getInputs();
+        ListOf<Input> inputs = transitionDataManager.getInputs();
         boolean firstContained = false;
         boolean secondContained = false;
         for (Input i : inputs) {
@@ -254,15 +254,15 @@ public class TransitionConverterSteps {
 
     @Then("the transition contains a list of {int} output")
     public void theTransitionContainsAListOfOutput(int arg0) {
-        Transition t = transitionManager.getTransition();
+        Transition t = transitionDataManager.getTransition();
         ListOf<Output> outputs = t.getListOfOutputs();
-        transitionManager.setOutputs(outputs);
+        transitionDataManager.setOutputs(outputs);
         Assert.assertEquals(arg0, outputs.size());
     }
 
     @Then("the output references {string}")
     public void theOutputReferences(String arg0) {
-        ListOf<Output> outputs = transitionManager.getOutputs();
+        ListOf<Output> outputs = transitionDataManager.getOutputs();
         boolean isReferenced = false;
         for(Output o : outputs) {
             String species = o.getQualitativeSpecies();
@@ -274,15 +274,15 @@ public class TransitionConverterSteps {
 
     @Then("the transition contains a list of {int} function terms")
     public void theTransitionContainsAListOfFunctionTerms(int arg0) {
-        Transition t = transitionManager.getTransition();
+        Transition t = transitionDataManager.getTransition();
         ListOf<FunctionTerm> functionTerms = t.getListOfFunctionTerms();
-        transitionManager.setFunctionTerms(functionTerms);
+        transitionDataManager.setFunctionTerms(functionTerms);
         Assert.assertEquals(arg0, functionTerms.size());
     }
 
     @Then("one of the function terms is the default term")
     public void oneOfTheFunctionTermsIsTheDefaultTerm() {
-        ListOf<FunctionTerm> functionTerms = transitionManager.getFunctionTerms();
+        ListOf<FunctionTerm> functionTerms = transitionDataManager.getFunctionTerms();
         boolean isDefault = false;
         for (FunctionTerm f : functionTerms) {
             if(f.isDefaultTerm())

@@ -12,7 +12,7 @@ import sbml.test.framework.TestDataManager;
 
 import java.util.LinkedHashMap;
 
-public class TransitionManager extends TestDataManager {
+public class TransitionDataManager extends TestDataManager {
     private SBMLDocument sbmlDocument;
 
     private ListOf<Transition> transitions;

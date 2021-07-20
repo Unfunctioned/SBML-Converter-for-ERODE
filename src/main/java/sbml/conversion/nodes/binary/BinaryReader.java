@@ -1,6 +1,7 @@
 package sbml.conversion.nodes.binary;
 
 import org.sbml.jsbml.ASTNode;
+import sbml.conversion.nodes.NodeManager;
 import sbml.conversion.nodes.operators.ErodeOperator;
 import sbml.conversion.nodes.NodeConverter;
 
@@ -10,8 +11,8 @@ public class BinaryReader extends BinaryASTConverter {
 
     public BinaryReader(ASTNode node) {
         super(node);
-        this.leftChild = NodeConverter.create(currentNode.getChild(0));
-        this.rightChild = NodeConverter.create(currentNode.getChild(1));
+        this.leftChild = NodeManager.create(currentNode.getChild(0));
+        this.rightChild = NodeManager.create(currentNode.getChild(1));
         this.operator = new ErodeOperator();
         this.convert();
     }

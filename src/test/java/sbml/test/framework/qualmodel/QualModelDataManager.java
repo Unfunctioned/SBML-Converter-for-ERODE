@@ -6,7 +6,7 @@ import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.qualmodel.IQualModelConverter;
 import sbml.test.framework.TestDataManager;
 
-public class QualModelManager extends TestDataManager {
+public class QualModelDataManager extends TestDataManager {
 
     private QualModelPlugin qualModelPlugin;
     private IQualModelConverter qualModelConverter;

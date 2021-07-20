@@ -11,18 +11,10 @@ import sbml.conversion.qualmodel.IQualModelConverter;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public abstract class ModelConverter implements IModelConverter
+abstract class ModelConverter implements IModelConverter
 {
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
     protected static final String EXTENSION_NAME = "qual";
-
-    public static IModelConverter create(@NotNull Model model) {
-        return new ModelReader(model);
-    }
-
-    public static IModelConverter create(@NotNull IBooleanNetwork booleanNetwork) {
-        return new ModelWriter(booleanNetwork);
-    }
 
     protected Model model;
     protected String name;

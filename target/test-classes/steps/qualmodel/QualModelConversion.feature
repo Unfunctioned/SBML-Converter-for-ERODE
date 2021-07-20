@@ -23,4 +23,4 @@ Feature: Converting the QualModelPlugin extension of an SBMLModel using the Qual
   Scenario: Attempting to create a QualModel instance without an SBML-qual model
     Given that there is no QualModelPlugin instance
     When the QualModelConverter is created for the ERODE conversion
-    Then an exception with message is "Argument for @NotNull parameter 'qualModelPlugin' of sbml/conversion/qualmodel/QualModelConverter.create must not be null" thrown
+    Then an exception with message is "Argument for @NotNull parameter 'qualModelPlugin' of sbml/conversion/qualmodel/QualModelManager.create must not be null" thrown

@@ -4,7 +4,7 @@ import it.imt.erode.importing.booleannetwork.GUIBooleanNetworkImporter;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBMLWriter;
 import sbml.conversion.document.ISBMLConverter;
-import sbml.conversion.document.SBMLConverter;
+import sbml.conversion.document.SBMLManager;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -18,13 +18,13 @@ public class SBMLExporter {
      */
     public static void main(String[] args) throws IOException, XMLStreamException {
        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
-        SBMLDocument sbmlDocument = (SBMLDocument) SBMLConverter.read(path);
+        SBMLDocument sbmlDocument = (SBMLDocument) SBMLManager.read(path);
 
 
-        ISBMLConverter converter = SBMLConverter.create(sbmlDocument);
+        ISBMLConverter converter = SBMLManager.create(sbmlDocument);
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = converter.getGuiBnImporter();
         //--------------------------------------------------------------------------------------
-        converter = SBMLConverter.create(guiBooleanNetworkImporter.getBooleanNetwork());
+        converter = SBMLManager.create(guiBooleanNetworkImporter.getBooleanNetwork());
         sbmlDocument = converter.getSbmlDocument();
 
         print(sbmlDocument);

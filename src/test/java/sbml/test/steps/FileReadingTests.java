@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.SBase;
-import sbml.conversion.document.SBMLConverter;
+import sbml.conversion.document.SBMLManager;
 
 public class FileReadingTests {
     private String path;
@@ -28,7 +28,7 @@ public class FileReadingTests {
     @When("the file is read by the module")
     public void theFileIsReadByTheModule() {
         try {
-            tree = SBMLConverter.read(path);
+            tree = SBMLManager.read(path);
         } catch (Exception e) {
             exception = e;
         }

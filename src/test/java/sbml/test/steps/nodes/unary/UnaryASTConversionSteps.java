@@ -9,15 +9,15 @@ import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.unary.UnaryASTConverter;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.nodes.unary.UnaryManager;
+import sbml.test.framework.nodes.unary.UnaryDataManager;
 
 public class UnaryASTConversionSteps {
-    private UnaryManager unaryManager;
+    private UnaryDataManager unaryManager;
 
     @Given("a UnaryManager has been initialized")
     public void aUnaryManagerHasBeenInitialized() {
         TestDataManager.setInstance(TestDataManager.Type.UNARY);
-        unaryManager = (UnaryManager) TestDataManager.getInstance();
+        unaryManager = (UnaryDataManager) TestDataManager.getInstance();
     }
 
     @Given("a unary ASTNode with type {string}")
@@ -57,7 +57,7 @@ public class UnaryASTConversionSteps {
     public void theUnaryASTConverterIsCreatedForTheSBMLConversion() {
         try {
             IUpdateFunction updateFunction = unaryManager.getUpdateFunction();
-            UnaryASTConverter converter = (UnaryASTConverter) UnaryASTConverter.create(updateFunction);
+            UnaryASTConverter converter = UnaryASTConverter.create((NotBooleanUpdateFunction) updateFunction);
             unaryManager.setUnaryASTConverter(converter);
         } catch (Exception e) {
             unaryManager.setException(e);

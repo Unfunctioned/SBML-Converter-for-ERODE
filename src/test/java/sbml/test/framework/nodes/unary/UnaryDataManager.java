@@ -5,7 +5,7 @@ import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.unary.UnaryASTConverter;
 import sbml.test.framework.TestDataManager;
 
-public class UnaryManager extends TestDataManager {
+public class UnaryDataManager extends TestDataManager {
 
     private ASTNode node;
 

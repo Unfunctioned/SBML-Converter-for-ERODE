@@ -5,7 +5,9 @@ import org.sbml.jsbml.ASTNode;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.ext.qual.FunctionTerm;
 import sbml.configurations.SBMLConfiguration;
+import sbml.conversion.nodes.INodeConverter;
 import sbml.conversion.nodes.NodeConverter;
+import sbml.conversion.nodes.NodeManager;
 
 public class FunctionTermWriter {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
@@ -31,7 +33,7 @@ public class FunctionTermWriter {
     }
 
     private ASTNode convertUpdateFunction(IUpdateFunction updateFunction) {
-        NodeConverter nodeConverter = NodeConverter.create(updateFunction);
+        INodeConverter nodeConverter = NodeManager.create(updateFunction);
         return nodeConverter.getExpressionAST();
     }
 }

@@ -14,9 +14,8 @@ import org.junit.Assert;
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.model.IModelConverter;
-import sbml.conversion.model.ModelConverter;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.model.ModelManager;
+import sbml.test.framework.model.ModelDataManager;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -26,12 +25,12 @@ import java.util.LinkedHashMap;
 import static sbml.test.framework.TestDataManager.Type;
 
 public class ModelConversionSteps {
-    private ModelManager modelManager;
+    private ModelDataManager modelManager;
 
     @Given("a new ModelManager instance")
     public void aNewModelManagerInstance() {
         TestDataManager.setInstance(Type.MODEL);
-        modelManager = (ModelManager) TestDataManager.getInstance();
+        modelManager = (ModelDataManager) TestDataManager.getInstance();
     }
 
     @Given("a valid SBML-qual model")
@@ -85,7 +84,7 @@ public class ModelConversionSteps {
     public void attemptingToCreateAModelConverterInstanceForERODEFormat() {
         try {
             Model model = modelManager.getModel();
-            IModelConverter modelConverter = ModelConverter.create(model);
+            IModelConverter modelConverter = sbml.conversion.model.ModelManager.create(model);
             modelManager.setModelConverter(modelConverter);
         } catch (Exception e) {
             modelManager.setException(e);
@@ -96,7 +95,7 @@ public class ModelConversionSteps {
     public void attemptingToCreateAModelConverterInstanceForSBMLFormat() {
         try {
             IBooleanNetwork booleanNetwork = modelManager.getBooleanNetwork();
-            IModelConverter modelConverter = ModelConverter.create(booleanNetwork);
+            IModelConverter modelConverter = sbml.conversion.model.ModelManager.create(booleanNetwork);
             modelManager.setModelConverter(modelConverter);
         } catch (Exception e) {
             modelManager.setException(e);

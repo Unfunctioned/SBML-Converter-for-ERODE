@@ -11,12 +11,11 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import org.sbml.jsbml.ext.qual.QualitativeSpecies;
-import sbml.conversion.document.SBMLConverter;
+import sbml.conversion.document.SBMLManager;
 import sbml.conversion.species.ISpeciesConverter;
-import sbml.conversion.species.SpeciesConverter;
-import sbml.test.framework.ExceptionCollector;
+import sbml.conversion.species.SpeciesManager;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.species.SpeciesManager;
+import sbml.test.framework.species.SpeciesDataManager;
 import sbml.test.steps.CommonSteps;
 
 import java.math.BigDecimal;
@@ -27,44 +26,44 @@ import static sbml.test.framework.TestDataManager.Type;
 
 public class SpeciesConversionSteps {
 
-    private SpeciesManager speciesManager;
+    private SpeciesDataManager speciesDataManager;
 
     @Given("the SpeciesManger has been initialised")
     public void theSpeciesMangerHasBeenInitialised() {
         TestDataManager.setInstance(Type.SPECIES);
-        speciesManager = (SpeciesManager) TestDataManager.getInstance();
+        speciesDataManager = (SpeciesDataManager) TestDataManager.getInstance();
     }
 
     @Given("a valid list of qualitative species")
     public void aValidListOfQualitativeSpecies() {
         String path = CommonSteps.GetPath();
         try {
-            speciesManager.setSbmlDocument((SBMLDocument) SBMLConverter.read(path));
+            speciesDataManager.setSbmlDocument((SBMLDocument) SBMLManager.read(path));
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
-        SBMLDocument sbmlDocument = speciesManager.getSbmlDocument();
+        SBMLDocument sbmlDocument = speciesDataManager.getSbmlDocument();
         Model model = sbmlDocument.getModel();
         QualModelPlugin qualModelPlugin = (QualModelPlugin) model.getExtension("qual");
         ListOf<QualitativeSpecies> qualitativeSpecies = qualModelPlugin.getListOfQualitativeSpecies();
-        speciesManager.setQualitativeSpecies(qualitativeSpecies);
+        speciesDataManager.setQualitativeSpecies(qualitativeSpecies);
         Assert.assertNotNull(qualitativeSpecies);
     }
 
     @Given("an empty list of qualitative species")
     public void anEmptyListOfQualitativeSpecies() {
-        speciesManager.setQualitativeSpecies(new ListOf<>(3,1));
+        speciesDataManager.setQualitativeSpecies(new ListOf<>(3,1));
     }
 
     @Given("that there is no list of qualitative species")
     public void thatThereIsNoListOfQualitativeSpecies() {
-        speciesManager.setQualitativeSpecies(null);
+        speciesDataManager.setQualitativeSpecies(null);
     }
 
     @Given("a valid list of qualitative species with initial values ranging from {int} to {int}")
     public void aValidListOfQualitativeSpeciesWithInitialValuesRangingFromTo(int arg0, int arg1) {
-        speciesManager.setQualitativeSpecies(new ListOf<>(3,1));
-        ListOf<QualitativeSpecies> species = speciesManager.getQualitativeSpecies();
+        speciesDataManager.setQualitativeSpecies(new ListOf<>(3,1));
+        ListOf<QualitativeSpecies> species = speciesDataManager.getQualitativeSpecies();
         for(int i = arg0; i<=arg1; i++) {
             QualitativeSpecies q = new QualitativeSpecies(new org.sbml.jsbml.Species("Species"+i));
             q.setInitialLevel(i);
@@ -80,47 +79,47 @@ public class SpeciesConversionSteps {
         Species species2 = new Species("TestSpecies2", 1, BigDecimal.ZERO, "0");
         species.add(species1);
         species.add(species2);
-        speciesManager.setSpecies(species);
+        speciesDataManager.setSpecies(species);
     }
 
     @When("attempting to create a SpeciesConverter instance for ERODE format")
     public void attemptingToCreateASpeciesConverterInstanceForERODEFormat() {
         try {
-            ListOf<QualitativeSpecies> species = speciesManager.getQualitativeSpecies();
-            ISpeciesConverter speciesConverter = SpeciesConverter.create(species);
-            speciesManager.setSpeciesConverter(speciesConverter);
+            ListOf<QualitativeSpecies> species = speciesDataManager.getQualitativeSpecies();
+            ISpeciesConverter speciesConverter = SpeciesManager.create(species);
+            speciesDataManager.setSpeciesConverter(speciesConverter);
         }
         catch (Exception e) {
-            speciesManager.setException(e);
+            speciesDataManager.setException(e);
         }
     }
 
     @When("attempting to create a SpeciesConverter instance for SBML format")
     public void attemptingToCreateASpeciesConverterInstanceForSBMLFormat() {
         try {
-            List<ISpecies> species = speciesManager.getSpecies();
-            ISpeciesConverter speciesConverter = SpeciesConverter.create(species);
-            speciesManager.setSpeciesConverter(speciesConverter);
+            List<ISpecies> species = speciesDataManager.getSpecies();
+            ISpeciesConverter speciesConverter = SpeciesManager.create(species);
+            speciesDataManager.setSpeciesConverter(speciesConverter);
         }
         catch (Exception e) {
-            speciesManager.setException(e);
+            speciesDataManager.setException(e);
         }
     }
 
     @Then("the SpeciesConverter creation succeeds")
     public void theSpeciesConverterCreationSucceeds() {
-        ISpeciesConverter speciesConverter = speciesManager.getSpeciesConverter();
+        ISpeciesConverter speciesConverter = speciesDataManager.getSpeciesConverter();
         Assert.assertNotNull(speciesConverter);
         Assert.assertNotNull(speciesConverter.getErodeSpecies());
     }
 
     @Then("a List of ERODE species is available")
     public void aListOfERODESpeciesIsAvailable() {
-        Assert.assertNotNull(speciesManager.getSpecies());
+        Assert.assertNotNull(speciesDataManager.getSpecies());
     }
 
     @Then("a list of qualitative species is available")
     public void aListOfQualitativeSpeciesIsAvailable() {
-        Assert.assertNotNull(speciesManager.getQualitativeSpecies());
+        Assert.assertNotNull(speciesDataManager.getQualitativeSpecies());
     }
 }

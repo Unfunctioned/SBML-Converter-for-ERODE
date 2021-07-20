@@ -4,6 +4,7 @@ import it.imt.erode.booleannetwork.updatefunctions.BooleanUpdateFunctionExpr;
 import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
+import sbml.conversion.nodes.NodeManager;
 import sbml.conversion.nodes.operators.SBMLOperator;
 import sbml.conversion.nodes.NodeConverter;
 
@@ -14,7 +15,7 @@ public class UnaryWriter extends UnaryASTConverter {
     public UnaryWriter(NotBooleanUpdateFunction updateFunction) {
         super(updateFunction);
         this.operator = new SBMLOperator();
-        this.child = NodeConverter.create(updateFunction.getInnerUpdateFunction());
+        this.child = NodeManager.create(updateFunction.getInnerUpdateFunction());
         this.convert();
     }
 
@@ -28,7 +29,7 @@ public class UnaryWriter extends UnaryASTConverter {
             if(connector.equals(BooleanConnector.EQ)) {
                 BooleanUpdateFunctionExpr neq = new BooleanUpdateFunctionExpr(
                         expression.getFirst(), expression.getSecond(), BooleanConnector.NEQ);
-                this.child = NodeConverter.create(neq);
+                this.child = NodeManager.create(neq);
                 this.currentNode = child.getExpressionAST();
                 return;
             }

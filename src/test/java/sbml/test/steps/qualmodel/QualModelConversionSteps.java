@@ -15,9 +15,8 @@ import org.sbml.jsbml.Model;
 import org.sbml.jsbml.SBMLDocument;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
 import sbml.conversion.qualmodel.IQualModelConverter;
-import sbml.conversion.qualmodel.QualModelConverter;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.qualmodel.QualModelManager;
+import sbml.test.framework.qualmodel.QualModelDataManager;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -28,12 +27,12 @@ import static sbml.test.framework.TestDataManager.Type;
 
 public class QualModelConversionSteps {
 
-    private QualModelManager qualModelManager;
+    private QualModelDataManager qualModelManager;
 
     @Given("a QualModelManager has been initialized")
     public void aQualModelManagerHasBeenInitialized() {
         TestDataManager.setInstance(Type.QUAL);
-        qualModelManager = (QualModelManager) TestDataManager.getInstance();
+        qualModelManager = (QualModelDataManager) TestDataManager.getInstance();
     }
 
     @Given("a valid QualModelPlugin")
@@ -87,7 +86,7 @@ public class QualModelConversionSteps {
     public void theQualModelConverterIsCreatedForTheERODEConversion() {
         try {
             QualModelPlugin qualModelPlugin = qualModelManager.getQualModelPlugin();
-            IQualModelConverter qualModelConverter = QualModelConverter.create(qualModelPlugin);
+            IQualModelConverter qualModelConverter = sbml.conversion.qualmodel.QualModelManager.create(qualModelPlugin);
             qualModelManager.setQualModelConverter(qualModelConverter);
         } catch (Exception e) {
             qualModelManager.setException(e);
@@ -99,7 +98,7 @@ public class QualModelConversionSteps {
         try {
             IBooleanNetwork booleanNetwork = qualModelManager.getBooleanNetwork();
             Model model = qualModelManager.getModel();
-            IQualModelConverter qualModelConverter = QualModelConverter.create(booleanNetwork, model);
+            IQualModelConverter qualModelConverter = sbml.conversion.qualmodel.QualModelManager.create(booleanNetwork, model);
             qualModelManager.setQualModelConverter(qualModelConverter);
         } catch (Exception e) {
             qualModelManager.setException(e);

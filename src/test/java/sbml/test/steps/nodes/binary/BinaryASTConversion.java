@@ -11,18 +11,18 @@ import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.binary.BinaryASTConverter;
 import sbml.test.framework.TestDataManager;
-import sbml.test.framework.nodes.binary.BinaryManager;
+import sbml.test.framework.nodes.binary.BinaryDataManager;
 
 import static sbml.test.framework.TestDataManager.Type;
 
 public class BinaryASTConversion {
 
-    private BinaryManager binaryManager;
+    private BinaryDataManager binaryManager;
 
     @Given("a BinaryManager has been initialized")
     public void aBinaryManagerHasBeenInitialized() {
         TestDataManager.setInstance(Type.BINARY);
-        binaryManager = (BinaryManager) TestDataManager.getInstance();
+        binaryManager = (BinaryDataManager) TestDataManager.getInstance();
     }
 
     @Given("a binary ASTNode with type {string}")

@@ -65,7 +65,7 @@ Feature: Converting SBML-transitions into ERODE's UpdateFunctions using the Tran
   Scenario: Attempting to create a TransitionConverter without a list of transitions
     Given that there is no list of transitions
     When the TransitionConverter is created for the ERODE conversion
-    Then an exception with message is "Argument for @NotNull parameter 'transitions' of sbml/conversion/transitions/TransitionConverter.create must not be null" thrown
+    Then an exception with message is "Argument for @NotNull parameter 'transitions' of sbml/conversion/transitions/TransitionManager.create must not be null" thrown
 
   Scenario: Attempting to retrieve a functionTerm from the list of FunctionTerms using an invalid result level
     Given a valid list of transitions with result levels from 0 to 2 except level 1

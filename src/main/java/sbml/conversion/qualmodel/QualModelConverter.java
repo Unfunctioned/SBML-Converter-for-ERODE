@@ -12,15 +12,7 @@ import sbml.conversion.transitions.ITransitionConverter;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public abstract class QualModelConverter implements IQualModelConverter {
-
-    public static IQualModelConverter create(@NotNull QualModelPlugin qualModelPlugin) {
-        return new QualModelReader(qualModelPlugin);
-    }
-
-    public static IQualModelConverter create(@NotNull IBooleanNetwork booleanNetwork, Model model) {
-        return new QualModelWriter(booleanNetwork, model);
-    }
+abstract class QualModelConverter implements IQualModelConverter {
 
     protected QualModelPlugin sbmlQualModel;
 

@@ -5,7 +5,7 @@ import org.sbml.jsbml.Model;
 import sbml.conversion.model.IModelConverter;
 import sbml.test.framework.TestDataManager;
 
-public class ModelManager extends TestDataManager {
+public class ModelDataManager extends TestDataManager {
     private Model model;
     private IModelConverter modelConverter;
     private IBooleanNetwork booleanNetwork;

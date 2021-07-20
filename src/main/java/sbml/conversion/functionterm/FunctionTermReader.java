@@ -4,14 +4,16 @@ import it.imt.erode.booleannetwork.updatefunctions.IUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.ext.qual.FunctionTerm;
+import sbml.conversion.nodes.INodeConverter;
 import sbml.conversion.nodes.NodeConverter;
+import sbml.conversion.nodes.NodeManager;
 
 public class FunctionTermReader {
 
     public IUpdateFunction convert(ListOf<FunctionTerm> functionTerms) {
         FunctionTerm functionTerm = getResultLevel(functionTerms,1);
         ASTNode node = functionTerm.getMath();
-        NodeConverter converter = NodeConverter.create(node);
+        INodeConverter converter = NodeManager.create(node);
         return converter.getUpdateFunction();
     }
 

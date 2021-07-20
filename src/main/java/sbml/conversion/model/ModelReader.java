@@ -2,13 +2,13 @@ package sbml.conversion.model;
 
 import org.sbml.jsbml.Model;
 import org.sbml.jsbml.ext.qual.QualModelPlugin;
-import sbml.conversion.qualmodel.QualModelConverter;
+import sbml.conversion.qualmodel.QualModelManager;
 
 class ModelReader extends ModelConverter {
 
     public ModelReader(Model model) {
         super(model);
-        this.qualModelConverter = QualModelConverter.create(this.tryGetQualModel());
+        this.qualModelConverter = QualModelManager.create(this.tryGetQualModel());
     }
 
     private QualModelPlugin tryGetQualModel() {

@@ -11,7 +11,7 @@ import sbml.conversion.functionterm.FunctionTermWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class TransitionWriter extends TransitionConverter {
+class TransitionWriter extends TransitionConverter {
 
     private InputBuilder inputBuilder;
     private OutputBuilder outputBuilder;

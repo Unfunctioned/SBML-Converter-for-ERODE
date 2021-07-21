@@ -5,7 +5,7 @@ import it.imt.erode.crn.interfaces.ISpecies;
 
 import java.math.BigDecimal;
 
-public class ErodeSpeciesBuilder {
+class ErodeSpeciesBuilder {
 
 
     public ISpecies createSpecies(int id, String name, int initialLevel) {

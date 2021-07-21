@@ -7,7 +7,7 @@ import org.sbml.jsbml.ext.qual.Output;
 import org.sbml.jsbml.ext.qual.Transition;
 import sbml.configurations.SBMLConfiguration;
 
-public class TransitionBuilder {
+class TransitionBuilder {
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
     public Transition createTransition(ListOf<Input> inputs, ListOf<Output> outputs, ListOf<FunctionTerm> functionTerms) {

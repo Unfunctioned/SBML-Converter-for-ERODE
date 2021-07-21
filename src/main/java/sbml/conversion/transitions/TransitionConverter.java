@@ -8,7 +8,7 @@ import sbml.configurations.SBMLConfiguration;
 
 import java.util.LinkedHashMap;
 
-public abstract class TransitionConverter implements ITransitionConverter {
+abstract class TransitionConverter implements ITransitionConverter {
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
     protected ListOf<Transition> sbmlTransitions;

@@ -7,16 +7,14 @@ import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.Model;
 import sbml.configurations.SBMLConfiguration;
 import sbml.conversion.qualmodel.IQualModelConverter;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 
-abstract class ModelConverter implements IModelConverter
-{
-    protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
+abstract class ModelConverter implements IModelConverter {
     protected static final String EXTENSION_NAME = "qual";
 
     protected Model model;
+
     protected String name;
 
     protected IQualModelConverter qualModelConverter;
@@ -27,7 +25,7 @@ abstract class ModelConverter implements IModelConverter
             this.name = model.getId();
     }
 
-    public ModelConverter(IBooleanNetwork booleanNetwork) {
+    public ModelConverter(@NotNull IBooleanNetwork booleanNetwork) {
         this.name = booleanNetwork.getName();
 
     }

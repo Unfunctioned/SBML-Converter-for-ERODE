@@ -9,7 +9,7 @@ import sbml.conversion.functionterm.FunctionTermReader;
 
 import java.util.LinkedHashMap;
 
-public class TransitionReader extends TransitionConverter {
+class TransitionReader extends TransitionConverter {
 
     private FunctionTermReader reader;
 

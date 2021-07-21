@@ -1,19 +1,14 @@
 package sbml.conversion.species;
 
-import it.imt.erode.crn.implementations.Species;
 import it.imt.erode.crn.interfaces.ISpecies;
-import org.eclipse.swt.internal.C;
 import org.jetbrains.annotations.NotNull;
 import org.sbml.jsbml.ListOf;
 import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 import sbml.configurations.SBMLConfiguration;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
-public abstract class SpeciesConverter implements ISpeciesConverter {
+abstract class SpeciesConverter implements ISpeciesConverter {
     protected static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
     protected ListOf<QualitativeSpecies> sbmlSpecies;

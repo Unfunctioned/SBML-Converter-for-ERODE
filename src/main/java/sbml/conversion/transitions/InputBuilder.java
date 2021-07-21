@@ -11,7 +11,7 @@ import sbml.configurations.SBMLConfiguration;
 
 import java.util.HashSet;
 
-public class InputBuilder {
+class InputBuilder {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
     private static final String DEFAULT_NAME = "Input";
 

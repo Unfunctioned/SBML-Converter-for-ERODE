@@ -4,7 +4,7 @@ import it.imt.erode.crn.interfaces.ISpecies;
 import org.sbml.jsbml.ext.qual.QualitativeSpecies;
 import sbml.configurations.SBMLConfiguration;
 
-public class SBMLSpeciesBuilder {
+class SBMLSpeciesBuilder {
     private static final SBMLConfiguration CONFIG = SBMLConfiguration.getConfiguration();
 
     public QualitativeSpecies createSpecies(ISpecies species) {

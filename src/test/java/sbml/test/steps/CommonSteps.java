@@ -1,10 +1,7 @@
 package sbml.test.steps;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import sbml.test.framework.ExceptionCollector;
-import sbml.test.framework.Expression;
 import sbml.test.framework.TestDataManager;
 
 public class CommonSteps {

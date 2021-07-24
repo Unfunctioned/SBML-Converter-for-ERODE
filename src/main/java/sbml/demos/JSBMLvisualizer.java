@@ -72,7 +72,7 @@ public class JSBMLvisualizer extends JFrame {
      */
     public static void main(String[] args) throws Exception {
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/Trp_reg.sbml";
+        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/DemoNetwork.sbml";
         SBase tree = SBMLReader.read(new File(path));
         new JSBMLvisualizer(tree);
     }

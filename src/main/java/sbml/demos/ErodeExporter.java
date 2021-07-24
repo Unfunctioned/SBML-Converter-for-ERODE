@@ -18,7 +18,7 @@ public class ErodeExporter {
      */
 
     public static void main(String[] args) throws IOException, XMLStreamException {
-        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
+        String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/DemoNetwork.sbml";
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLManager.read(path);
 
 
@@ -27,6 +27,6 @@ public class ErodeExporter {
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = sbmlConverter.getGuiBnImporter();
         System.out.println(guiBooleanNetworkImporter.getBooleanNetwork().getSpecies().toString());
         GUIBooleanNetworkImporter.printToBNERODEFIle(guiBooleanNetworkImporter.getBooleanNetwork(),guiBooleanNetworkImporter.getInitialPartition(),
-                "Test.ode", null, true, null, null, false);
+                "DemoNetwork.ode", null, true, null, null, false);
     }
 }

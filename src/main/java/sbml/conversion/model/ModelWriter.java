@@ -14,7 +14,7 @@ class ModelWriter extends ModelConverter {
         super(booleanNetwork);
         this.model = new Model(CONFIG.getLevel(), 
             CONFIG.getVersion());
-        this.model.setName(this.name);
+        this.model.setId(this.name);
         this.qualModelConverter = QualModelManager.create(
             booleanNetwork, model);
         this.packageSBML();

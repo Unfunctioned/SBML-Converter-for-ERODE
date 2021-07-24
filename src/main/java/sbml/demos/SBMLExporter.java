@@ -17,7 +17,7 @@ public class SBMLExporter {
      * @param args
      */
     public static void main(String[] args) throws IOException, XMLStreamException {
-       String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/CorticalAreaDevelopment.sbml";
+       String path = "D:/Repositories/SBML-Converter-for-ERODE/src/main/resources/sbml/demos/DemoNetwork.sbml";
         SBMLDocument sbmlDocument = (SBMLDocument) SBMLManager.read(path);
 
 
@@ -34,7 +34,7 @@ public class SBMLExporter {
         String writePath = System.getProperty("user.dir");
         System.out.println("Working Directory = " + writePath);
         try {
-            File sbmlFile = new File("SBMLFile.sbml");
+            File sbmlFile = new File("DemoSBMLFile.sbml");
             if(sbmlFile.createNewFile()) {
                 System.out.println("Created file: " + sbmlFile.getName() + "at path: " + sbmlFile.getPath());
             }

@@ -23,6 +23,8 @@ public class SBMLExporter {
 
         ISBMLConverter converter = SBMLManager.create(sbmlDocument);
         GUIBooleanNetworkImporter guiBooleanNetworkImporter = converter.getGuiBnImporter();
+        GUIBooleanNetworkImporter.printToBNERODEFIle(guiBooleanNetworkImporter.getBooleanNetwork(),guiBooleanNetworkImporter.getInitialPartition(),
+                "DemoNetwork.ode", null, true, null, null, false);
         //--------------------------------------------------------------------------------------
         converter = SBMLManager.create(guiBooleanNetworkImporter.getBooleanNetwork());
         sbmlDocument = converter.getSbmlDocument();

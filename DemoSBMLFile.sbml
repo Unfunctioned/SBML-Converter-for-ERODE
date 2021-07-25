@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<!-- Created by SBMLConverter version 1.0 on 2021-07-24 at 11:37:06 CEST with JSBML version 1.5. -->
+<!-- Created by SBMLConverter version 1.0 on 2021-07-24 at 12:36:22 CEST with JSBML version 1.5. -->
 <sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" level="3" qual:required="true" version="1" xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
-  <model name="DemoNetwork">
+  <model id="DemoNetwork">
     <qual:listOfQualitativeSpecies xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
       <qual:qualitativeSpecies qual:compartment="default" qual:constant="false" qual:id="S_1" qual:initialLevel="0" qual:maxLevel="1"/>
       <qual:qualitativeSpecies qual:compartment="default" qual:constant="false" qual:id="S_2" qual:initialLevel="0" qual:maxLevel="1"/>
@@ -21,8 +21,16 @@
             <math xmlns="http://www.w3.org/1998/Math/MathML">            
               <apply>
                 <xor/>
-                <ci> S_2 </ci>
-                <ci> S_3 </ci>
+                <apply>
+                  <eq/>
+                  <ci> S_2 </ci>
+                  <cn type="integer"> 1 </cn>
+                </apply>
+                <apply>
+                  <eq/>
+                  <ci> S_3 </ci>
+                  <cn type="integer"> 1 </cn>
+                </apply>
               </apply>
             </math>
                     </qual:functionTerm>
@@ -32,8 +40,8 @@
       </qual:transition>
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input2" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input3" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input2" qual:qualitativeSpecies="S_3" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input3" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
         </qual:listOfInputs>
         <qual:listOfOutputs>
           <qual:output qual:id="Output1" qual:qualitativeSpecies="S_2" qual:transitionEffect="assignmentLevel"/>
@@ -62,8 +70,8 @@
       </qual:transition>
       <qual:transition>
         <qual:listOfInputs>
-          <qual:input qual:id="Input4" qual:qualitativeSpecies="S_2" qual:transitionEffect="none"/>
-          <qual:input qual:id="Input5" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input4" qual:qualitativeSpecies="S_1" qual:transitionEffect="none"/>
+          <qual:input qual:id="Input5" qual:qualitativeSpecies="S_2" qual:transitionEffect="none"/>
         </qual:listOfInputs>
         <qual:listOfOutputs>
           <qual:output qual:id="Output2" qual:qualitativeSpecies="S_3" qual:transitionEffect="assignmentLevel"/>

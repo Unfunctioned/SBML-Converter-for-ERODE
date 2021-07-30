@@ -22,7 +22,11 @@ class SpeciesReader extends SpeciesConverter {
         List<ISpecies> erodeSpecies = new ArrayList<>();
         int id = 0;
         for(QualitativeSpecies q : this.sbmlSpecies) {
-            ISpecies s = erodeSpeciesBuilder.createSpecies(id, q.getId(), q.getInitialLevel());
+            ISpecies s;
+            if(!q.isSetInitialLevel())
+                s = erodeSpeciesBuilder.createSpecies(id, q.getId());
+            else
+                s = erodeSpeciesBuilder.createSpecies(id, q.getId(), q.getInitialLevel());
             erodeSpecies.add(s);
             id++;
         }

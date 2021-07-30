@@ -21,4 +21,8 @@ class ErodeSpeciesBuilder {
                 return new Species(species.getId(),id,new BigDecimal(startValue),startValue, false);*/
         }
     }
+
+    public ISpecies createSpecies(int id, String name) {
+        return new Species(name,id, BigDecimal.ZERO,"false", false);
+    }
 }

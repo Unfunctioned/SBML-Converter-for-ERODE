@@ -9,6 +9,8 @@ Feature: Converting the SBML-Species into an ERODE-Species
     When attempting to create a SpeciesConverter instance for ERODE format
     Then the SpeciesConverter creation succeeds
 
+  Scenario: Converting species
+
   Scenario: Attempting to create a SpeciesConverter instance using an empty list
     Given an empty list of qualitative species
     When attempting to create a SpeciesConverter instance for ERODE format

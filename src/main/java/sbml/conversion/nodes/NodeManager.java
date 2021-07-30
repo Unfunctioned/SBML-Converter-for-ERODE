@@ -6,6 +6,7 @@ import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import sbml.configurations.Strings;
 import sbml.conversion.nodes.binary.BinaryASTConverter;
+import sbml.conversion.nodes.nary.NaryASTConverter;
 import sbml.conversion.nodes.unary.UnaryASTConverter;
 import sbml.conversion.nodes.value.ValueASTConverter;
 
@@ -19,7 +20,7 @@ public class NodeManager {
             case 0:
                 return ValueASTConverter.create(node);
             default:
-                throw new IllegalArgumentException("A node cannot have more than 2 children");
+                return NaryASTConverter.create(node);
         }
     }
 

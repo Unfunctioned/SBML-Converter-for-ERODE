@@ -1,0 +1,72 @@
+\chapter{Tools and Technologies}
+
+\section{SBML \& JSBML}
+
+%What is SBML?
+    %A format to represent biological models that can be read by a machine
+%What is it used for?
+    %Data exchange format (language) between tools that do not share a common language
+    
+The Systems Biology Markup Language (SBML, \cite{hucka2018systems}) is a common XML-based format used to represent biological systems for computational modelling. The SBML format comes with multiple extensions that provide additional features, depending on the nature of the model. For example, variables may take values in the real, Boolean or multivalued domain. The different SBML extensions support several types of variables. This project focuses on SBML-qual, an extension used to represent both Boolean and multivalued networks.
+%\comg{We focus on SBML-qual an extension used for BN and MN representation.}
+%One of these extensions is SBML-qual, a module that can be used to represent BNs and MNs.
+
+%It comes with an extension SBML-qual that is designed to represent both boolean and \comg{multi-valued} many-valued networks. (...)
+The models represented in SBML format become available to Java using the JSBML library (\cite{sbmlteam_2020}). It is an open source pure Java API designed specifically to parse and write SBML and its extensions. When parsing an SBML-file, JSBML replicates the structure of the SBML-file using Java-objects, where each of these objects represents of the SBML-elements. Once parsing is complete, the entire structure is provided to the host program.
+
+%What is JSBML?
+    % A pure JAVA API to parse SBML files
+    % platform independent
+    % open source
+    
+%How does the JSBML library work?
+%What were the first steps to learn and use the library?
+
+\section{Apache Maven}
+%What is Apache Maven?
+    %Project management tool for Java projects
+%What primary benefits does it provide for this project?
+    %Easy build process with uniform build system, Maven handles everything from project dependencies to building, running and testing projects
+    %The workflow for maven project will be same no matter the size of the project
+    %Provides project information, such as unit test reports and code coverage information
+    
+%Check where references to - https://maven.apache.org/what-is-maven.html - are meeded
+% Also - https://en.wikipedia.org/wiki/Apache_Maven
+Apache Maven (\cite{porter_zyl_lamy}) is a project management tool that provides a wide range of useful features for the development of Java projects. Particularly, the tool provides uniform build system, simple dependency management framework, and unit testing capabilities.
+
+Maven projects are built using a project object model (POM) that contains all configurations, dependencies and plugins. The POM is loaded from the \emph{pom.xml} file, and is also used to manage dependencies to external sources.
+Once the developer has supplied all necessary dependency configurations to Maven, it will automatically download and install the required resources. This requires that they exist in the Maven Central Repository \cite{mavenDB}, a public database containing millions of Java-modules. In case some resources do not exist in the repository, it is however still possible to add them manually.
+In addition to managing all project configurations, Maven also detects source files. This removes the need to specify, what files to use when building the project.
+%\comg{a sentence should not contain more than 25 words.}
+
+Maven is also a very useful tool, when it comes to testing projects, using unit test or similar, as the tool is capable of detecting implemented tests. This makes it possible to use Maven's interface to run tests and collect Maven generated test reports, instead of running tests manually.
+%The most important features for this project being\comg{is}, the uniform build system, simple dependency management and unit test reporting with code coverage. \comg{The uniform-build system, the simple dependency management framework, and the unit test reporting with code coverage constitute some crucial features related with the project.}
+
+%One of the great strengths of Maven is that it build process \comg{Maven's build process} is almost fully automated, as\comg{since} the developer only needs to specify build configurations. The configurations are given to Maven using the project object model (POM), which contains all project configurations for the entire project.\comg{The project object model (POM), included in Maven, contains/incorporates all required configurations for the project.} The POM is available to the developer through an XML file, which can be used by developers to configure Maven \comg{so that it fits the specific needs of their project.} to fit the specific needs of their project.
+
+%Another important part of a project's configuration is its dependencies to external sources. Especially, when a project has many dependencies, managing the can be quite difficult.\comg{Especially, managing the dependencies is quite difficult when a project has many of them.} Using Maven, having many dependencies is not a problem. \comg{One can overcome this problem with Maven.} Once a developer has configured a dependency in the POM, Maven will automatically download the module and all of its dependencies.
+
+%Last but not least, Maven reports on unit test results and code coverage, which makes the development of projects substantially easier, when using development processes such as Test Driven Development (TDD).
+
+\section{Cucumber and the Gherkin language}
+Cucumber Open (\cite{cucumber}) is an open source tool created to support Behaviour Driven Development (BDD), a development process that allows collaboration between programmers and non-programmers. Tests are defined used the Gherkin language, a verbose language that makes it anyone to define system tests. Once the tests are defined in \emph{feature-files (.feature format)}, the developers can use Cucumber to implement the various steps of a test scenario. Cucumber will then, map the steps definitions from the feature file to the Java test methods executing these steps. Due to this method mapping, a step definition can be reused in other scenarios requiring the same action, making it possible to assemble scenarios in a building-block-like manner.
+
+To define a cucumber scenario, three different types of step definitions are required. The \emph{Given} step defines the initial state of the scenario. Once this state has been defined, a system action can be defined using the \emph{When} keyword for the next step definition. The code mapped to the \emph{When} statement will simulate the system action, when executing the test scenario. Finally, for a meaningful scenario it is also required to assert if the simulation ended as intended. For this, \emph{Then} statement can be defined to define how the expected end state.
+
+The advantage of using Cucumber instead of e.g. regular unit tests is that the building-block-like structure of cucumber scenarios allows to minimize the test code. Often used steps only need to be implemented once, because each step can be executed independently. Another advantage is that the verbose test scenarios also can be used as system documentation that does not require the ability to read code. Finally, also due to the verbose nature of the scenario definitions, the choice of words for these definitions can be selected to fit a certain type of reader. For example, if the developers are the only people reading the test documentation, some technical language may be included. On the other hand, if the intended reader is  a manager or customer without the technical know-how, technical terms should generally be avoided.
+
+\begin{lstlisting}[language=Gherkin]
+    #Some cucumber scenario examples written in Gherkin
+    Feature: Converting SBML files
+    
+        Scenario: Converting a valid SBML file
+            Given a valid SBML file
+            When the SBML file is converted to ERODE format
+            Then a valid file in ERODE format has been created
+            
+        Scenario: Attempting to convert an invalid SBML file
+            Given an invalid SBML file
+            When the SBML file is converted to ERODE format
+            Then the conversion fails
+            And the converter raises an exception
+\end{lstlisting}

@@ -1,0 +1,29 @@
+\chapter{Introduction}
+
+Mathematical models constitute the study basis of real world systems from various scientific domains like biology, physics and computer science. The complexity of systems leads to large mathematical models with many variables and parameters which hinders our capability to manipulate them and explore their properties. \href{https://www.erode.eu/}{ERODE} (\cite{erode}) is a tool to analyze, simulate and minimize 
+many types of models like ordinary differential equations, chemical reaction networks, and Boolean Networks (BNs).  Since ERODE uses its own language to execute these tasks, it is often necessary to translate representations of such systems into the format of ERODE.   
+
+Boolean Networks (BNs) constitute an established qualitative
+modelling approach for biological systems. Currently, ERODE has only limited support for BNs, wherein variables take values in the Boolean domain (\{0,1\}). However, support is under development for multi-valued networks (MNs), wherein variables take values in some bounded integer domain e.g. \{0,1,2\}. SBML (Systems Biology Markup Language) is the most common representation format for biological systems, and, particularly, SBML-qual is an extension of SBML designed for the representation of BNs and MNs. 
+
+The goal of this project is to create a converter that can translate between the formats SBML-qual and ERODE. The converter tool is developed in Java and is based on the JSBML-library (\cite{sbmlteam_2020}), a library providing framework to parse SBML files. Given that ERODE is written in Java as well, the converter is developed as a plugin, that can be integrated into ERODE and as a standalone application.
+
+
+%Additionally, the converter should also be able to translate ERODE output data back into the form of  SBML. \comg{The goal of this project is to create an importer that can translate SBML-qual into the format of ERODE and vice versa.} The converter tool should be created in Java and be based on the JSBML library, a library providing framework to parse SBML files.\comg{The converter comes as a stand-alone application written in Java and based on JSBML- a library that provides a framework to parse SBML files.} The importer should come as a stand-alone application. However, given that ERODE is written in Java as well, the importer might also be fully integrated within ERODE. \comg{Since ERODE is a java application, it will be able to fully integrate the importer.}
+
+\section{Report structure}
+
+The report is organized as follows: Section 2 presents project's objectives and the project management. Section 3 introduces the various tools and technologies used to complete the project. In section 4, a thorough analysis of both the SBML-qual and ERODE formats is given. This analysis is then used to explain how to convert between the two formats. Section 5 explains the system architecture that was designed for this conversion process. The report continues with the implementation of this system in section 6. Particularly, this section focuses on the implementation of the individual converter components and the conversion of mathematical expressions. Section 7 explains how testing was used to ensure a correct conversion, after which a demonstration of the conversion process is given with a small demo application in section 8. In section 9, a few ideas of possible extensions or optimizations to the final converter are given, before the report is wrapped up by a conclusion in section 10.
+
+%Section 3, analyze the problem
+%Section 4, how to design the converter
+%Section 5, Implementation
+%Section 6, Testing
+%Section 7, 
+%Tools & Technologies - present tools used during this project
+%Analysis - Analyze and explain the various tools
+%Design - Show the design of the program, and justify design choices
+%Implementation - ???
+%Testing - Show testing approach, evaluate tests?
+%Evaluation - What goals were achieved? Improvements? Extensions?
+%Conclusion

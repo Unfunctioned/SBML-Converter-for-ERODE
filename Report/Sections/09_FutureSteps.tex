@@ -1,0 +1,9 @@
+\chapter{Future Steps}
+Considering the current state of the converter and the functionality it provides, there are a few things that could be added to the converter with further development. Suggestions for how some of these features can be implemented, can be found in the appendix.
+
+For one, the current converter is currently unable to support multi-valued networks. However, to add the support of MNs, it would require ERODE to be extended to support them first. It should also be taken into account that such an extension can turn into very big task, since there is a larger set of network-operations that can be performed on networks in the multi-valued domain. For example, the multi-valued representation of SBML also supports the consumption of transition inputs, and production of outputs. This means, that inputs to a transition can be reduced during a transition and outputs increased, instead of overwritten.
+
+Apart from that, there are also a series of small optimisation and extensions that can be done, that do not require ERODE to be updated. For example, algorithms that minimize the network representation could be added. This could include an update function analysis that joins output species in the same transition, given they have the same update conditions.
+Another option could also be to feature algorithms that can reduce a function terms logical expression to its most compact and concise form.
+
+A final option for further development could also be to optimize program performance by introducing concurrency. In its current state, the program runs on a single thread, since performance was of no great import. However, there are many places in the program where two independent task are performed sequentially. In these places, one could introduce concurrency to optimise the performance.

@@ -29,9 +29,10 @@ public class NaryASTConversion {
 
     @Given("a n-ary ASTNode with type {string}")
     public void aNAryASTNodeWithType(String arg0) {
-        ASTNode node = new ASTNode();
         Random rand = new Random();
-        for(int i = 0; i<(rand.nextInt(5)+1); i++) {
+        int val = rand.nextInt(5)+2;
+        ASTNode node = new ASTNode();
+        for(int i = 0; i<val; i++) {
             node.addChild(new ASTNode(1));
         }
         node.setType(arg0);

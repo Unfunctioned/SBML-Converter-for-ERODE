@@ -8,14 +8,6 @@ import sbml.conversion.nodes.NodeConverter;
 
 public abstract class BinaryASTConverter extends NodeConverter {
 
-    public static BinaryASTConverter create(ASTNode node) {
-        return new BinaryReader(node);
-    }
-
-    public static BinaryASTConverter create(BooleanUpdateFunctionExpr updateFunction) {
-        return new BinaryWriter(updateFunction);
-    }
-
     protected INodeConverter leftChild;
     protected INodeConverter rightChild;
 

@@ -3,6 +3,7 @@ package sbml.test.framework;
 import sbml.test.framework.document.DocumentDataManager;
 import sbml.test.framework.model.ModelDataManager;
 import sbml.test.framework.nodes.binary.BinaryDataManager;
+import sbml.test.framework.nodes.nary.NaryDataManager;
 import sbml.test.framework.nodes.unary.UnaryDataManager;
 import sbml.test.framework.nodes.values.ValueDataManager;
 import sbml.test.framework.qualmodel.QualModelDataManager;
@@ -15,6 +16,7 @@ public abstract  class TestDataManager {
         VALUES,
         UNARY,
         BINARY,
+        NARY,
         TRANSITION,
         SPECIES,
         QUAL,
@@ -38,6 +40,9 @@ public abstract  class TestDataManager {
                 break;
             case BINARY:
                 dataManager = new BinaryDataManager();
+                break;
+            case NARY:
+                dataManager = new NaryDataManager();
                 break;
             case TRANSITION:
                 dataManager = new TransitionDataManager();

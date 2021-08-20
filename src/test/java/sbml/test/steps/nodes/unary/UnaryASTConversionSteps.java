@@ -8,6 +8,7 @@ import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.unary.UnaryASTConverter;
+import sbml.conversion.nodes.unary.UnaryManager;
 import sbml.test.framework.TestDataManager;
 import sbml.test.framework.nodes.unary.UnaryDataManager;
 
@@ -47,7 +48,7 @@ public class UnaryASTConversionSteps {
     public void theUnaryASTConverterIsCreatedForTheERODEConversion() {
         try {
             ASTNode node = unaryManager.getNode();
-            unaryManager.setUnaryASTConverter(UnaryASTConverter.create(node));
+            unaryManager.setUnaryASTConverter(UnaryManager.create(node));
         } catch (Exception e) {
             unaryManager.setException(e);
         }
@@ -57,7 +58,7 @@ public class UnaryASTConversionSteps {
     public void theUnaryASTConverterIsCreatedForTheSBMLConversion() {
         try {
             IUpdateFunction updateFunction = unaryManager.getUpdateFunction();
-            UnaryASTConverter converter = UnaryASTConverter.create((NotBooleanUpdateFunction) updateFunction);
+            UnaryASTConverter converter = UnaryManager.create((NotBooleanUpdateFunction) updateFunction);
             unaryManager.setUnaryASTConverter(converter);
         } catch (Exception e) {
             unaryManager.setException(e);

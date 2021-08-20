@@ -7,14 +7,6 @@ import sbml.conversion.nodes.NodeConverter;
 
 public abstract class UnaryASTConverter extends NodeConverter {
 
-    public static UnaryASTConverter create(ASTNode node) {
-        return new UnaryReader(node);
-    }
-
-    public static UnaryASTConverter create(NotBooleanUpdateFunction updateFunction) {
-        return new UnaryWriter(updateFunction);
-    }
-
     protected INodeConverter child;
 
     public UnaryASTConverter(ASTNode node) {

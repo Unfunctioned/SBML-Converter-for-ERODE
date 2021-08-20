@@ -10,6 +10,7 @@ import it.imt.erode.crn.symbolic.constraints.BooleanConnector;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.binary.BinaryASTConverter;
+import sbml.conversion.nodes.binary.BinaryManager;
 import sbml.test.framework.TestDataManager;
 import sbml.test.framework.nodes.binary.BinaryDataManager;
 
@@ -72,7 +73,7 @@ public class BinaryASTConversion {
     @When("the BinaryASTConverter is created for the ERODE conversion")
     public void theBinaryASTConverterIsCreatedForTheERODEConversion() {
         try {
-            BinaryASTConverter binaryASTConverter = BinaryASTConverter.create(binaryManager.getNode());
+            BinaryASTConverter binaryASTConverter = BinaryManager.create(binaryManager.getNode());
             binaryManager.setBinaryASTConverter(binaryASTConverter);
         } catch (Exception e) {
             binaryManager.setException(e);
@@ -83,7 +84,7 @@ public class BinaryASTConversion {
     public void theBinaryASTConverterIsCreatedForTheSBMLConversion() {
         try {
             BooleanUpdateFunctionExpr expression = (BooleanUpdateFunctionExpr) binaryManager.getUpdateFunction();
-            BinaryASTConverter binaryASTConverter = BinaryASTConverter.create(expression);
+            BinaryASTConverter binaryASTConverter = BinaryManager.create(expression);
             binaryManager.setBinaryASTConverter(binaryASTConverter);
         } catch (Exception e) {
             binaryManager.setException(e);

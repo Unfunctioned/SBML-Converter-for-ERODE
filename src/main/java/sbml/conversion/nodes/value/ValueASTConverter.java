@@ -6,14 +6,6 @@ import sbml.conversion.nodes.NodeConverter;
 
 public abstract class ValueASTConverter extends NodeConverter {
 
-    public static ValueASTConverter create(ASTNode node) {
-        return new ValueReader(node);
-    }
-
-    public static ValueASTConverter create(IUpdateFunction updateFunction) {
-        return new ValueWriter(updateFunction);
-    }
-
     public ValueASTConverter(ASTNode node) {
         super(node);
     }

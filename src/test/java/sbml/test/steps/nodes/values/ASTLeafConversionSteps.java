@@ -10,6 +10,7 @@ import it.imt.erode.booleannetwork.updatefunctions.TrueUpdateFunction;
 import org.junit.Assert;
 import org.sbml.jsbml.ASTNode;
 import sbml.conversion.nodes.value.ValueASTConverter;
+import sbml.conversion.nodes.value.ValueManager;
 import sbml.test.framework.TestDataManager;
 import sbml.test.framework.nodes.values.ValueDataManager;
 import static sbml.test.framework.TestDataManager.Type;
@@ -68,7 +69,7 @@ public class ASTLeafConversionSteps {
     public void theValueASTConverterIsCreatedForTheERODEConversion() {
         try {
             ASTNode node = valueManager.getNode();
-            valueManager.setValueASTConverter(ValueASTConverter.create(node));
+            valueManager.setValueASTConverter(ValueManager.create(node));
         } catch (Exception e) {
             valueManager.setException(e);
         }
@@ -78,7 +79,7 @@ public class ASTLeafConversionSteps {
     public void theValueASTConverterIsCreatedForTheSBMLConversion() {
         try {
             IUpdateFunction updateFunction = valueManager.getUpdateFunction();
-            valueManager.setValueASTConverter(ValueASTConverter.create(updateFunction));
+            valueManager.setValueASTConverter(ValueManager.create(updateFunction));
         } catch (Exception e) {
             valueManager.setException(e);
         }

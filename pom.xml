@@ -47,16 +47,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit-platform-engine</artifactId>
-            <version>6.10.3</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>imt.erode</groupId>
+            <artifactId>erode</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>d:/Java Libraries/erode.jar</systemPath>
         </dependency>
     </dependencies>
 

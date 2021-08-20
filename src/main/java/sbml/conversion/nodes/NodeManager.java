@@ -6,21 +6,25 @@ import it.imt.erode.booleannetwork.updatefunctions.NotBooleanUpdateFunction;
 import org.sbml.jsbml.ASTNode;
 import sbml.configurations.Strings;
 import sbml.conversion.nodes.binary.BinaryASTConverter;
+import sbml.conversion.nodes.binary.BinaryManager;
 import sbml.conversion.nodes.nary.NaryASTConverter;
+import sbml.conversion.nodes.nary.NaryManager;
 import sbml.conversion.nodes.unary.UnaryASTConverter;
+import sbml.conversion.nodes.unary.UnaryManager;
 import sbml.conversion.nodes.value.ValueASTConverter;
+import sbml.conversion.nodes.value.ValueManager;
 
 public class NodeManager {
     public static INodeConverter create(ASTNode node) {
         switch (node.getChildCount()) {
             case 2:
-                return BinaryASTConverter.create(node);
+                return BinaryManager.create(node);
             case 1:
-                return UnaryASTConverter.create(node);
+                return UnaryManager.create(node);
             case 0:
-                return ValueASTConverter.create(node);
+                return ValueManager.create(node);
             default:
-                return NaryASTConverter.create(node);
+                return NaryManager.create(node);
         }
     }
 
@@ -29,13 +33,13 @@ public class NodeManager {
         String className = classType.getSimpleName();
         switch (className) {
             case Strings.BINARY_EXPRESSION:
-                return BinaryASTConverter.create((BooleanUpdateFunctionExpr)updateFunction);
+                return BinaryManager.create((BooleanUpdateFunctionExpr)updateFunction);
             case Strings.NEGATION:
-                return UnaryASTConverter.create((NotBooleanUpdateFunction)updateFunction);
+                return UnaryManager.create((NotBooleanUpdateFunction)updateFunction);
             case Strings.REFERENCE:
             case Strings.TRUE:
             case Strings.FALSE:
-                return ValueASTConverter.create(updateFunction);
+                return ValueManager.create(updateFunction);
             default:
                 throw new IllegalArgumentException("Unknown update function type");
         }

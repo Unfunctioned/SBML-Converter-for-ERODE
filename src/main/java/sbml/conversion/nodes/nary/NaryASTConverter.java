@@ -9,10 +9,6 @@ import java.util.List;
 
 public abstract class NaryASTConverter extends NodeConverter {
 
-    public static NaryASTConverter create(ASTNode node) {
-        return new NaryReader(node);
-    }
-
     protected List<INodeConverter> children;
 
     public NaryASTConverter(ASTNode node) {
